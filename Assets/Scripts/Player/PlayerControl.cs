@@ -16,6 +16,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float targetSpeed;
     [SerializeField] private float speedDif;
     [SerializeField] private float acceleration = 0.5f;
+    [SerializeField] private float decceleration = 0.5f;
+    [SerializeField] private float speedChangeRate = 0.5f;
+    [SerializeField] private float velocityPower;
 
     [Header("Jump Parameters")]
     [SerializeField] private float jumpForce;
@@ -31,9 +34,12 @@ public class PlayerControl : MonoBehaviour
     [Header("Check Parameters")]
     [SerializeField] private Vector2 groundBoxSize;
     [SerializeField] private Vector2 groundBoxOffset;
+    [SerializeField] private Vector2 wallBoxSize;
+    [SerializeField] private Vector2 wallBoxOffset;
 
     [Header("Layer Masks")]
     public LayerMask groundLayer;
+    public LayerMask wallLayer;
 
     #region UserInput
 
@@ -66,76 +72,86 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        acceleration = Mathf.Clamp(acceleration, 0, 1);
+        decceleration = Mathf.Clamp(decceleration, 0, 1);
         GetInput();
         Movement();
         Jump();
         _isGrounded = isGrounded();
+        currentSpeed = playerRigidbody.velocity.x;
         
     }
     
     void Movement()
     {
+        float force;
         _moveInput = UserInput.Instance.MoveInput;
 
-        targetSpeed = Mathf.Lerp(playerRigidbody.velocity.x, 
-            Mathf.Clamp(Mathf.Abs(targetSpeed) + Time.fixedDeltaTime * acceleration, currentSpeed, topSpeed) * _moveInput.x, 1);
-        
-        speedDif = (targetSpeed - playerRigidbody.velocity.x) * 5;
+        targetSpeed = topSpeed * _moveInput.x;
 
-        playerRigidbody.AddForce(speedDif * Vector2.right, ForceMode2D.Force);
+        speedDif = targetSpeed - currentSpeed;
+
+        speedChangeRate = (Mathf.Abs(_moveInput.x) > 0.01f) ? acceleration : decceleration;
+
+        force = Mathf.Pow(Mathf.Abs(speedDif) * speedChangeRate, velocityPower) * Mathf.Sign(speedDif);
+
+        playerRigidbody.AddForce(force * Vector2.right, ForceMode2D.Force);
     }
 
     void Jump()
     {
         float force = jumpForce;
-        if(_jumpInput) Debug.Log("Jumping");
 
-        if(isGrounded()) jumpCoyoteTimeCounter = jumpCoyoteTime;
+        if (isGrounded()) 
+        {
+            jumpCoyoteTimeCounter = jumpCoyoteTime;
+            doubleJumpIndex = totalDoubleJumpCount;
+        }
         else jumpCoyoteTimeCounter -= Time.deltaTime;
-    
-        if(UserInput.Instance._jumpAction.WasPressedThisFrame() && !isGrounded()) 
+
+        if (UserInput.Instance._jumpAction.WasPressedThisFrame()) 
             jumpBufferTimeCounter = jumpBufferTime;
 
-        if(jumpBufferTimeCounter > 0 && isGrounded()) 
+        if ((jumpBufferTimeCounter > 0) && (isGrounded() || jumpCoyoteTimeCounter > 0 || doubleJumpIndex > 0))
         {
+            jumpBufferTimeCounter = 0;
+
             if (playerRigidbody.velocity.y > 0)
                 force -= playerRigidbody.velocity.y;
 
-            playerRigidbody.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-        }
-
-        if(jumpBufferTimeCounter > 0) jumpBufferTimeCounter -= Time.deltaTime;
-
-        if ((UserInput.Instance._jumpAction.WasPressedThisFrame() && (isGrounded() || jumpCoyoteTimeCounter > 0 || doubleJumpIndex > 0)))
-        {
-            if (playerRigidbody.velocity.y > 0)
-                force -= playerRigidbody.velocity.y;
-
-            playerRigidbody.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-
-            if(!isGrounded() && jumpCoyoteTimeCounter < 0) 
+            if (!isGrounded() && jumpCoyoteTimeCounter <= 0) 
                 --doubleJumpIndex;
+
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, force);
         }
 
-        if(UserInput.Instance._jumpAction.WasPressedThisFrame()) jumpCoyoteTimeCounter = 0;
+        if (UserInput.Instance._jumpAction.WasPressedThisFrame()) 
+            jumpCoyoteTimeCounter = 0;
 
-
-        if (UserInput.Instance._jumpAction.WasPressedThisFrame() && isGrounded())
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce);
-
-        if (UserInput.Instance._jumpAction.WasReleasedThisFrame() && playerRigidbody.velocity.y > 0 && doubleJumpIndex == totalDoubleJumpCount)
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y / 4);
+        if (UserInput.Instance._jumpAction.WasReleasedThisFrame() && playerRigidbody.velocity.y > 0 && doubleJumpIndex == totalDoubleJumpCount) 
+        {
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y * 0.5f);
+        }
     }
+
 
     bool isGrounded()
     {
         return Physics2D.OverlapBox((Vector2)transform.position + groundBoxOffset, groundBoxSize, 0, groundLayer);
     }
 
+    bool isWalled()
+    {
+        return Physics2D.OverlapBox((Vector2)transform.position + wallBoxOffset, wallBoxSize, 0, wallLayer);
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube((Vector2)transform.position + groundBoxOffset, groundBoxSize);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube((Vector2)transform.position + wallBoxOffset, wallBoxSize);
     }
 
     void GetInput()
