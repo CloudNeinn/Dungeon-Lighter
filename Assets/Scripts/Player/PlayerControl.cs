@@ -8,7 +8,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D playerRigidbody;
-    [SerializeField] private CircleCollider2D playerCollider;
+    [SerializeField] private CapsuleCollider2D playerCollider;
 
     [Header("Movement Parameters")]
     [SerializeField] private float topSpeed = 10f;
@@ -72,6 +72,8 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        if(_moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        else if(_moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
         acceleration = Mathf.Clamp(acceleration, 0, 1);
         decceleration = Mathf.Clamp(decceleration, 0, 1);
         GetInput();
@@ -89,7 +91,8 @@ public class PlayerControl : MonoBehaviour
 
         targetSpeed = topSpeed * _moveInput.x;
 
-        speedDif = targetSpeed - currentSpeed;
+        if(!isWalled()) speedDif = targetSpeed - currentSpeed;
+        else speedDif = 0;
 
         speedChangeRate = (Mathf.Abs(_moveInput.x) > 0.01f) ? acceleration : decceleration;
 
@@ -142,7 +145,19 @@ public class PlayerControl : MonoBehaviour
 
     bool isWalled()
     {
-        return Physics2D.OverlapBox((Vector2)transform.position + wallBoxOffset, wallBoxSize, 0, wallLayer);
+        return Physics2D.OverlapBox((Vector2)transform.position + new Vector2(wallBoxOffset.x * transform.localScale.x, wallBoxOffset.y), wallBoxSize, 0, groundLayer);
+    }
+
+    public bool isMoving()
+    {
+        if(playerRigidbody.velocity.x != 0 && isGrounded()) return true;
+        else return false;
+    }
+
+    private bool movingWithoutInput()
+    {
+        if(isMoving() && Mathf.Abs(_moveInput.x) == 0) return true;
+        else return false;
     }
 
     void OnDrawGizmos()
@@ -150,8 +165,8 @@ public class PlayerControl : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube((Vector2)transform.position + groundBoxOffset, groundBoxSize);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube((Vector2)transform.position + wallBoxOffset, wallBoxSize);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(wallBoxOffset.x * transform.localScale.x, wallBoxOffset.y), wallBoxSize);
     }
 
     void GetInput()
