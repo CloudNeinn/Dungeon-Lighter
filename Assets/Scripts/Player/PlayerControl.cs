@@ -105,7 +105,7 @@ public class PlayerControl : MonoBehaviour
     {
         float force = jumpForce;
 
-        if (isGrounded()) 
+        if (isGrounded() || isWalled()) 
         {
             jumpCoyoteTimeCounter = jumpCoyoteTime;
             doubleJumpIndex = totalDoubleJumpCount;
