@@ -19,6 +19,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float decceleration = 0.5f;
     [SerializeField] private float speedChangeRate = 0.5f;
     [SerializeField] private float velocityPower;
+    [SerializeField] private bool canMove;
+    [SerializeField] private float moveCooldownTime;
+    [SerializeField] private float moveCooldownTimeCounter;
 
     [Header("Jump Parameters")]
     [SerializeField] private float jumpForce;
@@ -30,6 +33,13 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private int doubleJumpIndex;
     [SerializeField] private int totalDoubleJumpCount;
     [SerializeField] private int doubleJumpCount;
+
+    [SerializeField] private float wallJumpStrengthX;
+    [SerializeField] private float wallJumpStrengthY;
+
+    [SerializeField] private bool isSliding;
+    [field: SerializeField] public float slideSpeed;
+    [field: SerializeField] public float slideAccel;
 
     [Header("Check Parameters")]
     [SerializeField] private Vector2 groundBoxSize;
@@ -56,6 +66,7 @@ public class PlayerControl : MonoBehaviour
     #endregion
 
     [field: SerializeField] public bool _isGrounded {get; private set;}
+    [field: SerializeField] public Vector2 movementVector {get; private set;}
 
     void Awake()
     {
@@ -72,16 +83,38 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        movementVector = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y);
         if(_moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
         else if(_moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
+        else if(Mathf.Abs(playerRigidbody.velocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Sign(playerRigidbody.velocity.x), transform.localScale.y);
         acceleration = Mathf.Clamp(acceleration, 0, 1);
         decceleration = Mathf.Clamp(decceleration, 0, 1);
         GetInput();
-        Movement();
+
+        if(canMove) Movement();
+        else if(moveCooldownTimeCounter > 0) moveCooldownTimeCounter -= Time.deltaTime;
+        else canMove = true;
+
         Jump();
         _isGrounded = isGrounded();
         currentSpeed = playerRigidbody.velocity.x;
+
+        if(isWalled() && Mathf.Abs(_moveInput.x) > 0 && canMove) isSliding = true;
+        else isSliding = false;
+
+        if(isSliding && UserInput.Instance._jumpAction.WasPressedThisFrame())
+        {
+            playerRigidbody.AddForce(new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpStrengthX, wallJumpStrengthY), ForceMode2D.Impulse);
+            canMove = false;
+            moveCooldownTimeCounter = moveCooldownTime;
+            isSliding = false;
+        }
         
+    }
+
+    void FixedUpdate()
+    {
+        if(isSliding) Slide();
     }
     
     void Movement()
@@ -112,7 +145,7 @@ public class PlayerControl : MonoBehaviour
         }
         else jumpCoyoteTimeCounter -= Time.deltaTime;
 
-        if (UserInput.Instance._jumpAction.WasPressedThisFrame()) 
+        if (UserInput.Instance._jumpAction.WasPressedThisFrame() && !isSliding) 
             jumpBufferTimeCounter = jumpBufferTime;
 
         if ((jumpBufferTimeCounter > 0) && (isGrounded() || jumpCoyoteTimeCounter > 0 || doubleJumpIndex > 0))
@@ -127,6 +160,7 @@ public class PlayerControl : MonoBehaviour
 
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, force);
         }
+        else if(jumpBufferTimeCounter > 0) jumpBufferTimeCounter -= Time.deltaTime;
 
         if (UserInput.Instance._jumpAction.WasPressedThisFrame()) 
             jumpCoyoteTimeCounter = 0;
@@ -137,6 +171,13 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    public void Slide()
+    {
+        float speedDif = slideSpeed - playerRigidbody.velocity.y;	
+		float movement = speedDif * slideAccel;
+		movement = Mathf.Clamp(movement, -Mathf.Abs(speedDif)  * (1 / Time.fixedDeltaTime), Mathf.Abs(speedDif) * (1 / Time.fixedDeltaTime));
+		if(canMove) playerRigidbody.AddForce(movement * Vector2.up);
+    }
 
     bool isGrounded()
     {
