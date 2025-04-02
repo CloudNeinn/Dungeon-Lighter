@@ -80,6 +80,8 @@ public class PlayerControl : MonoBehaviour
         {
             Instance = this;
         }
+
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
