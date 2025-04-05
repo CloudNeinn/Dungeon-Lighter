@@ -76,12 +76,14 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
-
-        //DontDestroyOnLoad(this.gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -94,7 +96,7 @@ public class PlayerControl : MonoBehaviour
         movementVector = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y);
         if(_moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
         else if(_moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
-        else if(Mathf.Abs(playerRigidbody.velocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Sign(playerRigidbody.velocity.x), transform.localScale.y);
+        else if(Mathf.Abs(playerRigidbody.velocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(playerRigidbody.velocity.x), transform.localScale.y);
         acceleration = Mathf.Clamp(acceleration, 0, 1);
         decceleration = Mathf.Clamp(decceleration, 0, 1);
         GetInput();
@@ -257,5 +259,18 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("Teleporting");
             collision.gameObject.GetComponent<Portal>().TeleportPlayer();
         }
+        
+        if (collision.gameObject.tag == "Trap")
+        {
+            Debug.Log("Player has collided with an enemy.");
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        // Implement death logic here
+        Debug.Log("Player has died.");
+        SceneLoading.Instance.ReloadScene();
     }
 }

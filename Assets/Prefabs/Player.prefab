@@ -179,7 +179,7 @@ MonoBehaviour:
   jumpCoyoteTime: 0.2
   jumpCoyoteTimeCounter: 0.2
   jumpBufferTime: 0.2
-  jumpBufferTimeCounter: 0.2
+  jumpBufferTimeCounter: 0
   doubleJumpIndex: 1
   totalDoubleJumpCount: 1
   doubleJumpCount: 1
@@ -193,6 +193,8 @@ MonoBehaviour:
   wallBoxSize: {x: 0.1, y: 0.4}
   wallBoxOffset: {x: 0.2, y: -0.05}
   torchLightRadius: 0.5
+  portalCheckBoxSize: {x: 0, y: 0}
+  portalCheckBoxOffset: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -202,6 +204,9 @@ MonoBehaviour:
   torchLayer:
     serializedVersion: 2
     m_Bits: 64
+  portalLayer:
+    serializedVersion: 2
+    m_Bits: 128
   <_moveInput>k__BackingField: {x: 0, y: 0}
   <_isGrounded>k__BackingField: 0
   <movementVector>k__BackingField: {x: 0, y: 0}

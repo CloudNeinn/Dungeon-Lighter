@@ -35,6 +35,12 @@ public class UserInput : MonoBehaviour
         {
             Instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
 
         _playerInput = GetComponent<PlayerInput>();
 

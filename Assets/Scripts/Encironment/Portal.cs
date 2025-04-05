@@ -8,6 +8,6 @@ public class Portal : MonoBehaviour
     [SerializeField] private int sceneIndex;
     public void TeleportPlayer()
     {
-        SceneManager.LoadScene(sceneIndex);
+        SceneLoading.Instance.LoadScene(sceneIndex);
     }
 }
