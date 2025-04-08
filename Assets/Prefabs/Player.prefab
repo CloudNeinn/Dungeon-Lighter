@@ -164,11 +164,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRigidbody: {fileID: 471496188600353898}
   playerCollider: {fileID: 7353277815411045271}
-  topSpeed: 7
+  topSpeed: 6
   currentSpeed: 0
   targetSpeed: 0
   speedDif: 0
-  acceleration: 0.7
+  acceleration: 0.6
   decceleration: 0.85
   speedChangeRate: 0.5
   velocityPower: 2
@@ -183,7 +183,7 @@ MonoBehaviour:
   doubleJumpIndex: 1
   totalDoubleJumpCount: 1
   doubleJumpCount: 1
-  wallJumpStrengthX: -20
+  wallJumpStrengthX: -10
   wallJumpStrengthY: 25
   isSliding: 0
   slideSpeed: 5
