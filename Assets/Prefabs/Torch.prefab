@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6537778781851256802}
   - component: {fileID: 1310540739576583734}
   - component: {fileID: 7083101497027451764}
+  - component: {fileID: 7579393640619841911}
   m_Layer: 6
   m_Name: Torch
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 395f6b9556f14704790df6035be6ee3a, type: 3}
+  m_Sprite: {fileID: -427973065, guid: 852028d4352f0d64f8ff79cbbd5095ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,6 +122,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0000009536743, y: -0.012520075}
   m_Size: {x: 0.26940155, y: 0.56821775}
   m_Direction: 0
+--- !u!95 &7579393640619841911
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6436326009374467557}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6c384ae373b47fb4984ac58a37996293, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8311120731982656127
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,11 +198,11 @@ MonoBehaviour:
   m_ApplyToSortingLayers: 0000000061fca332
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
+  m_LightOrder: 185
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
+  m_NormalMapQuality: 1
   m_UseNormalMap: 0
   m_ShadowIntensityEnabled: 1
   m_ShadowIntensity: 1

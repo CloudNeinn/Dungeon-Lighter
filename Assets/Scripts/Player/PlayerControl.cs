@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float targetSpeed;
     [SerializeField] private float speedDif;
     [SerializeField] private float acceleration = 0.5f;
-    [SerializeField] private float decceleration = 0.5f;
+    [SerializeField] private float deceleration = 0.5f;
     [SerializeField] private float speedChangeRate = 0.5f;
     [SerializeField] private float velocityPower;
     [SerializeField] private bool canMove;
@@ -88,7 +88,7 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-
+        //Application.targetFrameRate = 15;
     }
 
     void Update()
@@ -97,12 +97,14 @@ public class PlayerControl : MonoBehaviour
         if(_moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
         else if(_moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
         else if(Mathf.Abs(playerRigidbody.velocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(playerRigidbody.velocity.x), transform.localScale.y);
-        acceleration = Mathf.Clamp(acceleration, 0, 1);
-        decceleration = Mathf.Clamp(decceleration, 0, 1);
+
         GetInput();
+        acceleration = Mathf.Clamp(acceleration, 0, 1);
+        deceleration = Mathf.Clamp(deceleration, 0, 1);
+
 
         if(canMove) Movement();
-        else if(moveCooldownTimeCounter > 0) moveCooldownTimeCounter -= Time.deltaTime;
+        else if(moveCooldownTimeCounter > 0) moveCooldownTimeCounter -= Time.fixedDeltaTime;
         else canMove = true;
 
         Jump();
@@ -131,6 +133,7 @@ public class PlayerControl : MonoBehaviour
     void FixedUpdate()
     {
         if(isSliding) Slide();
+
     }
     
     void Movement()
@@ -143,10 +146,10 @@ public class PlayerControl : MonoBehaviour
         if(!isWalled()) speedDif = targetSpeed - currentSpeed;
         else speedDif = 0;
 
-        speedChangeRate = (Mathf.Abs(_moveInput.x) > 0.01f) ? acceleration : decceleration;
+        speedChangeRate = (Mathf.Abs(_moveInput.x) > 0.01f) ? acceleration : deceleration;
 
         force = Mathf.Pow(Mathf.Abs(speedDif) * speedChangeRate, velocityPower) * Mathf.Sign(speedDif);
-
+        
         playerRigidbody.AddForce(force * Vector2.right, ForceMode2D.Force);
     }
 
