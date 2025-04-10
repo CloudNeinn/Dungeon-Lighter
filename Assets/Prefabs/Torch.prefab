@@ -153,6 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9023873406268449}
   - component: {fileID: 810306365581194314}
+  - component: {fileID: 5421077684982434592}
   m_Layer: 0
   m_Name: Light 2D
   m_TagString: Untagged
@@ -218,7 +219,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 3.37
+  m_ShapeLightFalloffSize: 2.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: 0.5, y: 0, z: 0}
@@ -253,3 +254,18 @@ MonoBehaviour:
   - {x: 0.4157348, y: -0.27778515, z: 0}
   - {x: 0.46193978, y: -0.19134171, z: 0}
   - {x: 0.49039266, y: -0.09754512, z: 0}
+--- !u!114 &5421077684982434592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311120731982656127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c2bd453b60ef248b9e683de252ebb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerSpeed: 3
+  minIntensity: 1.2
+  maxIntensity: 3
