@@ -157,7 +157,7 @@ public class PlayerControl : MonoBehaviour
     {
         float force = jumpForce;
 
-        if (isGrounded() || isWalled()) 
+        if (isGrounded() || isSliding) 
         {
             jumpCoyoteTimeCounter = jumpCoyoteTime;
             doubleJumpIndex = totalDoubleJumpCount;
@@ -178,6 +178,7 @@ public class PlayerControl : MonoBehaviour
                 --doubleJumpIndex;
 
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, force);
+            PlayerAudio.Instance.PlayJumpSound();
         }
         else if(jumpBufferTimeCounter > 0) jumpBufferTimeCounter -= Time.deltaTime;
 

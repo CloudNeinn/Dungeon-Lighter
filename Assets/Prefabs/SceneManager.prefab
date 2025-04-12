@@ -152,7 +152,7 @@ MonoBehaviour:
   Grids: []
   _detectColliderMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 264
 --- !u!1 &5522871562776988879
 GameObject:
   m_ObjectHideFlags: 0
