@@ -30,6 +30,11 @@ public class SceneLoading : MonoBehaviour
         Grids = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Grid").ToList();
     }
 
+    public void StartGame()
+    {
+        LoadScene(1);
+    }
+
     public void LoadScene(int sceneID, bool isAdditive = false)
     {
         StartCoroutine(LoadSceneAsync(sceneID, isAdditive));
