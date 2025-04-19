@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private int sceneIndex;
+    [SerializeField] private int _sceneIndex;
     public void TeleportPlayer()
     {
-        SceneLoading.Instance.LoadScene(sceneIndex);
+        SceneLoading.Instance.LoadScene(_sceneIndex);
     }
 }

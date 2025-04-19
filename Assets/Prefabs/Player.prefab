@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 471496188600353898}
   - component: {fileID: 1462144532024263905}
   - component: {fileID: 2989726128419885480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,9 +380,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c2bd453b60ef248b9e683de252ebb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flickerSpeed: 3
-  minIntensity: 0.8
-  maxIntensity: 1.8
+  _flickerSpeed: 0.1
+  _minIntensity: 0.5
+  _maxIntensity: 2
 --- !u!1 &8340637933788483099
 GameObject:
   m_ObjectHideFlags: 0
