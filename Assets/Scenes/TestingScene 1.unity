@@ -68147,11 +68147,11 @@ PrefabInstance:
       objectReference: {fileID: 705726924}
     - target: {fileID: 4218929047647230071, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.9451222
+      value: -4.457206
       objectReference: {fileID: 0}
     - target: {fileID: 4218929047647230071, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.011099815
+      value: 0.010429859
       objectReference: {fileID: 0}
     - target: {fileID: 5495454783827833959, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_Follow
@@ -68159,11 +68159,11 @@ PrefabInstance:
       objectReference: {fileID: 414033862}
     - target: {fileID: 5807478771560300169, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.024878
+      value: -5.5127945
       objectReference: {fileID: 0}
     - target: {fileID: 5807478771560300169, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.6110997
+      value: -4.61043
       objectReference: {fileID: 0}
     - target: {fileID: 5807478771560300169, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -113485,7 +113485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3513536f6d121e441a5fc176cee594f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 1
+  _sceneIndex: 1
 --- !u!61 &1952900184
 BoxCollider2D:
   m_ObjectHideFlags: 0
