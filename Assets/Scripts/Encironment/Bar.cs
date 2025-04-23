@@ -9,6 +9,13 @@ public class Bar : MonoBehaviour
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private GameObject _barUI;
     private bool _barUIActive = false;
+    [SerializeField] private GameObject[] _barPages;
+    private int _currentPage = 0;
+
+    void Start()
+    {
+        _barPages[_currentPage].SetActive(true);
+    }
 
     void Update()
     {
@@ -26,5 +33,22 @@ public class Bar : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position + _interactiovityOffset, _interacivityRadius);
+    }
+
+    public void NextPage()
+    {
+        _barPages[_currentPage].SetActive(false);
+        _currentPage++;
+        if(_currentPage >= _barPages.Length) _currentPage = 0;
+        _barPages[_currentPage].SetActive(true);
+    }
+
+    public void PreviousPage()
+    {
+        _barPages[_currentPage].SetActive(false);
+        _currentPage--;
+        if(_currentPage < 0) _currentPage = _barPages.Length - 1;
+        _barPages[_currentPage].SetActive(true);
+
     }
 }
