@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class Bar : MonoBehaviour
 {
+    public static Bar Instance { get; private set; }
     [SerializeField] private float _interacivityRadius;
     [SerializeField] private Vector3 _interactiovityOffset;
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private GameObject _barUI;
-    private bool _barUIActive = false;
+    public bool _barUIActive { get; private set;}
     [SerializeField] private GameObject[] _barPages;
     private int _currentPage = 0;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        _barUIActive = false;
+    }
 
     void Start()
     {

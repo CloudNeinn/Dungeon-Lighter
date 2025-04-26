@@ -256,29 +256,8 @@ public class PlayerControl : MonoBehaviour
         _mapInput = UserInput.Instance.MapInput;
     }
 
-    // void OnCollisionStay2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.tag == "Portal")
-    //     {
-    //         Debug.Log("Teleporting");
-    //         collision.gameObject.GetComponent<Portal>().TeleportPlayer();
-    //     }
-        
-    //     if (collision.gameObject.tag == "Trap")
-    //     {
-    //         Debug.Log("Player has collided with an enemy.");
-    //         Death();
-    //     }
-    // }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Portal")
-        {
-            Debug.Log("Teleporting");
-            collision.gameObject.GetComponent<Portal>().TeleportPlayer();
-        }
-        
         if (collision.gameObject.tag == "Trap")
         {
             Debug.Log("Player has collided with an enemy.");
