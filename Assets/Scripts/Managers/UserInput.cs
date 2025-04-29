@@ -10,7 +10,7 @@ public class UserInput : MonoBehaviour
     [field: SerializeField] public Vector2 MoveInput { get; private set; }
     [field: SerializeField] public bool JumpInput { get; private set; }
     [field: SerializeField] public bool DashInput { get; private set; }
-    [field: SerializeField] public bool CrouchInput { get; private set; }
+    [field: SerializeField] public bool RunInput { get; private set; }
     [field: SerializeField] public bool Use1Input { get; private set; }
     [field: SerializeField] public bool Use2Input { get; private set; }
     [field: SerializeField] public bool MenuToggleInput { get; private set; }
@@ -22,7 +22,7 @@ public class UserInput : MonoBehaviour
     public InputAction _moveAction { get; private set; }
     public InputAction _jumpAction { get; private set; }
     public InputAction _dashAction { get; private set; }
-    public InputAction _crouchAction { get; private set; }
+    public InputAction _runAction { get; private set; }
     public InputAction _use1Action { get; private set; }
     public InputAction _use2Action { get; private set; }
     public InputAction _menuToggleAction { get; private set; }
@@ -48,7 +48,7 @@ public class UserInput : MonoBehaviour
         _moveAction = _playerInput.actions["Move"];
         _jumpAction = _playerInput.actions["Jump"];
         _dashAction = _playerInput.actions["Dash"];
-        _crouchAction = _playerInput.actions["Crouch"];
+        _runAction = _playerInput.actions["Run"];
         _use1Action = _playerInput.actions["Use1"];
         _use2Action = _playerInput.actions["Use2"];
         _menuToggleAction = _playerInput.actions["MenuToggle"];
@@ -61,7 +61,7 @@ public class UserInput : MonoBehaviour
         MoveInput = _moveAction.ReadValue<Vector2>();
         JumpInput = _jumpAction.WasPressedThisFrame();
         DashInput = _dashAction.WasPressedThisFrame();
-        CrouchInput = _crouchAction.WasPressedThisFrame();
+        RunInput = _runAction.WasPressedThisFrame();
         Use1Input = _use1Action.WasPressedThisFrame();
         Use2Input = _use2Action.WasPressedThisFrame();
         MenuToggleInput = _menuToggleAction.WasPressedThisFrame();

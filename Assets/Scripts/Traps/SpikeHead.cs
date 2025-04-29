@@ -74,7 +74,7 @@ public class SpikeHead : MonoBehaviour
 
     bool playerInSight()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, vectorDir[(int)movementDirection], 2f, playerLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, vectorDir[(int)movementDirection], 20f, playerLayer);
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
             return true;
@@ -90,7 +90,7 @@ public class SpikeHead : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, vectorDir[(int)movementDirection] * 2f);
+        Gizmos.DrawRay(transform.position, vectorDir[(int)movementDirection] * 20f);
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position + vectorDir[(int)movementDirection] * .02f, coll.bounds.size);

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2989726128419885480}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,17 +166,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRigidbody: {fileID: 471496188600353898}
   playerCollider: {fileID: 7353277815411045271}
-  topSpeed: 6
-  currentSpeed: 0
-  targetSpeed: 0
-  speedDif: 0
-  acceleration: 0.6
-  deceleration: 0.5
-  speedChangeRate: 0.5
-  velocityPower: 2
+  walkSpeed: 2.5
+  runSpeed: 3.5
+  airSpeed: 3
   canMove: 0
-  moveCooldownTime: 0.1
-  moveCooldownTimeCounter: 0.1
+  moveCooldownTime: 0.2
+  moveCooldownTimeCounter: 0.2
+  currentSpeed: 0
+  speedChangeRate: 0.5
   jumpForce: 5
   jumpCoyoteTime: 0.2
   jumpCoyoteTimeCounter: 0.2
@@ -185,8 +182,8 @@ MonoBehaviour:
   doubleJumpIndex: 1
   totalDoubleJumpCount: 1
   doubleJumpCount: 1
-  wallJumpStrengthX: -10
-  wallJumpStrengthY: 25
+  wallJumpStrengthX: -2
+  wallJumpStrengthY: 5
   isSliding: 0
   slideSpeed: 5
   slideAccel: 7.5
@@ -212,6 +209,7 @@ MonoBehaviour:
   <_moveInput>k__BackingField: {x: 0, y: 0}
   <_isGrounded>k__BackingField: 0
   <movementVector>k__BackingField: {x: 0, y: 0}
+  frameRate: 0
 --- !u!114 &2989726128419885480
 MonoBehaviour:
   m_ObjectHideFlags: 0

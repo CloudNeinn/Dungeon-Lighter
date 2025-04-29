@@ -11,17 +11,16 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private CapsuleCollider2D playerCollider;
 
     [Header("Movement Parameters")]
-    [SerializeField] private float topSpeed = 10f;
-    [SerializeField] private float currentSpeed;
-    [SerializeField] private float targetSpeed;
-    [SerializeField] private float speedDif;
-    [SerializeField] private float acceleration = 0.5f;
-    [SerializeField] private float deceleration = 0.5f;
-    [SerializeField] private float speedChangeRate = 0.5f;
-    [SerializeField] private float velocityPower;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
+    [SerializeField] private float airSpeed;
     [SerializeField] private bool canMove;
     [SerializeField] private float moveCooldownTime;
     [SerializeField] private float moveCooldownTimeCounter;
+    [SerializeField] private float currentSpeed;
+    [SerializeField] private float speedChangeRate;
+    private float targetSpeed;
+    [SerializeField] private float speedDiff;
 
     [Header("Jump Parameters")]
     [SerializeField] private float jumpForce;
@@ -62,7 +61,7 @@ public class PlayerControl : MonoBehaviour
     [field: SerializeField] public Vector2 _moveInput {get; private set;}
     public bool _jumpInput {get; private set;}
     public bool _dashInput {get; private set;}
-    public bool _crouchInput {get; private set;}
+    public bool _runInput {get; private set;}
     public bool _use1Input {get; private set;}
     public bool _use2Input {get; private set;}
     public bool _menuToggleInput {get; private set;}
@@ -73,6 +72,18 @@ public class PlayerControl : MonoBehaviour
     [field: SerializeField] public bool _isGrounded {get; private set;}
     [field: SerializeField] public Vector2 movementVector {get; private set;}
     private GameObject torch;
+
+    public enum FrameRate
+    {
+        FPS_15 = 15,
+        FPS_30 = 30,
+        FPS_60 = 60,
+        FPS_120 = 120,
+        FPS_144 = 144,
+        FPS_240 = 240
+    }
+
+    [SerializeField] public FrameRate frameRate;
 
     void Awake()
     {
@@ -86,41 +97,23 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        //Application.targetFrameRate = 15;
-    }
 
     void Update()
     {
-        movementVector = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y);
-        if(_moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-        else if(_moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
-        else if(Mathf.Abs(playerRigidbody.velocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(playerRigidbody.velocity.x), transform.localScale.y);
-
+        Application.targetFrameRate = (int)frameRate;
+        Rotate();
         GetInput();
-        acceleration = Mathf.Clamp(acceleration, 0, 1);
-        deceleration = Mathf.Clamp(deceleration, 0, 1);
-
-
-        if(canMove) Movement();
-        else if(moveCooldownTimeCounter > 0) moveCooldownTimeCounter -= Time.fixedDeltaTime;
+        Movement();
+        
+        if(moveCooldownTimeCounter > 0) moveCooldownTimeCounter -= Time.deltaTime;
         else canMove = true;
 
         Jump();
         _isGrounded = isGrounded();
-        currentSpeed = playerRigidbody.velocity.x;
 
         if(isWalled() && Mathf.Abs(_moveInput.x) > 0 && canMove) isSliding = true;
         else isSliding = false;
 
-        if(isSliding && UserInput.Instance._jumpAction.WasPressedThisFrame())
-        {
-            playerRigidbody.AddForce(new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpStrengthX, wallJumpStrengthY), ForceMode2D.Impulse);
-            canMove = false;
-            moveCooldownTimeCounter = moveCooldownTime;
-            isSliding = false;
-        }
 
         if(_use1Input)
         {
@@ -133,24 +126,32 @@ public class PlayerControl : MonoBehaviour
     void FixedUpdate()
     {
         if(isSliding) Slide();
+        if(canMove && !isSliding) playerRigidbody.velocity = new Vector2(_moveInput.x * currentSpeed + playerRigidbody.velocity.x/4, playerRigidbody.velocity.y);
 
     }
-    
+
     void Movement()
     {
-        float force;
-        _moveInput = UserInput.Instance.MoveInput;
+        if(isGrounded())
+        {
+            if(UserInput.Instance._runAction.IsPressed()) targetSpeed = runSpeed;
+            else if(!UserInput.Instance._runAction.IsPressed()) targetSpeed = walkSpeed;
+        }
+        else if(!isGrounded() && !isWalled())
+        {
+            targetSpeed = airSpeed; 
+        }
+        else if(isWalled())
+        {
+            targetSpeed = 0;
+        }
 
-        targetSpeed = topSpeed * _moveInput.x;
-
-        if(!isWalled()) speedDif = targetSpeed - currentSpeed;
-        else speedDif = 0;
-
-        speedChangeRate = (Mathf.Abs(_moveInput.x) > 0.01f) ? acceleration : deceleration;
-
-        force = Mathf.Pow(Mathf.Abs(speedDif) * speedChangeRate, velocityPower) * Mathf.Sign(speedDif);
-        
-        playerRigidbody.AddForce(force * Vector2.right, ForceMode2D.Force);
+        if(currentSpeed != targetSpeed)
+        {
+            speedDiff = targetSpeed - currentSpeed;
+            currentSpeed = Mathf.Clamp(currentSpeed += speedChangeRate * Time.deltaTime * Mathf.Sign(speedDiff), 0, runSpeed);
+            if(Mathf.Abs(speedDiff) < 0.01f) currentSpeed = targetSpeed;
+        }
     }
 
     void Jump()
@@ -189,6 +190,22 @@ public class PlayerControl : MonoBehaviour
         {
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y * 0.5f);
         }
+
+        if(isSliding && UserInput.Instance._jumpAction.WasPressedThisFrame())
+        {
+            playerRigidbody.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpStrengthX, wallJumpStrengthY);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            canMove = false;
+            moveCooldownTimeCounter = moveCooldownTime;
+            isSliding = false;
+        }
+    }
+
+    void Rotate()
+    {
+        movementVector = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y);
+        if(!canMove && Mathf.Abs(playerRigidbody.velocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(playerRigidbody.velocity.x), transform.localScale.y);
+        else if(_moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
+        else if(_moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
     }
 
     public void Slide()
@@ -248,7 +265,7 @@ public class PlayerControl : MonoBehaviour
         _moveInput = UserInput.Instance.MoveInput;
         _jumpInput = UserInput.Instance.JumpInput;
         _dashInput = UserInput.Instance.DashInput;
-        _crouchInput = UserInput.Instance.CrouchInput;
+        _runInput = UserInput.Instance.RunInput;
         _use1Input = UserInput.Instance.Use1Input;
         _use2Input = UserInput.Instance.Use2Input;
         _menuToggleInput = UserInput.Instance.MenuToggleInput; 
