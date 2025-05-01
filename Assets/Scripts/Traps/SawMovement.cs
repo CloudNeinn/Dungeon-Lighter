@@ -8,6 +8,7 @@ public class SawMovement : MonoBehaviour
     public int currentWaypointIndex = 0;
     public float speed = 2f;
     private int _direction = 1;
+    [SerializeField] private bool loopMovement;
 
     private void FixedUpdate()
     {
@@ -21,7 +22,13 @@ public class SawMovement : MonoBehaviour
         Transform TargetWaypoint = waypoints[currentWaypointIndex];
         transform.position = Vector2.MoveTowards(transform.position, TargetWaypoint.position, speed * Time.fixedDeltaTime);
 
-        if (Vector2.Distance(transform.position, TargetWaypoint.position) < 0.1f)
+        if (Vector2.Distance(transform.position, TargetWaypoint.position) > 0.1f) return;
+        if(loopMovement)
+        {
+            currentWaypointIndex += _direction;
+            if (currentWaypointIndex >= waypoints.Length) currentWaypointIndex = 0;
+        }
+        else if(!loopMovement)
         {
             currentWaypointIndex += _direction;
             if (currentWaypointIndex >= waypoints.Length || currentWaypointIndex < 0)

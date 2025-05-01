@@ -34,7 +34,11 @@ public class Bar : MonoBehaviour
     void Update()
     {
         _barUI.SetActive(_barUIActive);
-        if(PlayerControl.Instance._use1Input && InRange()) _barUIActive = !_barUIActive;
+        if(PlayerControl.Instance._use1Input && InRange())
+        {
+            _barUIActive = !_barUIActive;
+            CurrencyManager.Instance.SetCurrencyUI();
+        } 
         if(!InRange()) _barUIActive = false;
     }
 

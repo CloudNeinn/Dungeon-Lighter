@@ -73,17 +73,6 @@ public class PlayerControl : MonoBehaviour
     [field: SerializeField] public Vector2 movementVector {get; private set;}
     private GameObject torch;
 
-    public enum FrameRate
-    {
-        FPS_15 = 15,
-        FPS_30 = 30,
-        FPS_60 = 60,
-        FPS_120 = 120,
-        FPS_144 = 144,
-        FPS_240 = 240
-    }
-
-    [SerializeField] public FrameRate frameRate;
 
     void Awake()
     {
@@ -95,12 +84,12 @@ public class PlayerControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        currentSpeed = walkSpeed;
     }
 
 
     void Update()
     {
-        Application.targetFrameRate = (int)frameRate;
         Rotate();
         GetInput();
         Movement();

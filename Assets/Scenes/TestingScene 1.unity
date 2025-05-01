@@ -68147,11 +68147,11 @@ PrefabInstance:
       objectReference: {fileID: 705726924}
     - target: {fileID: 4218929047647230071, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.457206
+      value: -3.9467154
       objectReference: {fileID: 0}
     - target: {fileID: 4218929047647230071, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.010429859
+      value: 0.011099815
       objectReference: {fileID: 0}
     - target: {fileID: 5495454783827833959, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_Follow
@@ -68159,11 +68159,11 @@ PrefabInstance:
       objectReference: {fileID: 414033862}
     - target: {fileID: 5807478771560300169, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.5127945
+      value: -6.023285
       objectReference: {fileID: 0}
     - target: {fileID: 5807478771560300169, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.61043
+      value: -4.6110997
       objectReference: {fileID: 0}
     - target: {fileID: 5807478771560300169, guid: b3fc4b109e243014dae1b4e76747121e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -113486,6 +113486,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneIndex: 1
+  _interacivityRadius: 0.5
+  _interactiovityOffset: {x: 0, y: 0, z: 0}
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!61 &1952900184
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -113592,7 +113597,7 @@ Transform:
   m_GameObject: {fileID: 1952900182}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -9.47, y: -1.25, z: 0}
+  m_LocalPosition: {x: -11, y: -5.08, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []

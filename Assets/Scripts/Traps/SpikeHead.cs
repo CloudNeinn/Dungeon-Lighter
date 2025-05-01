@@ -74,7 +74,7 @@ public class SpikeHead : MonoBehaviour
 
     bool playerInSight()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, vectorDir[(int)movementDirection], 20f, playerLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, vectorDir[(int)movementDirection], 20f, raycastLayer);
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
             return true;
