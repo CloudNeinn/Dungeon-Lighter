@@ -5,24 +5,35 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
-    private CinemachineFramingTransposer transposer;
-    private float startingScreenX;
-    [SerializeField] private float barScreenX = 0.4f;
+    public CinemachineFramingTransposer transposer {get; private set;}
+    float startingScreenX;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
         transposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-        startingScreenX = transposer.m_ScreenX;
+        if(transposer != null) startingScreenX = transposer.m_ScreenX;
     }
 
-    void Update()
+    public float getCameraScreenX()
     {
-        if(Bar.Instance._barUIActive && transposer.m_ScreenX == startingScreenX) setCameraScreenX(barScreenX);
-        else if(!Bar.Instance._barUIActive) setCameraScreenX(startingScreenX);
+        return startingScreenX;
     }
 
-    void setCameraScreenX(float screenX)
+    public void setCameraScreenX(float screenX)
     {
         transposer.m_ScreenX = screenX;
     }

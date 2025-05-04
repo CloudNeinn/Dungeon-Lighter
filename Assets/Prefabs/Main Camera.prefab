@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4218929047647230071}
   - component: {fileID: 5495454783827833959}
   - component: {fileID: 2501914653628917407}
+  - component: {fileID: 4744681018695978826}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -56,7 +57,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 3
+    OrthographicSize: 8
     NearClipPlane: 0
     FarClipPlane: 5000
     Dutch: 0
@@ -89,6 +90,18 @@ MonoBehaviour:
   m_Damping: 0.51
   m_MaxWindowSize: -1
   m_Padding: 0
+--- !u!114 &4744681018695978826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568998750349594610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8160075972396810854
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +116,7 @@ GameObject:
   - component: {fileID: 4677607187524888720}
   - component: {fileID: 5522089865426281105}
   - component: {fileID: 5799608979270794163}
+  - component: {fileID: 4286000580328236829}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -276,7 +290,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 5495454783827833959}
-  barScreenX: 0.4
+--- !u!114 &4286000580328236829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160075972396810854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_AssetsPPU: 16
+  m_RefResolutionX: 640
+  m_RefResolutionY: 360
+  m_CropFrame: 0
+  m_GridSnapping: 0
+  m_FilterMode: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1 &8740588810874550324
 GameObject:
   m_ObjectHideFlags: 0

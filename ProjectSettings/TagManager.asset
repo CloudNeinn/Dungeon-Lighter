@@ -46,3 +46,6 @@ TagManager:
   - name: Not iliuminated
     uniqueID: 849607777
     locked: 0
+  - name: Player
+    uniqueID: 3195136991
+    locked: 0

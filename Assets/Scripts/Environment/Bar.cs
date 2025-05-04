@@ -12,6 +12,7 @@ public class Bar : MonoBehaviour
     public bool _barUIActive { get; private set;}
     [SerializeField] private GameObject[] _barPages;
     private int _currentPage = 0;
+    [SerializeField] private float barScreenShiftX = 0.4f;
 
     private void Awake()
     {
@@ -40,6 +41,8 @@ public class Bar : MonoBehaviour
             CurrencyManager.Instance.SetCurrencyUI();
         } 
         if(!InRange()) _barUIActive = false;
+        if(_barUIActive && CameraController.Instance.transposer.m_ScreenX == CameraController.Instance.getCameraScreenX()) CameraController.Instance.setCameraScreenX(barScreenShiftX);
+        else if(!_barUIActive) CameraController.Instance.setCameraScreenX(CameraController.Instance.getCameraScreenX());
     }
 
     bool InRange()
