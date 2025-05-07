@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float dialogueRadius;
+    [SerializeField] private LayerMask playerLayer;
 
-    // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    bool inRadius()
+    {
+        return Physics2D.OverlapCircle(transform.position, dialogueRadius, playerLayer);
     }
 }
