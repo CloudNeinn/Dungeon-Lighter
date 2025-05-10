@@ -9,6 +9,7 @@ public class Door : MonoBehaviour
     [SerializeField] private float _interacivityRadius;
     [SerializeField] private Vector3 _interactiovityOffset;
     [SerializeField] private LayerMask _playerLayer;
+    [SerializeField] private int returnCurrency;
 
     void Update()
     {
@@ -17,8 +18,11 @@ public class Door : MonoBehaviour
 
     public void EnterDungeon()
     {
+        if(returnCurrency > 0) CurrencyManager.Instance.addCurrency(returnCurrency);
+        if(SceneLoading.Instance.currentSceneType == SceneLoading.SceneType.Level) ShotManager.Instance.activeShot = ShotManager.Shots.None;
         SceneLoading.Instance.LoadScene(_sceneIndex);
     }
+
     bool InRange()
     {
         return Physics2D.OverlapCircle(transform.position + _interactiovityOffset, _interacivityRadius, _playerLayer); 

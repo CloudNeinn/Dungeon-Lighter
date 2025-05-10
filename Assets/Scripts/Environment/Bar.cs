@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bar : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Bar : MonoBehaviour
     [SerializeField] private GameObject[] _barPages;
     private int _currentPage = 0;
     [SerializeField] private float barScreenShiftX = 0.4f;
+    [SerializeField] private GameObject[] shotButtons;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class Bar : MonoBehaviour
     void Start()
     {
         _barPages[_currentPage].SetActive(true);
+        setButtonActions();
     }
 
     void Update()
@@ -71,5 +74,13 @@ public class Bar : MonoBehaviour
         if(_currentPage < 0) _currentPage = _barPages.Length - 1;
         _barPages[_currentPage].SetActive(true);
 
+    }
+
+    void setButtonActions()
+    {
+        foreach(var button in shotButtons)
+        {
+            button.GetComponent<Button>().onClick.AddListener(() => ShotManager.Instance.setActiveShot(button.name));
+        }
     }
 }

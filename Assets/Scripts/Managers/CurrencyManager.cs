@@ -9,19 +9,33 @@ public class CurrencyManager : MonoBehaviour
     public static CurrencyManager Instance;
 
     [SerializeField] private int totalCurrency;
-    private TextMeshProUGUI currencyDisplayText;
+    [SerializeField] private TextMeshProUGUI currencyDisplayText;
+
+
+    public void OnSceneLoaded()
+    {
+        findCurrencyUI();
+        SetCurrencyUI();
+    }
 
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+        
+        totalCurrency = PlayerPrefs.GetInt("coins", 11111111);
     }
 
     void Start()
     {
-        currencyDisplayText = GameObject.Find("CurrencyUI").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        findCurrencyUI();
     }
 
     public void addCurrency(int amount)
@@ -38,7 +52,9 @@ public class CurrencyManager : MonoBehaviour
 
     public void SetCurrencyUI()
     {
-        currencyDisplayText.text = totalCurrency.ToString();
+        //if(!currencyDisplayText) findCurrencyUI();
+        if(currencyDisplayText) currencyDisplayText.text = totalCurrency.ToString();
+        saveCurrency();
     }
 
     public void SetTotalCurrency(int amount)
@@ -50,5 +66,17 @@ public class CurrencyManager : MonoBehaviour
     public int getTotalCurrency()
     {
         return totalCurrency;
+    }
+
+    private void saveCurrency()
+    {
+        PlayerPrefs.SetInt("coins", totalCurrency);
+        PlayerPrefs.Save();
+    }
+
+    private void findCurrencyUI()
+    {
+        GameObject currencyUI = GameObject.Find("CurrencyUI");
+        if(currencyUI) currencyDisplayText = currencyUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 }

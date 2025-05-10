@@ -28,7 +28,6 @@ public class FPSManager : MonoBehaviour
             Destroy(gameObject);
         }
         
-        DontDestroyOnLoad(this.gameObject);
     }
     void Update()
     {

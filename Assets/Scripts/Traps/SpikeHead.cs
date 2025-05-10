@@ -26,7 +26,7 @@ public class SpikeHead : MonoBehaviour
     [SerializeField] private float returnSpeed = 1f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D coll;
-    private bool inInitialPosition = true;
+    //private bool inInitialPosition = true;
     private bool ready = true;
     private Vector3 initialPosition;
     [SerializeField] private float cooldownTime = 2f;
@@ -60,7 +60,7 @@ public class SpikeHead : MonoBehaviour
             {
                 rb.velocity = Vector3.zero;
                 ready = true;
-                inInitialPosition = true;
+                //inInitialPosition = true;
                 cooldownTimeCounter = cooldownTime;
             }
         }
@@ -68,7 +68,7 @@ public class SpikeHead : MonoBehaviour
 
     void Attack()
     {
-        inInitialPosition = false;
+        //inInitialPosition = false;
         rb.velocity = vectorDir[(int)movementDirection] * attackSpeed;
     }
 

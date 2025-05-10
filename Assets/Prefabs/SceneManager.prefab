@@ -74,10 +74,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 640, y: 360}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2900939151147576925}
-  - component: {fileID: 3933151141055245215}
+  - component: {fileID: 1655126425489993851}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -135,7 +135,7 @@ Transform:
   - {fileID: 3476436882180149438}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3933151141055245215
+--- !u!114 &1655126425489993851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,11 +144,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3474718984300572103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74b53f1279af9f44989f5bfb0fe05d72, type: 3}
+  m_Script: {fileID: 11500000, guid: ee2cfa32b09c35740b4dc4df6a9be781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSceneType: 0
   loadingScreen: {fileID: 6060792046622281702}
-  loadingBar: {fileID: 6468107706677869905}
+  loadingBar: {fileID: 4067544403704485756}
   Grids: []
   _detectColliderMask:
     serializedVersion: 2

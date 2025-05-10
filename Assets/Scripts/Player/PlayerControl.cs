@@ -37,6 +37,11 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float wallJumpStrengthY;
 
     [SerializeField] private bool isSliding;
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool isAtApex;
+    [SerializeField] private float jumpFallForce;
+    [SerializeField] private float jumpApexThreshold;
+    [SerializeField] private float apexSpeedMultiplier;
     [field: SerializeField] public float slideSpeed;
     [field: SerializeField] public float slideAccel;
 
@@ -72,8 +77,31 @@ public class PlayerControl : MonoBehaviour
     [field: SerializeField] public bool _isGrounded {get; private set;}
     [field: SerializeField] public Vector2 movementVector {get; private set;}
     private GameObject torch;
+    private PlayerLight playerLight;
 
+    #region GET/SET
+    
+    public float RunSpeed
+    {
+        get => runSpeed;
+        set => runSpeed = value;
+    }
 
+    public int TotalDoubleJumpCount
+    {
+        get => totalDoubleJumpCount;
+        set => totalDoubleJumpCount = value;
+    }
+
+    public float GravityScale
+    {
+        get => playerRigidbody.gravityScale;
+        set => playerRigidbody.gravityScale = value;
+    }
+
+    public Rigidbody2D PlayerRigidbody => playerRigidbody;
+    #endregion
+    
     void Awake()
     {
         if (Instance == null)
@@ -109,7 +137,6 @@ public class PlayerControl : MonoBehaviour
             torch = getTorch()?.gameObject.transform.GetChild(0).gameObject;
             if(torch != null) torch.SetActive(true);
         }
-           
     }
 
     void FixedUpdate()
@@ -128,7 +155,8 @@ public class PlayerControl : MonoBehaviour
         }
         else if(!isGrounded() && !isWalled())
         {
-            targetSpeed = airSpeed; 
+            if(isAtApex) targetSpeed = airSpeed * apexSpeedMultiplier; 
+            else targetSpeed = airSpeed; 
         }
         else if(isWalled())
         {
@@ -187,6 +215,12 @@ public class PlayerControl : MonoBehaviour
             moveCooldownTimeCounter = moveCooldownTime;
             isSliding = false;
         }
+
+        if(!isJumping  && playerRigidbody.velocity.y > 0) isJumping = true;
+        if(isJumping && playerRigidbody.velocity.y < 0 && !isAtApex) playerRigidbody.AddForce(Vector2.up * -jumpFallForce);
+        if(isGrounded() && isJumping) isJumping = false;
+        if(isJumping && Mathf.Abs(playerRigidbody.velocity.y) <= jumpApexThreshold) isAtApex = true;
+        else isAtApex = false;
     }
 
     void Rotate()
@@ -271,10 +305,15 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    void Death()
+    public void Death()
     {
         // Implement death logic here
         Debug.Log("Player has died.");
         SceneLoading.Instance.ReloadScene();
+    }
+
+    public float getFlickerSpeedModifier()
+    {
+        return currentSpeed / runSpeed;
     }
 }

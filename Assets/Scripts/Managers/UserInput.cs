@@ -40,7 +40,6 @@ public class UserInput : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(this.gameObject);
 
         _playerInput = GetComponent<PlayerInput>();
 

@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using Cinemachine;
 
 public class SceneLoading : MonoBehaviour
 {
+    public enum SceneType {Hub,Level}
+    [SerializeField] public SceneType currentSceneType;
     public static SceneLoading Instance;
     public GameObject loadingScreen;
     public Image loadingBar;
@@ -22,7 +25,13 @@ public class SceneLoading : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this.gameObject);
+        setCurrentSceneType(SceneManager.GetActiveScene());
+        SceneManager.sceneLoaded += onSceneLoad;
+    }
+    
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= onSceneLoad;
     }
     
     void Start()
@@ -76,5 +85,46 @@ public class SceneLoading : MonoBehaviour
     {
         Collider2D collider = Physics2D.OverlapCircle(PlayerControl.Instance.transform.position, 10f, _detectColliderMask);
         return collider.gameObject.scene.name;
+    }
+
+    void onSceneLoad(Scene scene, LoadSceneMode mode)
+    {
+        setCurrentSceneType(scene);
+
+        if (ShotManager.Instance != null)
+        {
+            ShotManager.Instance.applyShotEffects();
+        }
+
+        if (CurrencyManager.Instance != null)
+        {
+            CurrencyManager.Instance.OnSceneLoaded();
+        }
+    
+        StartCoroutine(ResetCameraConfiner());
+    }
+
+    IEnumerator ResetCameraConfiner()
+    {
+        yield return null;
+        
+        var confiner2D = FindObjectOfType<CinemachineConfiner2D>();
+        if (confiner2D != null)
+        {
+            confiner2D.InvalidateCache();
+        }
+
+    }
+
+    void setCurrentSceneType(Scene scene)
+    {
+        if (scene.name == "Hub")
+        {
+            currentSceneType = SceneType.Hub;
+        }
+        else
+        {
+            currentSceneType = SceneType.Level;
+        }
     }
 }

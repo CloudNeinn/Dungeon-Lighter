@@ -476,15 +476,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2900939151147576925, guid: bd5be0cac365fa445998af0f1148f5b8, type: 3}
   m_PrefabInstance: {fileID: 16678969}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &797964762 stripped
+--- !u!114 &911117661 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3933151141055245215, guid: bd5be0cac365fa445998af0f1148f5b8, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1655126425489993851, guid: bd5be0cac365fa445998af0f1148f5b8, type: 3}
   m_PrefabInstance: {fileID: 16678969}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74b53f1279af9f44989f5bfb0fe05d72, type: 3}
+  m_Script: {fileID: 11500000, guid: ee2cfa32b09c35740b4dc4df6a9be781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1231911389
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 797964762}
+      - m_Target: {fileID: 911117661}
         m_TargetAssemblyTypeName: SceneLoading, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
