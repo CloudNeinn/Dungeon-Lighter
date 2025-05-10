@@ -1,17 +1,16 @@
 fileFormatVersion: 2
-guid: 63d4c5d10d642194e9cec3483c9bc11b
+guid: 3380e1a3a2987144c892a2c902355793
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
-  forceTextureCase: 0
+  fontSize: 1
+  forceTextureCase: -1
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Pixeloid Sans
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 822e19323c3e3b643a3a690b32fb9f6d, type: 3}
+  - Pixelated Elegance
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 2
   ascentCalculationMode: 1
