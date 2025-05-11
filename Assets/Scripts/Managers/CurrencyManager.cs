@@ -28,9 +28,8 @@ public class CurrencyManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this.gameObject);
         
-        totalCurrency = PlayerPrefs.GetInt("coins", 11111111);
+        totalCurrency = PlayerPrefs.GetInt("coins", 0);
     }
 
     void Start()

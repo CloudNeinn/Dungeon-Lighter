@@ -80,7 +80,7 @@ public class ShotManager : MonoBehaviour
                     PlayerControl.Instance.TotalDoubleJumpCount += 1;
                     break;
                 case Shots.OverBurn:
-                    PlayerControl.Instance.GravityScale *= 0.5f;
+                    PlayerControl.Instance.GravityScale = 2;
                     break;
                 case Shots.SniffSpark:
                     // Add your effect
