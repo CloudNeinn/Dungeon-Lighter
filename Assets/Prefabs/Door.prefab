@@ -143,9 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3513536f6d121e441a5fc176cee594f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneIndex: 0
+  _sceneIndex: 1
   _interacivityRadius: 0.6
   _interactiovityOffset: {x: 0, y: 0, z: 0}
   _playerLayer:
     serializedVersion: 2
     m_Bits: 512
+  returnCurrency: 0
