@@ -100,6 +100,11 @@ public class SceneLoading : MonoBehaviour
         {
             CurrencyManager.Instance.OnSceneLoaded();
         }
+
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.getNotesUI();
+        }
     
         StartCoroutine(ResetCameraConfiner());
     }

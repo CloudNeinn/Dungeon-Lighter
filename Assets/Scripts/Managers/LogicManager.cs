@@ -25,8 +25,6 @@ public class LogicManager : MonoBehaviour
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
         Time.timeScale = isPaused ? 0f : 1f;
-
-        Debug.Log(isPaused ? "Game Paused" : "Game Resumed");
     }
 
     public void disablePause()

@@ -9,8 +9,8 @@ public class InteractiveUIController : MonoBehaviour
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private GameObject _UI;
     [SerializeField] private float _screenShiftX = 0.4f;
-    public bool _UIActive { get; private set;}
-    
+    [SerializeField] private bool _UIActive;
+
     void Start()
     {
         _UIActive = false;
@@ -19,24 +19,33 @@ public class InteractiveUIController : MonoBehaviour
     void Update()
     {
         _UI.SetActive(_UIActive);
-        if(PlayerControl.Instance._use1Input && InRange())
+        if (PlayerControl.Instance._use1Input && InRange())
         {
             _UIActive = !_UIActive;
             CurrencyManager.Instance.SetCurrencyUI();
-        } 
-        if(!InRange()) _UIActive = false;
-        if(_UIActive && CameraController.Instance.transposer.m_ScreenX == CameraController.Instance.getCameraScreenX()) CameraController.Instance.setCameraScreenX(_screenShiftX);
-        else if(!_UIActive) CameraController.Instance.setCameraScreenX(CameraController.Instance.getCameraScreenX());
+        }
+        if (_UIActive && !InRange()) _UIActive = false;
+        if (_UIActive && CameraController.Instance.transposer.m_ScreenX == CameraController.Instance.getCameraScreenX())
+        {
+            CameraController.Instance.setCameraScreenX(_screenShiftX);
+            UIManager.Instance.changeState(); 
+        }
+        else if (!_UIActive) UIManager.Instance.changeState();
     }
 
     bool InRange()
     {
-        return Physics2D.OverlapCircle(transform.position + _interactiovityOffset, _interacivityRadius, _playerLayer); 
+        return Physics2D.OverlapCircle(transform.position + _interactiovityOffset, _interacivityRadius, _playerLayer);
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position + _interactiovityOffset, _interacivityRadius);
+    }
+
+    public bool isActive()
+    {
+        return _UIActive;
     }
 }
