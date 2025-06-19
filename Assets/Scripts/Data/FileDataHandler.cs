@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 
-public class FileDataHandler
+public class FileDataHandler<T>
 {
     private string dataDirPath;
     private string dataFileName;
@@ -16,15 +16,14 @@ public class FileDataHandler
         this.dataFileName = dataFileName;
     }
 
-    public GameData Load()
+    public T Load()
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
-        GameData loadedData = null;
+        T loadedData = default(T);
         if (File.Exists(fullPath))
         {
             try
             {
-                // Read serialized data from the file
                 string dataToLoad;
                 using (FileStream stream = new FileStream(fullPath, FileMode.Open))
                 {
@@ -34,8 +33,7 @@ public class FileDataHandler
                     }
                 }
 
-                // Deserialize data from JSON to GameData
-                loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad);
+                loadedData = JsonConvert.DeserializeObject<T>(dataToLoad);
             }
             catch (Exception e)
             {
@@ -45,25 +43,21 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data)
+    public void Save(T data)
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         try
         {
-            // Create directory where save file will be written
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
-            // Configure JsonSerializerSettings to handle self-referencing loops
             var settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            // Serialize game data object to JSON using Newtonsoft.Json
             string dataToStore = JsonConvert.SerializeObject(data, settings);
 
-            // Write serialized data to the file
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(stream))

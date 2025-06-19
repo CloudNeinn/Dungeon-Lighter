@@ -6,19 +6,33 @@ using System.Linq;
 public class DataPersistanceManager : MonoBehaviour
 {
     [Header("File Storage Config")] 
-    [SerializeField] private string fileName;
+    [SerializeField] private string saveFileName = "savegame.json";
+    [SerializeField] private string settingsFileName = "settings.json";
+    [SerializeField] private string notesFileName = "notes.json";
+
     private GameData gameData;
+    private NoteData noteData;
     
     private List<IDataPersistance> dataPersistenceObjects;
-    private FileDataHandler dataHandler;
-    public static DataPersistanceManager Instance {get; private set; }
+
+    private FileDataHandler<GameData> gameDataHandler;
+    private FileDataHandler<NoteData> notesHandler;
+    
+    public static DataPersistanceManager Instance { get; private set; }
 
     private void Start()
     {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        InitializeHandlers();
         LoadGame();
     }
+
+    private void InitializeHandlers()
+    {
+        string dataPath = Application.persistentDataPath;
+        gameDataHandler = new FileDataHandler<GameData>(dataPath, saveFileName);
+        notesHandler = new FileDataHandler<NoteData>(dataPath, notesFileName);
+    }
+
     private void Awake()
     {
         if (Instance != null)
@@ -35,7 +49,7 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void LoadGame()
     {
-        this.gameData = dataHandler.Load();
+        this.gameData = gameDataHandler.Load();
 
         if(this.gameData == null)
         {
@@ -56,7 +70,7 @@ public class DataPersistanceManager : MonoBehaviour
             dataPersistenceObj.SaveData(ref gameData);
         }
 
-        dataHandler.Save(gameData);
+        gameDataHandler.Save(gameData);
     }
 
     private void OnApplicationQuit()

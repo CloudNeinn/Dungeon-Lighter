@@ -7,7 +7,6 @@ public class NoteData
 {
     public string title;
     public string content;
-    // Add other fields as needed (e.g., found status, timestamp)
 }
 
 [System.Serializable]
