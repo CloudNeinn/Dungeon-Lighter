@@ -5,25 +5,26 @@ using System.Linq;
 
 public class DataPersistanceManager : MonoBehaviour
 {
-    [Header("File Storage Config")] 
+    [Header("File Storage Config")]
     [SerializeField] private string saveFileName = "savegame.json";
     [SerializeField] private string settingsFileName = "settings.json";
     [SerializeField] private string notesFileName = "notes.json";
 
     private GameData gameData;
     private NoteData noteData;
-    
+
     private List<IDataPersistance> dataPersistenceObjects;
 
     private FileDataHandler<GameData> gameDataHandler;
     private FileDataHandler<NoteData> notesHandler;
-    
+
     public static DataPersistanceManager Instance { get; private set; }
 
     private void Start()
     {
         InitializeHandlers();
-        LoadGame();
+        //LoadGame();
+        LoadNotes();
     }
 
     private void InitializeHandlers()
@@ -51,7 +52,7 @@ public class DataPersistanceManager : MonoBehaviour
     {
         this.gameData = gameDataHandler.Load();
 
-        if(this.gameData == null)
+        if (this.gameData == null)
         {
             Debug.Log("No data was found. Initializing data to defaults.");
             NewGame();
@@ -84,5 +85,22 @@ public class DataPersistanceManager : MonoBehaviour
         .OfType<IDataPersistance>();
 
         return new List<IDataPersistance>(dataPersistenceObjects);
+    }
+
+    public void LoadNotes()
+    {
+        this.noteData = notesHandler.Load();
+
+        if (this.noteData == null)
+        {
+            Debug.Log("Note file is not present. Creating note file and populating with default values");
+            PopulateNoteFile();
+        }
+    }
+
+    public void PopulateNoteFile()
+    {
+        this.noteData = new NoteData();
+        notesHandler.Save(noteData);
     }
 }
