@@ -6,7 +6,7 @@ using System.Linq;
 public class NoteManager : MonoBehaviour
 {
     public static NoteManager Instance;
-    public SerializableDictionary<string, Note> notes;
+    [SerializeField] public SerializableDictionary<string, Note> notes;
 
     void Awake()
     {
@@ -21,15 +21,15 @@ public class NoteManager : MonoBehaviour
 
     }
 
-    public Note getNote(string uuid)
+    public Note getNote(string guid)
     {
-        if (string.IsNullOrEmpty(uuid))
+        if (string.IsNullOrEmpty(guid))
         {
-            Debug.LogWarning("Attempted to get a note with null or empty UUID");
+            Debug.LogWarning("Attempted to get a note with null or empty guid");
             return null;
         }
 
-        if (notes != null && notes.TryGetValue(uuid, out Note note))
+        if (notes != null && notes.TryGetValue(guid, out Note note))
         {
             if (note != null)
             {
@@ -38,7 +38,7 @@ public class NoteManager : MonoBehaviour
             }
         }
 
-        Debug.LogWarning($"Note with UUID '{uuid}' not found in the notes dictionary");
+        Debug.LogWarning($"Note with guid '{guid}' not found in the notes dictionary");
         return null;
     }
 }

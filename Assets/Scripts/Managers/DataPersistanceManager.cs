@@ -20,20 +20,6 @@ public class DataPersistanceManager : MonoBehaviour
 
     public static DataPersistanceManager Instance { get; private set; }
 
-    private void Start()
-    {
-        InitializeHandlers();
-        //LoadGame();
-        LoadNotes();
-    }
-
-    private void InitializeHandlers()
-    {
-        string dataPath = Application.persistentDataPath;
-        gameDataHandler = new FileDataHandler<GameData>(dataPath, saveFileName);
-        notesHandler = new FileDataHandler<NoteData>(dataPath, notesFileName);
-    }
-
     private void Awake()
     {
         if (Instance != null)
@@ -41,8 +27,18 @@ public class DataPersistanceManager : MonoBehaviour
             Debug.LogError("Found more than one Data Persistance Manager instance");
         }
         Instance = this;
+        InitializeHandlers();
+        //LoadGame();
+        LoadNotes();
     }
 
+
+    private void InitializeHandlers()
+    {
+        string dataPath = Application.persistentDataPath;
+        gameDataHandler = new FileDataHandler<GameData>(dataPath, saveFileName);
+        notesHandler = new FileDataHandler<NoteData>(dataPath, notesFileName);
+    }
     public void NewGame()
     {
         this.gameData = new GameData();
@@ -96,6 +92,8 @@ public class DataPersistanceManager : MonoBehaviour
             Debug.Log("Note file is not present. Creating note file and populating with default values");
             PopulateNoteFile();
         }
+
+        NoteManager.Instance.notes = noteData.notes;
     }
 
     public void PopulateNoteFile()
