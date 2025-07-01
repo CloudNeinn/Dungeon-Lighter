@@ -1,0 +1,34 @@
+{
+    "_notesList": [
+        {
+            "guid": "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d59",
+            "title": "Welcome to the Game",
+            "content": "This is your first note. Explore the world to find more!",
+            "isRead": false
+        },
+        {
+            "guid": "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d50",
+            "title": "Controls",
+            "content": "Use WASD to move. Press Space to jump. Press E to interact.",
+            "isRead": false
+        },
+        {
+            "guid": "d7f01c1c-7cf4-4ae2-a449-530c0c0c564f",
+            "title": "asdgasdgadfg",
+            "content": "adsfgadfgadfgadfgadsfgadfasxas4gsdreasrgadrgadradrgdfadfgh",
+            "isRead": false
+        },
+        {
+            "guid": "9f2aedbf-cb72-46c5-82a8-950c0307d99f",
+            "title": "New Note",
+            "content": "",
+            "isRead": false
+        },
+        {
+            "guid": "3821bd2a-1ff6-41c5-a3ef-76c1654ae2e9",
+            "title": "ASDGADSFGADFG",
+            "content": "AFASDFGASDFASD",
+            "isRead": false
+        }
+    ]
+}

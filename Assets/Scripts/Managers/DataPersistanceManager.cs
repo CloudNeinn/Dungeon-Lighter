@@ -27,6 +27,10 @@ public class DataPersistanceManager : MonoBehaviour
             Debug.LogError("Found more than one Data Persistance Manager instance");
         }
         Instance = this;
+    }
+
+    private void Start()
+    { 
         InitializeHandlers();
         //LoadGame();
         LoadNotes();
@@ -93,7 +97,7 @@ public class DataPersistanceManager : MonoBehaviour
             PopulateNoteFile();
         }
 
-        NoteManager.Instance.notes = noteData.notes;
+        if (this.noteData != null) NoteManager.Instance.notes = noteData.notes;
     }
 
     public void PopulateNoteFile()
