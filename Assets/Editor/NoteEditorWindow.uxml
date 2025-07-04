@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Editor/NoteEditorWindow.uss?fileID=7433441132597879392&amp;guid=a59f1850a4bbfa64c83d00842abfd267&amp;type=3#NoteEditorWindow" />
+    <ui:VisualElement class="root" style="min-height: 100%;">
+        <uie:Toolbar class="toolbar">
+            <ui:VisualElement class="toolbar-left">
+                <uie:ToolbarButton name="saveAllButton" text="Save All" />
+                <uie:ToolbarButton name="addNoteButton" text="Add New Note" />
+                <uie:ToolbarButton name="jsonViewButton" text="JSON View" />
+            </ui:VisualElement>
+            <ui:VisualElement class="toolbar-right">
+                <uie:ToolbarToggle name="showReadToggle" text="Show Read" />
+                <uie:ToolbarToggle name="showUnreadToggle" text="Show Unread" />
+                <uie:ToolbarSearchField name="searchField" />
+            </ui:VisualElement>
+        </uie:Toolbar>
+        <ui:TwoPaneSplitView name="mainSplitView" fixed-pane-index="0" fixed-pane-initial-dimension="300" orientation="Horizontal" class="split-view" style="min-height: 600px;">
+            <ui:VisualElement class="notes-list-pane" style="min-height: 0;">
+                <ui:VisualElement class="list-container">
+                    <ui:ListView name="notesListView" show-border="true" show-add-remove-footer="false" show-bound-collection-size="false" virtualization-method="dynamic" class="notes-list" style="flex-grow: 1;" />
+                </ui:VisualElement>
+                <ui:Label name="notesCountLabel" text="Total notes: 0" class="notes-count-label" />
+            </ui:VisualElement>
+            <ui:VisualElement class="note-details-pane" style="min-height: 0;">
+                <ui:TextField name="noteTitleField" label="Title" />
+                <ui:VisualElement class="guid-row">
+                    <ui:TextField name="noteGuidField" label="GUID" />
+                    <ui:Button name="generateGuidButton" text="Generate" />
+                </ui:VisualElement>
+                <ui:TextField name="noteContentField" label="Content" multiline="true" />
+                <ui:Toggle name="isReadToggle" label="Is Read" />
+            </ui:VisualElement>
+        </ui:TwoPaneSplitView>
+    </ui:VisualElement>
+</ui:UXML>
