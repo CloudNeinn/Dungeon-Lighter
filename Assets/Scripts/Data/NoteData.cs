@@ -54,7 +54,6 @@ public class NoteData
     {
         if (_notes == null) return;
         
-        // Update the list to match the dictionary
         _notesList.Clear();
         foreach (var kvp in _notes)
         {

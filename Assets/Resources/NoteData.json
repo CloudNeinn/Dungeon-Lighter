@@ -13,6 +13,12 @@
             "isRead": false
         },
         {
+            "guid": "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d5h",
+            "title": "Controls",
+            "content": "Use WASD to move. Press Space to jump. Press E to interact.",
+            "isRead": false
+        },
+        {
             "guid": "d7f01c1c-7cf4-4ae2-a449-530c0c0c564f",
             "title": "asdgasdgadfg",
             "content": "adsfgadfgadfgadfgadsfgadfasxas4gsdreasrgadrgadradrgdfadfgh",

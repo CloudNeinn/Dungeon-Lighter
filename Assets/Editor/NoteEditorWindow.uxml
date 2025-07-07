@@ -16,7 +16,7 @@
         <ui:TwoPaneSplitView name="mainSplitView" fixed-pane-index="0" fixed-pane-initial-dimension="300" orientation="Horizontal" class="split-view" style="min-height: 600px;">
             <ui:VisualElement class="notes-list-pane" style="min-height: 0;">
                 <ui:VisualElement class="list-container">
-                    <ui:ListView name="notesListView" show-border="true" show-add-remove-footer="false" show-bound-collection-size="false" virtualization-method="dynamic" class="notes-list" style="flex-grow: 1;" />
+                    <ui:ListView name="notesListView" show-border="true" show-add-remove-footer="false" show-bound-collection-size="false" virtualization-method="DynamicHeight" class="notes-list" style="flex-grow: 1;" />
                 </ui:VisualElement>
                 <ui:Label name="notesCountLabel" text="Total notes: 0" class="notes-count-label" />
             </ui:VisualElement>

@@ -8,7 +8,7 @@ public class DataPersistanceManager : MonoBehaviour
     [Header("File Storage Config")]
     [SerializeField] private string saveFileName = "savegame.json";
     [SerializeField] private string settingsFileName = "settings.json";
-    [SerializeField] private string notesFileName = "notes.json";
+    [SerializeField] private string notesFileName = "NoteData.json";
 
     private GameData gameData;
     private NoteData noteData;
@@ -41,7 +41,7 @@ public class DataPersistanceManager : MonoBehaviour
     {
         string dataPath = Application.persistentDataPath;
         gameDataHandler = new FileDataHandler<GameData>(dataPath, saveFileName);
-        notesHandler = new FileDataHandler<NoteData>(dataPath, notesFileName);
+        notesHandler = new FileDataHandler<NoteData>("/Assets/Resources/", notesFileName);
     }
     public void NewGame()
     {
