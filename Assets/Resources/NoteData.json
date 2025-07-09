@@ -1,40 +1,34 @@
 {
-    "_notesList": [
-        {
-            "guid": "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d59",
-            "title": "Welcome to the Game",
-            "content": "This is your first note. Explore the world to find more!",
-            "isRead": false
-        },
-        {
-            "guid": "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d50",
-            "title": "Controls",
-            "content": "Use WASD to move. Press Space to jump. Press E to interact.",
-            "isRead": false
-        },
-        {
-            "guid": "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d5h",
-            "title": "Controls",
-            "content": "Use WASD to move. Press Space to jump. Press E to interact.",
-            "isRead": false
-        },
-        {
-            "guid": "d7f01c1c-7cf4-4ae2-a449-530c0c0c564f",
-            "title": "asdgasdgadfg",
-            "content": "adsfgadfgadfgadfgadsfgadfasxas4gsdreasrgadrgadradrgdfadfgh",
-            "isRead": false
-        },
-        {
-            "guid": "9f2aedbf-cb72-46c5-82a8-950c0307d99f",
-            "title": "New Note",
-            "content": "",
-            "isRead": false
-        },
-        {
-            "guid": "3821bd2a-1ff6-41c5-a3ef-76c1654ae2e9",
-            "title": "ASDGADSFGADFG",
-            "content": "AFASDFGASDFASD",
-            "isRead": false
-        }
-    ]
+  "notes": {
+    "00dd2625-94d1-4641-b9e3-8e082b613a41": {
+      "guid": "00dd2625-94d1-4641-b9e3-8e082b613a41",
+      "title": "New Note",
+      "content": "Enter your note content here...",
+      "isRead": false
+    },
+    "fa259c15-52b5-40e7-a83b-c514092bb2ef": {
+      "guid": "fa259c15-52b5-40e7-a83b-c514092bb2ef",
+      "title": "New Note",
+      "content": "Enter your note content here...",
+      "isRead": false
+    },
+    "06145145-1f7e-466c-9a13-a2f251105faf": {
+      "guid": "06145145-1f7e-466c-9a13-a2f251105faf",
+      "title": "New Note",
+      "content": "Enter your note content here...",
+      "isRead": false
+    },
+    "b9133fc6-7e7f-4dce-b768-d6aa9e945f9c": {
+      "guid": "b9133fc6-7e7f-4dce-b768-d6aa9e945f9c",
+      "title": "New Note",
+      "content": "Enter your note content here...",
+      "isRead": false
+    },
+    "e6488858-6ee4-4d28-a396-9bec960e9249": {
+      "guid": "e6488858-6ee4-4d28-a396-9bec960e9249",
+      "title": "New Note",
+      "content": "Enter your note content here...",
+      "isRead": false
+    }
+  }
 }

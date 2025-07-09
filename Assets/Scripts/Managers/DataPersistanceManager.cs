@@ -41,7 +41,7 @@ public class DataPersistanceManager : MonoBehaviour
     {
         string dataPath = Application.persistentDataPath;
         gameDataHandler = new FileDataHandler<GameData>(dataPath, saveFileName);
-        notesHandler = new FileDataHandler<NoteData>("/Assets/Resources/", notesFileName);
+        notesHandler = new FileDataHandler<NoteData>("Assets/Resources/", notesFileName);
     }
     public void NewGame()
     {
@@ -91,11 +91,11 @@ public class DataPersistanceManager : MonoBehaviour
     {
         this.noteData = notesHandler.Load();
 
-        if (this.noteData == null)
-        {
-            Debug.Log("Note file is not present. Creating note file and populating with default values");
-            PopulateNoteFile();
-        }
+        //if (this.noteData == null)
+        //{
+        //    Debug.Log("Note file is not present. Creating note file and populating with default values");
+        //    PopulateNoteFile();
+        //}
 
         if (this.noteData != null) NoteManager.Instance.notes = noteData.notes;
     }

@@ -27,28 +27,36 @@ public class NoteData
         }
     }
 
-    public NoteData()
-    {
-        // Only initialize if notes is empty
-        if (_notesList.Count == 0)
-        {
-            _notesList.Add(new Note
-            {
-                guid = "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d59",
-                title = "Welcome to the Game",
-                content = "This is your first note. Explore the world to find more!",
-                isRead = false
-            });
-
-            _notesList.Add(new Note
-            {
-                guid = "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d50",
-                title = "Controls",
-                content = "Use WASD to move. Press Space to jump. Press E to interact.",
-                isRead = false
-            });
-        }
-    }
+    //public NoteData()
+    //{
+    //    // Only initialize if notes is empty
+    //    if (_notesList.Count == 0)
+    //    {
+    //        _notesList.Add(new Note
+    //        {
+    //            guid = "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d59",
+    //            title = "Welcome to the Game",
+    //            content = "This is your first note. Explore the world to find more!",
+    //            isRead = false
+    //        });
+//
+    //        _notesList.Add(new Note
+    //        {
+    //            guid = "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d50",
+    //            title = "Controls",
+    //            content = "Use WASD to move. Press Space to jump. Press E to interact.",
+    //            isRead = false
+    //        });
+//
+    //        _notesList.Add(new Note
+    //        {
+    //            guid = "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d58",
+    //            title = "Casdgadfhadhadfhals",
+    //            content = "Use WASD tadfhadfhadfgadfg.",
+    //            isRead = false
+    //        });
+    //    }
+    //}
 
     public void SyncDictionaryToList()
     {

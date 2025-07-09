@@ -1,13 +1,32 @@
+using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-
 public class NoteEditorWindow : EditorWindow
 {
-    List<Note> mockNotes;
-    List<Note> notes;
-    FileDataHandler<NoteData> notesHandler;
+    private List<Note> mockNotes;
+    private List<Note> notes;
+    private NoteData noteData;
+    private Note selectedNote;
+    private FileDataHandler<NoteData> notesHandler;
+    private Vector2 scrollPosition;
+    private bool needsSave;
+    private string filePath = "Assets/Resources/";
+    private string fileName = "NoteData.json";
+    private ListView notesListView;
+    private TextField noteTitleField;
+    private TextField noteGuidField;
+    private TextField noteContentField;
+    private Toggle isReadToggle;
+    private Label notesCountLabel;
+    private Button addNoteButton;
+    private Button saveAllButton;
+    private Button jsonViewButton;
+    private Toggle showReadToggle;
+    private Toggle showUnreadToggle;
+
 
     [MenuItem("Tools/Notes Editor")]
     public static void ShowWindow()
@@ -18,8 +37,9 @@ public class NoteEditorWindow : EditorWindow
 
     void OnEnable()
     {
-        notesHandler = new FileDataHandler<NoteData>("Assets/Resources/", "NoteData.json");
-        notes = new List<Note>(notesHandler.Load().notes.Values);
+        notesHandler = new FileDataHandler<NoteData>(filePath, fileName);
+        noteData = notesHandler.Load();
+        notes = new List<Note>(noteData.notes.Values);
     }
 
     public void CreateGUI()
@@ -43,25 +63,30 @@ public class NoteEditorWindow : EditorWindow
         root.Add(uxmlRoot);
         Debug.Log("UXML added to root");
 
-        var notesListView = root.Q<ListView>("notesListView");
-        var notetitleField = root.Q<TextField>("notetitleField");
-        var noteguidField = root.Q<TextField>("noteguidField");
-        var notecontentField = root.Q<TextField>("notecontentField");
-        var isReadToggle = root.Q<Toggle>("isReadToggle");
-        var notesCountLabel = root.Q<Label>("notesCountLabel");
+        notesListView = root.Q<ListView>("notesListView");
+        noteTitleField = root.Q<TextField>("noteTitleField");
+        noteGuidField = root.Q<TextField>("noteGuidField");
+        noteContentField = root.Q<TextField>("noteContentField");
+        isReadToggle = root.Q<Toggle>("isReadToggle");
+        notesCountLabel = root.Q<Label>("notesCountLabel");
+        addNoteButton = root.Q<Button>("addNoteButton");
+        saveAllButton = root.Q<Button>("saveAllButton");
+        jsonViewButton = root.Q<Button>("jsonViewButton");
+        showReadToggle = root.Q<Toggle>("showReadToggle");
+        showUnreadToggle = root.Q<Toggle>("showUnreadToggle");
 
-        //mockNotes = new List<Note>
-        //{
-        //    new Note { title = "First Note", guid = "1111-AAAA", content = "This is the first note.", isRead = true },
-        //    new Note { title = "Second Note", guid = "2222-BBBB", content = "This is the second note.", isRead = false },
-        //    new Note { title = "Third Note", guid = "3333-CCCC", content = "This is the third note.", isRead = true }
-        //};
-        mockNotes = notes;
-        Debug.Log($"Created {mockNotes.Count} mock notes");
+        if (addNoteButton != null)
+            addNoteButton.clicked += createNote;
+
+        if (saveAllButton != null)
+            saveAllButton.clicked += saveNotes;
+
+        if (jsonViewButton != null)
+            jsonViewButton.clicked += createNote;
 
         if (notesListView != null)
         {
-            notesListView.itemsSource = mockNotes;
+            notesListView.itemsSource = notes;
             notesListView.fixedItemHeight = 24;
             notesListView.selectionType = SelectionType.Single;
             notesListView.showBorder = true;
@@ -81,11 +106,11 @@ public class NoteEditorWindow : EditorWindow
 
             notesListView.bindItem = (element, i) =>
             {
-                if (i >= 0 && i < mockNotes.Count)
+                if (i >= 0 && i < notes.Count)
                 {
                     var label = element as Label;
-                    label.text = mockNotes[i].title;
-                    label.style.color = mockNotes[i].isRead ? new Color(0.7f, 0.7f, 0.7f) : Color.white;
+                    label.text = notes[i].title;
+                    label.style.color = notes[i].isRead ? new Color(0.7f, 0.7f, 0.7f) : Color.white;
                 }
             };
 
@@ -96,29 +121,85 @@ public class NoteEditorWindow : EditorWindow
             Debug.LogError("Failed to find ListView in UXML");
         }
 
-        if (notesListView != null && notetitleField != null)
+        if (notesListView != null && noteTitleField != null)
         {
             notesListView.onSelectionChange += (selectedItems) =>
             {
-                var selectedNote = (selectedItems as IList<Note>)?[0];
+                selectedNote = notesListView.selectedItem as Note;
                 if (selectedNote != null)
                 {
-                    notetitleField.value = selectedNote.title;
-                    noteguidField.value = selectedNote.guid;
-                    notecontentField.value = selectedNote.content;
+                    noteTitleField.value = selectedNote.title;
+                    noteGuidField.value = selectedNote.guid;
+                    noteContentField.value = selectedNote.content;
                     isReadToggle.value = selectedNote.isRead;
                 }
             };
         }
 
-        if (notesListView != null && mockNotes.Count > 0)
+        if (notesListView != null && notes.Count > 0)
         {
             notesListView.selectedIndex = 0;
         }
 
         if (notesCountLabel != null)
         {
-            notesCountLabel.text = $"Total notes: {mockNotes.Count}";
+            notesCountLabel.text = $"Total notes: {notes.Count}";
+        }
+    }
+
+    void createNote()
+    {
+        Debug.Log("asdfasdfas");
+        Note newNote = new Note
+        {
+            guid = Guid.NewGuid().ToString(),
+            title = "New Note",
+            content = "Enter your note content here...",
+            isRead = false
+        };
+
+        noteData.notes[newNote.guid] = newNote;
+        notes.Add(newNote);
+        selectedNote = newNote;
+        needsSave = true;
+
+        if (notesListView != null)
+        {
+            notesListView.itemsSource = null;
+            notesListView.itemsSource = notes;
+
+            notesListView.Rebuild();
+
+            notesListView.selectedIndex = notes.Count - 1;
+        }
+
+        EditorApplication.delayCall += () => {
+            scrollPosition.y = float.MaxValue;
+        };
+
+        Repaint();
+    }
+
+    void deleteNote()
+    {
+
+    }
+
+    void saveNotes()
+    {
+        notesHandler.Save(noteData);
+        needsSave = false;
+    }
+    
+    private void OnDestroy()
+    {
+        if (needsSave)
+        {
+            if (EditorUtility.DisplayDialog("Unsaved Changes",
+                "You have unsaved changes. Would you like to save them?", "Save", "Don't Save"))
+            {
+                saveNotes();
+            }
         }
     }
 }
