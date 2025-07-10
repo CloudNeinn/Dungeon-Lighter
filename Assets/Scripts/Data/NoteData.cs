@@ -5,67 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class NoteData
 {
-    [SerializeField] private List<Note> _notesList = new List<Note>();
-    private SerializableDictionary<string, Note> _notes;
-
-    public SerializableDictionary<string, Note> notes
+    public SerializableDictionary<string, Note> notes;
+    public string getNoteGuid(Note note)
     {
-        get
+        foreach (var kvp in notes)
         {
-            if (_notes == null)
+            if (kvp.Value == note)
             {
-                _notes = new SerializableDictionary<string, Note>();
-                foreach (var note in _notesList)
-                {
-                    if (!string.IsNullOrEmpty(note.guid))
-                    {
-                        _notes[note.guid] = note;
-                    }
-                }
+                return kvp.Key;
             }
-            return _notes;
         }
-    }
-
-    //public NoteData()
-    //{
-    //    // Only initialize if notes is empty
-    //    if (_notesList.Count == 0)
-    //    {
-    //        _notesList.Add(new Note
-    //        {
-    //            guid = "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d59",
-    //            title = "Welcome to the Game",
-    //            content = "This is your first note. Explore the world to find more!",
-    //            isRead = false
-    //        });
-//
-    //        _notesList.Add(new Note
-    //        {
-    //            guid = "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d50",
-    //            title = "Controls",
-    //            content = "Use WASD to move. Press Space to jump. Press E to interact.",
-    //            isRead = false
-    //        });
-//
-    //        _notesList.Add(new Note
-    //        {
-    //            guid = "0b8bdd4f-b2f1-427b-a20e-cb0a8aa31d58",
-    //            title = "Casdgadfhadhadfhals",
-    //            content = "Use WASD tadfhadfhadfgadfg.",
-    //            isRead = false
-    //        });
-    //    }
-    //}
-
-    public void SyncDictionaryToList()
-    {
-        if (_notes == null) return;
-        
-        _notesList.Clear();
-        foreach (var kvp in _notes)
-        {
-            _notesList.Add(kvp.Value);
-        }
+        return null;
     }
 }

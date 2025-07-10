@@ -51,14 +51,14 @@ public class SpikeHead : MonoBehaviour
         }
         else if(!ready && cooldownTimeCounter <= 0f)
         {
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             if (Vector3.Distance(transform.position, initialPosition) > .1f)
             {
-                rb.velocity = -vectorDir[(int)movementDirection] * returnSpeed;
+                rb.linearVelocity = -vectorDir[(int)movementDirection] * returnSpeed;
             }
             else
             {
-                rb.velocity = Vector3.zero;
+                rb.linearVelocity = Vector3.zero;
                 ready = true;
                 //inInitialPosition = true;
                 cooldownTimeCounter = cooldownTime;
@@ -69,7 +69,7 @@ public class SpikeHead : MonoBehaviour
     void Attack()
     {
         //inInitialPosition = false;
-        rb.velocity = vectorDir[(int)movementDirection] * attackSpeed;
+        rb.linearVelocity = vectorDir[(int)movementDirection] * attackSpeed;
     }
 
     bool playerInSight()

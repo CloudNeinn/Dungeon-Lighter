@@ -3,13 +3,17 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor.UIElements;
 using System.Collections.Generic;
+using System.Linq;
 public class NoteEditorWindow : EditorWindow
 {
-    private List<Note> mockNotes;
     private List<Note> notes;
+    private List<Note> filteredNotes;
     private NoteData noteData;
+    private HashSet<string> editedNoteGuids = new HashSet<string>();
     private Note selectedNote;
+    private string selectedNoteGuid;
     private FileDataHandler<NoteData> notesHandler;
     private Vector2 scrollPosition;
     private bool needsSave;
@@ -19,13 +23,23 @@ public class NoteEditorWindow : EditorWindow
     private TextField noteTitleField;
     private TextField noteGuidField;
     private TextField noteContentField;
+    private ToolbarSearchField searchField;
     private Toggle isReadToggle;
     private Label notesCountLabel;
+    private Label notesFilteredCountLabel;
     private Button addNoteButton;
     private Button saveAllButton;
-    private Button jsonViewButton;
+    private Button saveSelectedButton;
+    private Toggle jsonViewToggle;
     private Toggle showReadToggle;
     private Toggle showUnreadToggle;
+    public enum NoteListSelectionMode
+    {
+        RestorePrevious,
+        SelectLast,
+        SelectFirst,
+        None
+    }
 
 
     [MenuItem("Tools/Notes Editor")]
@@ -40,6 +54,7 @@ public class NoteEditorWindow : EditorWindow
         notesHandler = new FileDataHandler<NoteData>(filePath, fileName);
         noteData = notesHandler.Load();
         notes = new List<Note>(noteData.notes.Values);
+        filteredNotes = new List<Note>(notes);
     }
 
     public void CreateGUI()
@@ -67,11 +82,14 @@ public class NoteEditorWindow : EditorWindow
         noteTitleField = root.Q<TextField>("noteTitleField");
         noteGuidField = root.Q<TextField>("noteGuidField");
         noteContentField = root.Q<TextField>("noteContentField");
+        searchField = root.Q<ToolbarSearchField>("searchField");
         isReadToggle = root.Q<Toggle>("isReadToggle");
         notesCountLabel = root.Q<Label>("notesCountLabel");
+        notesFilteredCountLabel = root.Q<Label>("notesFilteredCountLabel");
         addNoteButton = root.Q<Button>("addNoteButton");
         saveAllButton = root.Q<Button>("saveAllButton");
-        jsonViewButton = root.Q<Button>("jsonViewButton");
+        saveSelectedButton = root.Q<Button>("saveSelectedButton");
+        jsonViewToggle = root.Q<Toggle>("jsonViewToggle");
         showReadToggle = root.Q<Toggle>("showReadToggle");
         showUnreadToggle = root.Q<Toggle>("showUnreadToggle");
 
@@ -81,12 +99,12 @@ public class NoteEditorWindow : EditorWindow
         if (saveAllButton != null)
             saveAllButton.clicked += saveNotes;
 
-        if (jsonViewButton != null)
-            jsonViewButton.clicked += createNote;
+        if (saveSelectedButton != null)
+            saveSelectedButton.clicked += saveSelectedNote;
 
         if (notesListView != null)
         {
-            notesListView.itemsSource = notes;
+            notesListView.itemsSource = filteredNotes;
             notesListView.fixedItemHeight = 24;
             notesListView.selectionType = SelectionType.Single;
             notesListView.showBorder = true;
@@ -96,23 +114,79 @@ public class NoteEditorWindow : EditorWindow
 
             notesListView.makeItem = () =>
             {
+                var row = new VisualElement();
+                row.style.flexDirection = FlexDirection.Row;
+                row.style.alignItems = Align.Center;
+
                 var label = new Label();
+                label.style.flexGrow = 1;
                 label.style.unityTextAlign = TextAnchor.MiddleLeft;
                 label.style.paddingLeft = 5;
                 label.style.unityFontStyleAndWeight = FontStyle.Normal;
                 label.style.whiteSpace = WhiteSpace.Normal;
-                return label;
+
+                var deleteButton = new Button();
+                deleteButton.text = "Delete";
+                deleteButton.style.marginLeft = 8;
+                deleteButton.style.backgroundColor = new Color(0.7f, 0.2f, 0.2f);
+                deleteButton.style.color = Color.white;
+
+                row.Add(label);
+                row.Add(deleteButton);
+
+                row.userData = new System.Tuple<Label, Button>(label, deleteButton);
+
+                return row;
             };
 
             notesListView.bindItem = (element, i) =>
             {
-                if (i >= 0 && i < notes.Count)
+                if (i >= 0 && i < filteredNotes.Count)
                 {
-                    var label = element as Label;
-                    label.text = notes[i].title;
-                    label.style.color = notes[i].isRead ? new Color(0.7f, 0.7f, 0.7f) : Color.white;
+                    var row = element as VisualElement;
+                    var refs = row.userData as System.Tuple<Label, Button>;
+                    var label = refs.Item1;
+                    var deleteButton = refs.Item2;
+
+                    var note = filteredNotes[i];
+                    var noteGuid = noteData.getNoteGuid(note);
+
+                    label.text = note.title;
+                    label.style.color = note.isRead ? new Color(0.7f, 0.7f, 0.7f) : Color.white;
+                    row.RemoveFromClassList("note-item-edited");
+                    if (noteGuid != null && editedNoteGuids.Contains(noteGuid))
+                    {
+                        row.AddToClassList("edited-note");
+                    }
+
+                    deleteButton.clicked -= deleteButton.userData as System.Action;
+
+                    System.Action onClick = () =>
+                    {
+                        bool confirm = EditorUtility.DisplayDialog(
+                            "Delete Note",
+                            $"Are you sure you want to delete '{note.title}'?",
+                            "Delete", "Cancel"
+                        );
+                        if (confirm)
+                        {
+                            noteData.notes.Remove(noteGuid);
+                            notes.RemoveAt(i);
+                            filteredNotes.RemoveAt(i);
+
+                            notesListView.selectedIndex = Mathf.Clamp(notesListView.selectedIndex, 0, notes.Count - 1);
+
+                            notesListView.RefreshItems();
+                            notesCountLabel.text = $"Total notes: {notes.Count}";
+                            notesFilteredCountLabel.text = $"Filtered notes: {filteredNotes.Count}";
+                        }
+                    };
+
+                    deleteButton.userData = onClick;
+                    deleteButton.clicked += onClick;
                 }
             };
+
 
             notesListView.Rebuild();
         }
@@ -128,8 +202,16 @@ public class NoteEditorWindow : EditorWindow
                 selectedNote = notesListView.selectedItem as Note;
                 if (selectedNote != null)
                 {
+                    foreach (var kvp in noteData.notes)
+                    {
+                        if (kvp.Value == selectedNote)
+                        {
+                            selectedNoteGuid = kvp.Key;
+                            break;
+                        }
+                    }
+                    noteGuidField.value = selectedNoteGuid;
                     noteTitleField.value = selectedNote.title;
-                    noteGuidField.value = selectedNote.guid;
                     noteContentField.value = selectedNote.content;
                     isReadToggle.value = selectedNote.isRead;
                 }
@@ -144,62 +226,257 @@ public class NoteEditorWindow : EditorWindow
         if (notesCountLabel != null)
         {
             notesCountLabel.text = $"Total notes: {notes.Count}";
+            notesFilteredCountLabel.text = $"Filtered notes: {filteredNotes.Count}";
         }
+
+        editNotes();
+        filterNotes();
     }
 
     void createNote()
     {
-        Debug.Log("asdfasdfas");
         Note newNote = new Note
         {
-            guid = Guid.NewGuid().ToString(),
-            title = "New Note",
+            title = "New Note " + (notes.Count + 1),
             content = "Enter your note content here...",
             isRead = false
         };
 
-        noteData.notes[newNote.guid] = newNote;
+        string newNoteGuid = Guid.NewGuid().ToString();
+        noteData.notes[newNoteGuid] = newNote;
         notes.Add(newNote);
+        filteredNotes.Add(newNote);
         selectedNote = newNote;
+        selectedNoteGuid = newNoteGuid;
         needsSave = true;
+        editedNoteGuids.Add(newNoteGuid);
 
-        if (notesListView != null)
+        if (notesCountLabel != null)
         {
-            notesListView.itemsSource = null;
-            notesListView.itemsSource = notes;
-
-            notesListView.Rebuild();
-
-            notesListView.selectedIndex = notes.Count - 1;
+            notesCountLabel.text = $"Total notes: {notes.Count}";
+            notesFilteredCountLabel.text = $"Filtered notes: {filteredNotes.Count}";
         }
 
         EditorApplication.delayCall += () => {
             scrollPosition.y = float.MaxValue;
         };
 
+        rebuildNoteList();
         Repaint();
     }
 
-    void deleteNote()
+    void rebuildNoteList(NoteListSelectionMode selectionMode = NoteListSelectionMode.SelectLast)
     {
+        int selectedIndex = notesListView.selectedIndex;
 
+        if (notesListView != null)
+        {
+            notesListView.itemsSource = null;
+            notesListView.itemsSource = filteredNotes;
+            notesListView.Rebuild();
+
+            switch (selectionMode)
+            {
+                case NoteListSelectionMode.RestorePrevious:
+                    notesListView.selectedIndex = selectedIndex;
+                    break;
+                case NoteListSelectionMode.SelectLast:
+                    notesListView.selectedIndex = notes.Count - 1;
+                    break;
+                case NoteListSelectionMode.SelectFirst:
+                    notesListView.selectedIndex = 0;
+                    break;
+                case NoteListSelectionMode.None:
+                    notesListView.selectedIndex = -1;
+                    break;
+            }
+        }
+
+        Repaint();
     }
+
 
     void saveNotes()
     {
         notesHandler.Save(noteData);
+        editedNoteGuids.Clear();
         needsSave = false;
     }
+
+    void saveSelectedNote()
+    {
+        if (selectedNote != null && selectedNoteGuid != null)
+        {
+            noteData.notes[selectedNoteGuid] = selectedNote;
+            notesHandler.Save(noteData);
+            editedNoteGuids.Remove(selectedNoteGuid);
+            if(editedNoteGuids.Count <= 0) needsSave = false;
+            rebuildNoteList(NoteListSelectionMode.RestorePrevious);
+        }
+    }
+
+    void filterNotes()
+    {
+        searchField.RegisterValueChangedCallback(evt =>
+        {
+            string search = evt.newValue;
+
+            filteredNotes.Clear();
+
+            if (string.IsNullOrEmpty(search))
+            {
+                // Show all notes if search is empty
+                filteredNotes.AddRange(notes);
+            }
+            else
+            {
+                // Filter by title or content, case-insensitive
+                foreach (var note in notes)
+                {
+                    if ((note.title != null && note.title.Contains(search, System.StringComparison.OrdinalIgnoreCase)) ||
+                        (note.content != null && note.content.Contains(search, System.StringComparison.OrdinalIgnoreCase)))
+                    {
+                        filteredNotes.Add(note);
+                    }
+                }
+            }
+
+            notesListView.itemsSource = filteredNotes;
+            rebuildNoteList();
+            Repaint();
+        });
+
+        showReadToggle.RegisterValueChangedCallback(evt => applyReadUnreadFilter());
+        showUnreadToggle.RegisterValueChangedCallback(evt => applyReadUnreadFilter());
+    }
+    void applyReadUnreadFilter()
+    {
+        bool showRead = showReadToggle.value;
+        bool showUnread = showUnreadToggle.value;
+
+        filteredNotes.Clear();
+
+        if (!showRead && !showUnread)
+        {
+            filteredNotes.AddRange(notes);
+        }
+        else if (showRead && !showUnread)
+        {
+            filteredNotes.AddRange(notes.Where(x => x.isRead));
+        }
+        else if (!showRead && showUnread)
+        {
+            filteredNotes.AddRange(notes.Where(x => !x.isRead));
+        }
+
+        notesListView.itemsSource = filteredNotes;
+        rebuildNoteList();
+        Repaint();
+    }
+
+    void editNotes()
+    {
+        noteTitleField.RegisterValueChangedCallback(evt =>
+        {
+            if (selectedNote != null && selectedNote.title != evt.newValue)
+            {
+                selectedNote.title = evt.newValue;
+                onNoteEdit();
+            }
+        });
+
+        noteGuidField.RegisterValueChangedCallback(evt =>
+        {
+            if (selectedNote != null && selectedNoteGuid != evt.newValue)
+            {
+                noteData.notes.Remove(selectedNoteGuid);
+                selectedNoteGuid = evt.newValue;
+                noteData.notes[selectedNoteGuid] = selectedNote;
+                onNoteEdit();
+            }
+        });
+
+        noteContentField.RegisterValueChangedCallback(evt =>
+        {
+            if (selectedNote != null && selectedNote.content != evt.newValue)
+            {
+                selectedNote.content = evt.newValue;
+                onNoteEdit();
+            }
+        });
+
+        isReadToggle.RegisterValueChangedCallback(evt =>
+        {
+            if (selectedNote != null && selectedNote.isRead != evt.newValue)
+            {
+                selectedNote.isRead = evt.newValue;
+                onNoteEdit();
+            }
+        });
+
+    }
+
+    //void removeNoteFromEdited(Note note)
+    //{
+    //    var noteGuid = noteData.getNoteGuid(note);
+//
+    //    if (noteGuid != null && editedNoteGuids.Contains(noteGuid))
+    //    {
+    //        label.AddToClassList("edited-note");
+    //    }
+    //    else if(noteGuid != null) label.RemoveFromClassList("edited-note");
+//
+    //}
+//
+    //void removeNoteFromEdited(string noteGuid)
+    //{
+    //    if (noteGuid != null && editedNoteGuids.Contains(noteGuid))
+    //    {
+    //        label.AddToClassList("edited-note");
+    //    }
+    //    else if(noteGuid != null) label.RemoveFromClassList("edited-note");
+//
+    //}
+
     
-    private void OnDestroy()
+
+    void onNoteEdit()
+    {
+        if (selectedNoteGuid != null) editedNoteGuids.Add(selectedNoteGuid);
+        needsSave = true;
+        var selectedIndex = notesListView.selectedIndex;
+        notesListView.Rebuild();
+        notesListView.selectedIndex = selectedIndex;
+    }
+
+    void toggleJsonView()
+    {
+        
+    }
+    
+    public bool CanClose()
     {
         if (needsSave)
         {
-            if (EditorUtility.DisplayDialog("Unsaved Changes",
-                "You have unsaved changes. Would you like to save them?", "Save", "Don't Save"))
+            int option = EditorUtility.DisplayDialogComplex(
+                "Unsaved Changes",
+                "You have unsaved changes. Would you like to save them?",
+                "Save",
+                "Don't Save",
+                "Cancel"
+            );
+
+            switch (option)
             {
-                saveNotes();
+                case 0:
+                    saveNotes();
+                    return true; 
+                case 1:
+                    return true; 
+                case 2:
+                    return false;
             }
         }
+        return true;
     }
 }

@@ -74,8 +74,22 @@ TextField, Toggle {
 
 .guid-row {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     gap: 8px;
+    margin-bottom: 12px;
+    width: 90%;
+}
+
+.guid-row > TextField {
+    flex-grow: 1;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.guid-row > Button {
+    min-width: 80px;
+    height: 21px;
+    margin-bottom: 0;
 }
 
 .unity-split-view__divider {
@@ -101,4 +115,21 @@ TextField, Toggle {
 .unity-list-view__item:selected {
     background-color: #2a5d84;
     color: white;
+}
+
+#noteContentField {
+    min-height: 60px;
+    height: 120px;
+    resize: vertical;
+    overflow: auto;
+}
+
+.edited-note {
+    background-color:rgb(120, 20, 20);
+    font-weight: bold;
+}
+
+.edited-note:hover {
+    background-color:rgb(90, 20, 20);
+    font-weight: bold;
 }

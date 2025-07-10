@@ -142,7 +142,7 @@ public class PlayerControl : MonoBehaviour
     void FixedUpdate()
     {
         if(isSliding) Slide();
-        if(canMove && !isSliding) playerRigidbody.velocity = new Vector2(_moveInput.x * currentSpeed + playerRigidbody.velocity.x/4, playerRigidbody.velocity.y);
+        if(canMove && !isSliding) playerRigidbody.linearVelocity = new Vector2(_moveInput.x * currentSpeed + playerRigidbody.linearVelocity.x/4, playerRigidbody.linearVelocity.y);
 
     }
 
@@ -189,13 +189,13 @@ public class PlayerControl : MonoBehaviour
         {
             jumpBufferTimeCounter = 0;
 
-            if (playerRigidbody.velocity.y > 0)
-                force -= playerRigidbody.velocity.y;
+            if (playerRigidbody.linearVelocity.y > 0)
+                force -= playerRigidbody.linearVelocity.y;
 
             if (!isGrounded() && jumpCoyoteTimeCounter <= 0) 
                 --doubleJumpIndex;
 
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, force);
+            playerRigidbody.linearVelocity = new Vector2(playerRigidbody.linearVelocity.x, force);
             PlayerAudio.Instance.PlayJumpSound();
         }
         else if(jumpBufferTimeCounter > 0) jumpBufferTimeCounter -= Time.deltaTime;
@@ -203,37 +203,37 @@ public class PlayerControl : MonoBehaviour
         if (UserInput.Instance._jumpAction.WasPressedThisFrame()) 
             jumpCoyoteTimeCounter = 0;
 
-        if (UserInput.Instance._jumpAction.WasReleasedThisFrame() && playerRigidbody.velocity.y > 0 && doubleJumpIndex == totalDoubleJumpCount) 
+        if (UserInput.Instance._jumpAction.WasReleasedThisFrame() && playerRigidbody.linearVelocity.y > 0 && doubleJumpIndex == totalDoubleJumpCount) 
         {
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y * 0.5f);
+            playerRigidbody.linearVelocity = new Vector2(playerRigidbody.linearVelocity.x, playerRigidbody.linearVelocity.y * 0.5f);
         }
 
         if(isSliding && UserInput.Instance._jumpAction.WasPressedThisFrame())
         {
-            playerRigidbody.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpStrengthX, wallJumpStrengthY);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            playerRigidbody.linearVelocity = new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpStrengthX, wallJumpStrengthY);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             canMove = false;
             moveCooldownTimeCounter = moveCooldownTime;
             isSliding = false;
         }
 
-        if(!isJumping  && playerRigidbody.velocity.y > 0) isJumping = true;
-        if(isJumping && playerRigidbody.velocity.y < 0 && !isAtApex) playerRigidbody.AddForce(Vector2.up * -jumpFallForce);
+        if(!isJumping  && playerRigidbody.linearVelocity.y > 0) isJumping = true;
+        if(isJumping && playerRigidbody.linearVelocity.y < 0 && !isAtApex) playerRigidbody.AddForce(Vector2.up * -jumpFallForce);
         if(isGrounded() && isJumping) isJumping = false;
-        if(isJumping && Mathf.Abs(playerRigidbody.velocity.y) <= jumpApexThreshold) isAtApex = true;
+        if(isJumping && Mathf.Abs(playerRigidbody.linearVelocity.y) <= jumpApexThreshold) isAtApex = true;
         else isAtApex = false;
     }
 
     void Rotate()
     {
-        movementVector = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y);
-        if(!canMove && Mathf.Abs(playerRigidbody.velocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(playerRigidbody.velocity.x), transform.localScale.y);
+        movementVector = new Vector2(playerRigidbody.linearVelocity.x, playerRigidbody.linearVelocity.y);
+        if(!canMove && Mathf.Abs(playerRigidbody.linearVelocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(playerRigidbody.linearVelocity.x), transform.localScale.y);
         else if(_moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
         else if(_moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
     }
 
     public void Slide()
     {
-        float speedDif = slideSpeed - playerRigidbody.velocity.y;	
+        float speedDif = slideSpeed - playerRigidbody.linearVelocity.y;	
 		float movement = speedDif * slideAccel;
 		movement = Mathf.Clamp(movement, -Mathf.Abs(speedDif)  * (1 / Time.fixedDeltaTime), Mathf.Abs(speedDif) * (1 / Time.fixedDeltaTime));
 		if(canMove) playerRigidbody.AddForce(movement * Vector2.up);
@@ -261,7 +261,7 @@ public class PlayerControl : MonoBehaviour
 
     public bool isMoving()
     {
-        if(playerRigidbody.velocity.x != 0 && isGrounded()) return true;
+        if(playerRigidbody.linearVelocity.x != 0 && isGrounded()) return true;
         else return false;
     }
 
