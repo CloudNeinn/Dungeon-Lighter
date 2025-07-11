@@ -30,6 +30,7 @@
                 <ui:TextField name="noteTitleField" label="Title" />
                 <ui:TextField name="noteContentField" label="Content" multiline="true" />
                 <ui:Toggle name="isReadToggle" label="Is Read" />
+                <ui:Button name="revertNoteButton" text="Revert Changes" />
             </ui:VisualElement>
         </ui:TwoPaneSplitView>
     </ui:VisualElement>

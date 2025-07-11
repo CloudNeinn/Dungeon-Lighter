@@ -10,6 +10,7 @@ public class NoteEditorWindow : EditorWindow
 {
     private List<Note> notes;
     private List<Note> filteredNotes;
+    private Dictionary<string, Note> originalNoteVersions;
     private NoteData noteData;
     private HashSet<string> editedNoteGuids = new HashSet<string>();
     private Note selectedNote;
@@ -30,6 +31,7 @@ public class NoteEditorWindow : EditorWindow
     private Button addNoteButton;
     private Button saveAllButton;
     private Button saveSelectedButton;
+    private Button revertNoteButton;
     private Toggle jsonViewToggle;
     private Toggle showReadToggle;
     private Toggle showUnreadToggle;
@@ -55,6 +57,7 @@ public class NoteEditorWindow : EditorWindow
         noteData = notesHandler.Load();
         notes = new List<Note>(noteData.notes.Values);
         filteredNotes = new List<Note>(notes);
+        originalNoteVersions = new Dictionary<string, Note>();
     }
 
     public void CreateGUI()
@@ -92,6 +95,10 @@ public class NoteEditorWindow : EditorWindow
         jsonViewToggle = root.Q<Toggle>("jsonViewToggle");
         showReadToggle = root.Q<Toggle>("showReadToggle");
         showUnreadToggle = root.Q<Toggle>("showUnreadToggle");
+        revertNoteButton = root.Q<Button>("revertNoteButton");
+
+        if (revertNoteButton != null)
+            revertNoteButton.clicked += revertSelectedNote;
 
         if (addNoteButton != null)
             addNoteButton.clicked += createNote;
@@ -200,21 +207,32 @@ public class NoteEditorWindow : EditorWindow
             notesListView.onSelectionChange += (selectedItems) =>
             {
                 selectedNote = notesListView.selectedItem as Note;
-                if (selectedNote != null)
-                {
-                    foreach (var kvp in noteData.notes)
+                    if (selectedNote != null)
                     {
-                        if (kvp.Value == selectedNote)
+                        foreach (var kvp in noteData.notes)
                         {
-                            selectedNoteGuid = kvp.Key;
-                            break;
+                            if (kvp.Value == selectedNote)
+                            {
+                                selectedNoteGuid = kvp.Key;
+                                break;
+                            }
+                        }
+                        noteGuidField.value = selectedNoteGuid;
+                        noteTitleField.value = selectedNote.title;
+                        noteContentField.value = selectedNote.content;
+                        isReadToggle.value = selectedNote.isRead;
+
+                        // Store the original version only if not already stored
+                        if (!originalNoteVersions.ContainsKey(selectedNoteGuid))
+                        {
+                            originalNoteVersions[selectedNoteGuid] = new Note
+                            {
+                                title = selectedNote.title,
+                                content = selectedNote.content,
+                                isRead = selectedNote.isRead
+                            };
                         }
                     }
-                    noteGuidField.value = selectedNoteGuid;
-                    noteTitleField.value = selectedNote.title;
-                    noteContentField.value = selectedNote.content;
-                    isReadToggle.value = selectedNote.isRead;
-                }
             };
         }
 
@@ -300,6 +318,7 @@ public class NoteEditorWindow : EditorWindow
     {
         notesHandler.Save(noteData);
         editedNoteGuids.Clear();
+        originalNoteVersions.Clear();
         needsSave = false;
     }
 
@@ -325,12 +344,10 @@ public class NoteEditorWindow : EditorWindow
 
             if (string.IsNullOrEmpty(search))
             {
-                // Show all notes if search is empty
                 filteredNotes.AddRange(notes);
             }
             else
             {
-                // Filter by title or content, case-insensitive
                 foreach (var note in notes)
                 {
                     if ((note.title != null && note.title.Contains(search, System.StringComparison.OrdinalIgnoreCase)) ||
@@ -349,6 +366,33 @@ public class NoteEditorWindow : EditorWindow
         showReadToggle.RegisterValueChangedCallback(evt => applyReadUnreadFilter());
         showUnreadToggle.RegisterValueChangedCallback(evt => applyReadUnreadFilter());
     }
+
+    void revertSelectedNote()
+    {
+        if (selectedNote != null && selectedNoteGuid != null && originalNoteVersions.ContainsKey(selectedNoteGuid))
+        {
+            var original = originalNoteVersions[selectedNoteGuid];
+
+            selectedNote.title = original.title;
+            selectedNote.content = original.content;
+            selectedNote.isRead = original.isRead;
+
+            noteTitleField.value = original.title;
+            noteContentField.value = original.content;
+            isReadToggle.value = original.isRead;
+
+            editedNoteGuids.Remove(selectedNoteGuid);
+            originalNoteVersions.Remove(selectedNoteGuid);
+
+            needsSave = editedNoteGuids.Count > 0;
+
+            var selectedIndex = notesListView.selectedIndex;
+            notesListView.Rebuild();
+            notesListView.selectedIndex = selectedIndex;
+            Repaint();
+        }
+    }
+
     void applyReadUnreadFilter()
     {
         bool showRead = showReadToggle.value;
@@ -416,67 +460,31 @@ public class NoteEditorWindow : EditorWindow
 
     }
 
-    //void removeNoteFromEdited(Note note)
-    //{
-    //    var noteGuid = noteData.getNoteGuid(note);
-//
-    //    if (noteGuid != null && editedNoteGuids.Contains(noteGuid))
-    //    {
-    //        label.AddToClassList("edited-note");
-    //    }
-    //    else if(noteGuid != null) label.RemoveFromClassList("edited-note");
-//
-    //}
-//
-    //void removeNoteFromEdited(string noteGuid)
-    //{
-    //    if (noteGuid != null && editedNoteGuids.Contains(noteGuid))
-    //    {
-    //        label.AddToClassList("edited-note");
-    //    }
-    //    else if(noteGuid != null) label.RemoveFromClassList("edited-note");
-//
-    //}
-
-    
-
     void onNoteEdit()
     {
-        if (selectedNoteGuid != null) editedNoteGuids.Add(selectedNoteGuid);
+        if (selectedNoteGuid != null)
+            editedNoteGuids.Add(selectedNoteGuid);
         needsSave = true;
         var selectedIndex = notesListView.selectedIndex;
         notesListView.Rebuild();
         notesListView.selectedIndex = selectedIndex;
     }
 
+
     void toggleJsonView()
     {
         
     }
     
-    public bool CanClose()
+    private void OnDestroy()
     {
         if (needsSave)
         {
-            int option = EditorUtility.DisplayDialogComplex(
-                "Unsaved Changes",
-                "You have unsaved changes. Would you like to save them?",
-                "Save",
-                "Don't Save",
-                "Cancel"
-            );
-
-            switch (option)
+            if (EditorUtility.DisplayDialog("Unsaved Changes", 
+                "You have unsaved changes. Would you like to save them?", "Save", "Don't Save"))
             {
-                case 0:
-                    saveNotes();
-                    return true; 
-                case 1:
-                    return true; 
-                case 2:
-                    return false;
+                saveNotes();
             }
         }
-        return true;
     }
 }
