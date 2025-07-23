@@ -20,6 +20,11 @@ public class NoteUI : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    public void LoadNoteText()
+    {
         textUI.text = NoteManager.Instance.getNote(id).content;
     }
 }

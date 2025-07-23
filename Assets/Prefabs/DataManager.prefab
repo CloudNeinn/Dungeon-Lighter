@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveFileName: savegame.json
   settingsFileName: settings.json
-  notesFileName: notes.json
+  notesFileName: NoteData.json

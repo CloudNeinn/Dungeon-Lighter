@@ -10,10 +10,13 @@ public class InteractiveUIController : MonoBehaviour
     [SerializeField] private GameObject _UI;
     [SerializeField] private float _screenShiftX = 0.4f;
     [SerializeField] private bool _UIActive;
+    private NoteUI _noteUI;
+
 
     void Start()
     {
         _UIActive = false;
+        _noteUI = GetComponent<NoteUI>();
     }
 
     void Update()
@@ -23,12 +26,13 @@ public class InteractiveUIController : MonoBehaviour
         {
             _UIActive = !_UIActive;
             CurrencyManager.Instance.SetCurrencyUI();
+            if (_noteUI != null) _noteUI.LoadNoteText();
         }
         if (_UIActive && !InRange()) _UIActive = false;
         if (_UIActive && CameraController.Instance.transposer.m_ScreenX == CameraController.Instance.getCameraScreenX())
         {
             CameraController.Instance.setCameraScreenX(_screenShiftX);
-            UIManager.Instance.changeState(); 
+            UIManager.Instance.changeState();
         }
         else if (!_UIActive) UIManager.Instance.changeState();
     }

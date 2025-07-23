@@ -90,13 +90,7 @@ public class DataPersistanceManager : MonoBehaviour
     public void LoadNotes()
     {
         this.noteData = notesHandler.Load();
-
-        //if (this.noteData == null)
-        //{
-        //    Debug.Log("Note file is not present. Creating note file and populating with default values");
-        //    PopulateNoteFile();
-        //}
-
+        
         if (this.noteData != null) NoteManager.Instance.notes = noteData.notes;
     }
 
