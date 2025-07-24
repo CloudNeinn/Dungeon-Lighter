@@ -22,11 +22,14 @@ public class DataPersistanceManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance == null)
         {
-            Debug.LogError("Found more than one Data Persistance Manager instance");
+            Instance = this;
         }
-        Instance = this;
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()

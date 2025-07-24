@@ -8,16 +8,17 @@ using Cinemachine;
 
 public class SceneLoading : MonoBehaviour
 {
-    public enum SceneType {Hub,Level}
+    public enum SceneType { Hub, Level }
     [SerializeField] public SceneType currentSceneType;
     public static SceneLoading Instance;
     public GameObject loadingScreen;
     public Image loadingBar;
     [field: SerializeField] public List<GameObject> Grids;
     [SerializeField] private LayerMask _detectColliderMask;
+    [SerializeField] private Vector3 _returnDoorPosition;
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -25,15 +26,14 @@ public class SceneLoading : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        setCurrentSceneType(SceneManager.GetActiveScene());
         SceneManager.sceneLoaded += onSceneLoad;
     }
-    
+
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= onSceneLoad;
     }
-    
+
     void Start()
     {
         Grids = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Grid").ToList();
@@ -57,18 +57,18 @@ public class SceneLoading : MonoBehaviour
     IEnumerator LoadSceneAsync(int sceneID, bool isAdditive)
     {
         AsyncOperation operation;
-        if(isAdditive) operation = SceneManager.LoadSceneAsync(sceneID, LoadSceneMode.Additive);
+        if (isAdditive) operation = SceneManager.LoadSceneAsync(sceneID, LoadSceneMode.Additive);
         else operation = SceneManager.LoadSceneAsync(sceneID);
         loadingScreen.SetActive(true);
 
-        while(!operation.isDone)
+        while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             loadingBar.fillAmount = progress;
             yield return null;
         }
 
-        if(operation.isDone)
+        if (operation.isDone)
         {
             loadingScreen.SetActive(false);
             loadingBar.fillAmount = 0;
@@ -105,14 +105,19 @@ public class SceneLoading : MonoBehaviour
         {
             UIManager.Instance.getNotesUI();
         }
-    
+
+        if (currentSceneType == SceneType.Hub)
+        {
+            PlayerControl.Instance.transform.position = _returnDoorPosition;
+        }
+
         StartCoroutine(ResetCameraConfiner());
     }
 
     IEnumerator ResetCameraConfiner()
     {
         yield return null;
-        
+
         var confiner2D = FindObjectOfType<CinemachineConfiner2D>();
         if (confiner2D != null)
         {
@@ -123,7 +128,7 @@ public class SceneLoading : MonoBehaviour
 
     void setCurrentSceneType(Scene scene)
     {
-        if (scene.name == "Hub")
+        if (scene.name == "Hub" || scene.name == "PersistentObjects")
         {
             currentSceneType = SceneType.Hub;
         }
@@ -131,5 +136,21 @@ public class SceneLoading : MonoBehaviour
         {
             currentSceneType = SceneType.Level;
         }
+    }
+
+    public void SetReturnDoor(Vector3 door)
+    {
+        _returnDoorPosition = door;
+    }
+
+    IEnumerator SetPlayerPositionWhenReady()
+    {
+        int i = 0;
+        while (PlayerControl.Instance == null)
+        {
+            Debug.Log(i++);
+            yield return null;
+        }
+        PlayerControl.Instance.transform.position = _returnDoorPosition;
     }
 }
