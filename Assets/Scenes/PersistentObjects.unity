@@ -510,11 +510,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1655126425489993851, guid: bd5be0cac365fa445998af0f1148f5b8, type: 3}
       propertyPath: _returnDoorPosition.x
-      value: -2
+      value: -487
       objectReference: {fileID: 0}
     - target: {fileID: 1655126425489993851, guid: bd5be0cac365fa445998af0f1148f5b8, type: 3}
       propertyPath: _returnDoorPosition.y
-      value: 85
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 1662378041869827522, guid: bd5be0cac365fa445998af0f1148f5b8, type: 3}
       propertyPath: m_IsActive
