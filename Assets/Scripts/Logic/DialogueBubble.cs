@@ -44,7 +44,7 @@ public class DialogueBubble : MonoBehaviour
     {
         if (inInteractivityRadius() && isLookingForward())
         {
-            if (PlayerControl.Instance._use1Input)
+            if (PlayerControl.Instance._use2Input)
             {
                 InteractionIndicator(false);
                 StartCoroutine(TypeText(_fullText));

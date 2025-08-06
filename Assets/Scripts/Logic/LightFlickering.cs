@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 
 public class LightFlickering : MonoBehaviour
 {
-    protected UnityEngine.Rendering.Universal.Light2D _light2D;
+    [SerializeField] protected Light2D _light2D;
     [SerializeField] protected float _flickerSpeed = 0.1f; // Speed of flickering
     [SerializeField] protected float _minIntensity = 0.5f; // Minimum intensity of the light
     [SerializeField] protected float _maxIntensity = 2f; // Maximum intensity of the light
@@ -14,7 +15,7 @@ public class LightFlickering : MonoBehaviour
 
     void Start()
     {
-        _light2D = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        if(!_light2D) _light2D = GetComponent<Light2D>();
         _timeOffset = Random.Range(0f, 100f); // Give each light a random starting point
     }
 
