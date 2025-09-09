@@ -38,7 +38,7 @@ public class ShotManager : MonoBehaviour
 
     void Start()
     {
-        getOriginalValues();
+        if(PlayerControl.Instance) getOriginalValues();
     }
 
     public void setActiveShot(Shots shot)

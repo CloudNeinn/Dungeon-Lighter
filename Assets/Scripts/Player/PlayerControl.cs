@@ -128,7 +128,11 @@ public class PlayerControl : MonoBehaviour
         Jump();
         _isGrounded = isGrounded();
 
-        if(isWalled() && Mathf.Abs(_moveInput.x) > 0 && canMove) isSliding = true;
+        if (isWalled() && Mathf.Abs(_moveInput.x) > 0 && canMove)
+        {
+            isSliding = true;
+            playerRigidbody.linearVelocity = new Vector2(0, playerRigidbody.linearVelocity.y);
+        }
         else isSliding = false;
 
 
@@ -236,7 +240,7 @@ public class PlayerControl : MonoBehaviour
         float speedDif = slideSpeed - playerRigidbody.linearVelocity.y;	
 		float movement = speedDif * slideAccel;
 		movement = Mathf.Clamp(movement, -Mathf.Abs(speedDif)  * (1 / Time.fixedDeltaTime), Mathf.Abs(speedDif) * (1 / Time.fixedDeltaTime));
-		if(canMove) playerRigidbody.AddForce(movement * Vector2.up);
+		if (canMove) playerRigidbody.AddForce(movement * Vector2.up);
     }
 
     bool isGrounded()
@@ -246,7 +250,7 @@ public class PlayerControl : MonoBehaviour
 
     bool isWalled()
     {
-        return Physics2D.OverlapBox((Vector2)transform.position + new Vector2(wallBoxOffset.x * transform.localScale.x, wallBoxOffset.y), wallBoxSize, 0, groundLayer);
+        return Physics2D.OverlapBox((Vector2)transform.position + new Vector2(wallBoxOffset.x * transform.localScale.x, wallBoxOffset.y), wallBoxSize, 0, wallLayer);
     }
 
     Collider2D getPortal()

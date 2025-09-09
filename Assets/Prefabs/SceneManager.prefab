@@ -154,7 +154,9 @@ MonoBehaviour:
   _detectColliderMask:
     serializedVersion: 2
     m_Bits: 264
-  _returnDoorPosition: {x: -2, y: 85, z: 0}
+  _returnDoorPosition: {x: -487, y: 62, z: 0}
+  _disableInMenu:
+  - {fileID: 0}
 --- !u!1 &5522871562776988879
 GameObject:
   m_ObjectHideFlags: 0
