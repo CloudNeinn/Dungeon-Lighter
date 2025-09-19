@@ -16,7 +16,6 @@ public class SceneLoading : MonoBehaviour
     [field: SerializeField] public List<GameObject> Grids;
     [SerializeField] private LayerMask _detectColliderMask;
     [SerializeField] private Vector3 _returnDoorPosition;
-    [SerializeField] private GameObject[] _disableInMenu;
     void Awake()
     {
         if (Instance == null)
@@ -40,33 +39,21 @@ public class SceneLoading : MonoBehaviour
         Grids = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Grid").ToList();
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+    // May be useful in the  future
+    // private void OnEnable()
+    // {
+    //     SceneManager.sceneLoaded += OnSceneLoaded;
+    // }
 
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    // private void OnDisable()
+    // {
+    //     SceneManager.sceneLoaded -= OnSceneLoaded;
+    // }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "MainMenu")
-        {
-            foreach (var obj in _disableInMenu)
-            {
-                obj.SetActive(false);
-            }
-        }
-        else
-        {
-            foreach (var obj in _disableInMenu)
-            {
-                obj.SetActive(true);
-            }
-        }
-    }
+    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // {
+    // }
+
     public void StartGame()
     {
         LoadScene(1);
