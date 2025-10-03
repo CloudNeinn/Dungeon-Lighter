@@ -24,6 +24,7 @@ public class DialogueBubble : MonoBehaviour
     private RectTransform _textTransform;
     private RectTransform _bubbleTransform;
     private bool facingRight;
+    private bool _talking;
 
     void Start()
     {
@@ -44,7 +45,7 @@ public class DialogueBubble : MonoBehaviour
     {
         if (inInteractivityRadius() && isLookingForward())
         {
-            if (PlayerControl.Instance._use2Input)
+            if (PlayerControl.Instance._use2Input && !_talking)
             {
                 InteractionIndicator(false);
                 StartCoroutine(TypeText(_fullText));
@@ -134,6 +135,7 @@ public class DialogueBubble : MonoBehaviour
     
     IEnumerator TypeText(string text)
     {
+        _talking = true;
         InteractionIndicator(false);
         //_textComponent.ForceMeshUpdate();
 
@@ -149,5 +151,6 @@ public class DialogueBubble : MonoBehaviour
                 break;
             }
         }
+    _talking = false;
     }
 }
