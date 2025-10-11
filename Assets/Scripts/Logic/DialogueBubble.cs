@@ -151,6 +151,6 @@ public class DialogueBubble : MonoBehaviour
                 break;
             }
         }
-    _talking = false;
+        _talking = false;
     }
 }

@@ -49,7 +49,7 @@ public class Bar : MonoBehaviour
     {
         foreach(var button in shotButtons)
         {
-            button.GetComponent<Button>().onClick.AddListener(() => ShotManager.Instance.setActiveShot(button.name));
+            button.GetComponent<Button>().onClick.AddListener(() => ShotManager.Instance.setActiveShots(button.name));
         }
     }
 }

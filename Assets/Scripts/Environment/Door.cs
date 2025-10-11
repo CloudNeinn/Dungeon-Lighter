@@ -18,9 +18,13 @@ public class Door : MonoBehaviour
 
     public void EnterDungeon()
     {
-        if (returnCurrency > 0) CurrencyManager.Instance.addCurrency(returnCurrency);
-        if (SceneLoading.Instance.currentSceneType == SceneLoading.SceneType.Level) ShotManager.Instance.activeShot = ShotManager.Shots.None;
-        else SceneLoading.Instance.SetReturnDoor(this.transform.position);
+        if (returnCurrency > 0)
+        {
+            CurrencyManager.Instance.addCurrency(returnCurrency);
+            GameManager.Instance.increaseCompletedLevels();
+        }
+        if (SceneLoading.Instance.currentSceneType != SceneLoading.SceneType.Level) SceneLoading.Instance.SetReturnDoor(this.transform.position);
+        //else ShotManager.Instance.activeShot = ShotManager.Shots.None;
         SceneLoading.Instance.LoadScene(_sceneIndex);
     }
 

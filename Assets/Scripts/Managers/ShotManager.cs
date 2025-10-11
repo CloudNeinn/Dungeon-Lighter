@@ -21,8 +21,10 @@ public class ShotManager : MonoBehaviour
     [SerializeField] private float originalSpeed;
     [SerializeField] private int originalDoubleJumpIndex;
     [SerializeField] private float originalGravity;
+    [SerializeField] public Queue<Shots> activeShots;
 
-    [SerializeField] public Shots activeShot;
+    // DEBUG PURPOSES
+    // [SerializeField] private List<Shots> _activeShots;
 
     void Awake()
     {
@@ -38,17 +40,25 @@ public class ShotManager : MonoBehaviour
 
     void Start()
     {
-        if(PlayerControl.Instance) getOriginalValues();
+        activeShots = new Queue<Shots>();
+        if (PlayerControl.Instance) getOriginalValues();
     }
 
-    public void setActiveShot(Shots shot)
+    public void setActiveShots(Shots shot)
     {
-        activeShot = shot;
+        if (!activeShots.Contains(shot))
+        {
+            if (activeShots.Count == GameManager.Instance._toleranceLevel) activeShots.Dequeue();
+            activeShots.Enqueue(shot);
+        }
+        // DEBUG PURPOSES
+        // _activeShots = new List<Shots>(activeShots);
     }
 
-    public void setActiveShot(string shot)
+    public void setActiveShots(string shot)
     {
-        activeShot = (Shots)Enum.Parse(typeof(Shots), shot);
+        Shots Shot = (Shots)Enum.Parse(typeof(Shots), shot);
+        setActiveShots(Shot);
     }
 
     void getOriginalValues()
@@ -69,41 +79,45 @@ public class ShotManager : MonoBehaviour
     {
         if (SceneLoading.Instance.currentSceneType == SceneLoading.SceneType.Level)
         {
-            switch (activeShot)
-            {
-                case Shots.None:
-                    break;
-                case Shots.QuickWick:
-                    PlayerControl.Instance.RunSpeed *= 1.5f;
-                    break;
-                case Shots.FloatFlicker:
-                    PlayerControl.Instance.TotalDoubleJumpCount += 1;
-                    break;
-                case Shots.OverBurn:
-                    PlayerControl.Instance.GravityScale = 2;
-                    break;
-                case Shots.SniffSpark:
-                    // Add your effect
-                    break;
-                case Shots.TripTrap:
-                    // Add your effect
-                    break;
-                case Shots.GoldGulp:
-                    // Add your effect
-                    break;
-                case Shots.AshGlide:
-                    // Add your effect
-                    break;
-                case Shots.HotDamn:
-                    // Add your effect
-                    break;
-                case Shots.NoctiDrop:
-                    // Add your effect
-                    break;
-                default:
-                    Debug.LogWarning("Unknown shot effect.");
-                    break;
+            foreach (Shots shot in activeShots)
+            {            
+                switch (shot)
+                {
+                    case Shots.None:
+                        break;
+                    case Shots.QuickWick:
+                        PlayerControl.Instance.RunSpeed *= 1.5f;
+                        break;
+                    case Shots.FloatFlicker:
+                        PlayerControl.Instance.TotalDoubleJumpCount += 1;
+                        break;
+                    case Shots.OverBurn:
+                        PlayerControl.Instance.GravityScale = 2;
+                        break;
+                    case Shots.SniffSpark:
+                        // Add your effect
+                        break;
+                    case Shots.TripTrap:
+                        // Add your effect
+                        break;
+                    case Shots.GoldGulp:
+                        // Add your effect
+                        break;
+                    case Shots.AshGlide:
+                        // Add your effect
+                        break;
+                    case Shots.HotDamn:
+                        // Add your effect
+                        break;
+                    case Shots.NoctiDrop:
+                        // Add your effect
+                        break;
+                    default:
+                        Debug.LogWarning("Unknown shot effect.");
+                        break;
+                }      
             }
+
         }
     }
 
