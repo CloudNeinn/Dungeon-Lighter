@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Cinemachine;
+using System.Diagnostics;
 
 public class SceneLoading : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class SceneLoading : MonoBehaviour
     [field: SerializeField] public List<GameObject> Grids;
     [SerializeField] private LayerMask _detectColliderMask;
     [SerializeField] private Vector3 _returnDoorPosition;
+    int number = 0;
     void Awake()
     {
         if (Instance == null)
@@ -32,6 +34,7 @@ public class SceneLoading : MonoBehaviour
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= onSceneLoad;
+        UnityEngine.Debug.Log("destroyed");
     }
 
     void Start()
@@ -57,6 +60,7 @@ public class SceneLoading : MonoBehaviour
     public void StartGame()
     {
         LoadScene(1);
+        LoadScene(2, true);
     }
 
     public void LoadScene(int sceneID, bool isAdditive = false)
@@ -123,6 +127,7 @@ public class SceneLoading : MonoBehaviour
 
         if (currentSceneType == SceneType.Hub)
         {
+            UnityEngine.Debug.Log("this is a hub scene " + number++);
             PlayerControl.Instance.transform.position = _returnDoorPosition;
         }
 
@@ -163,7 +168,7 @@ public class SceneLoading : MonoBehaviour
         int i = 0;
         while (PlayerControl.Instance == null)
         {
-            Debug.Log(i++);
+            UnityEngine.Debug.Log(i++);
             yield return null;
         }
         PlayerControl.Instance.transform.position = _returnDoorPosition;

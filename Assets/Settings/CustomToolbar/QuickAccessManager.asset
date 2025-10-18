@@ -13,29 +13,35 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
-  - displayName: Skeleton
+  - displayName: Door
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Skeleton (1)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Note
+  - displayName: Door
     scenePath: Assets/Scenes/Hub.unity
   - displayName: BackgroundMidLayer
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: ShotManager
-    scenePath: DontDestroyOnLoad
-  - displayName: GameManager
+  - displayName: Door
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: ShotManager
+  - displayName: Hub
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Light 2D (Bigger)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Camera confinement
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: UltimatePreview - Settings
-    scenePath: 
+  - displayName: PersistentObjects
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: MainMenu
+    scenePath: Assets/Scenes/MainMenu.unity
+  - displayName: PersistentObjects
+    scenePath: Assets/Scenes/PersistentObjects.unity
   - displayName: Scenes
     scenePath: 
+  - displayName: PlayButton
+    scenePath: Assets/Scenes/MainMenu.unity
+  - displayName: ---DontDestroyOnLoad---
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: PersistentObjects
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Scenes
+    scenePath: 
+  - displayName: Resources
+    scenePath: 
+  - displayName: SceneManager
+    scenePath: DontDestroyOnLoad
+  - displayName: FPSManager
+    scenePath: DontDestroyOnLoad

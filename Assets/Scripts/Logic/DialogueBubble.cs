@@ -72,7 +72,6 @@ public class DialogueBubble : MonoBehaviour
     {
         if (_parent.transform.localScale.x == -1 && facingRight)
         {
-        Debug.Log("called1");
             facingRight = false;
             _textTransform.pivot = new Vector2(0.5f, 0.5f);
             _textTransform.localScale = new Vector3(-1, _textTransform.localScale.y, _textTransform.localScale.z);
@@ -81,7 +80,6 @@ public class DialogueBubble : MonoBehaviour
         }
         else if (_parent.transform.localScale.x == 1 && !facingRight)
         {
-        Debug.Log("called2");
             facingRight = true;
             _textTransform.pivot = new Vector2(0.5f, 0.5f);
             _textTransform.localScale = new Vector3(1, _textTransform.localScale.y, _textTransform.localScale.z);
