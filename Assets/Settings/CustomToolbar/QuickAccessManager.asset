@@ -13,35 +13,25 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
-  - displayName: Door
+  - displayName: Main Camera
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Door
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Door
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Hub
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: PersistentObjects
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: MainMenu
-    scenePath: Assets/Scenes/MainMenu.unity
-  - displayName: PersistentObjects
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Scenes
+  - displayName: DialogueScriptableObject
     scenePath: 
-  - displayName: PlayButton
-    scenePath: Assets/Scenes/MainMenu.unity
-  - displayName: ---DontDestroyOnLoad---
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: PersistentObjects
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Scenes
+  - displayName: DialogueAsset
     scenePath: 
-  - displayName: Resources
+  - displayName: DialogueBubble
     scenePath: 
-  - displayName: SceneManager
-    scenePath: DontDestroyOnLoad
-  - displayName: FPSManager
-    scenePath: DontDestroyOnLoad
+  - displayName: NPCNames
+    scenePath: 
+  - displayName: DialogueScriptableObject
+    scenePath: 
+  - displayName: NPC
+    scenePath: 
+  - displayName: DialogueAsset
+    scenePath: 
+  - displayName: Dialogue
+    scenePath: 
+  - displayName: NPCNames
+    scenePath: 
+  - displayName: NPC
+    scenePath: 
