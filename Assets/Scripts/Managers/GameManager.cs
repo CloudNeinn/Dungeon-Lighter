@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     [field: SerializeField] public int _toleranceLevel { get; private set; }
     [field: SerializeField] public int _completedLevels { get; private set; }
     [SerializeField] private int _toleranceIncreaseThreshold;
+    [SerializeField] private int _consecutiveShotsDrinken;
+    [SerializeField] private int _needToDrinkConsecutiveShots;
 
     void Awake()
     {

@@ -19,7 +19,7 @@ public class CheckpointManager : MonoBehaviour
     }
     void Start()
     {
-        checkIfSaved = FindObjectsOfType<checkpoint>();
+        checkIfSaved = FindObjectsByType<checkpoint>(FindObjectsSortMode.None);
         if(currentCheckpoint != null) currentCheckpoint.isActivated = true;
     }
 

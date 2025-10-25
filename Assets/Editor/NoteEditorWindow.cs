@@ -204,7 +204,7 @@ public class NoteEditorWindow : EditorWindow
 
         if (notesListView != null && noteTitleField != null)
         {
-            notesListView.onSelectionChange += (selectedItems) =>
+            notesListView.selectionChanged += (selectedItems) =>
             {
                 selectedNote = notesListView.selectedItem as Note;
                     if (selectedNote != null)

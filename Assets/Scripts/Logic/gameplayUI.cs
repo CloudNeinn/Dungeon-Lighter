@@ -15,7 +15,7 @@ public class gameplayUI : MonoBehaviour
     void Start()
     {
         charRigid = PlayerControl.Instance.gameObject.GetComponent<Rigidbody2D>();
-        dataPerMan = GameObject.FindObjectOfType<DataPersistanceManager>();
+        dataPerMan = GameObject.FindFirstObjectByType<DataPersistanceManager>();
         pauseMenu = GameObject.Find("Pause Menu");
         settingsMenu =  GameObject.Find("Settings Menu");
         checkpointMenu =  GameObject.Find("CheckpointMenu");

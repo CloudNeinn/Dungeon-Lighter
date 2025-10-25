@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
 
     public void getNotesUI()
     {
-        _popUps = Object.FindObjectsOfType<InteractiveUIController>();
+        _popUps = Object.FindObjectsByType<InteractiveUIController>(FindObjectsSortMode.None);
     }
 
     public void changeState()

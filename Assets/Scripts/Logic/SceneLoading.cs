@@ -17,7 +17,6 @@ public class SceneLoading : MonoBehaviour
     [field: SerializeField] public List<GameObject> Grids;
     [SerializeField] private LayerMask _detectColliderMask;
     [SerializeField] private Vector3 _returnDoorPosition;
-    int number = 0;
     void Awake()
     {
         if (Instance == null)
@@ -127,8 +126,7 @@ public class SceneLoading : MonoBehaviour
 
         if (currentSceneType == SceneType.Hub)
         {
-            UnityEngine.Debug.Log("this is a hub scene " + number++);
-            PlayerControl.Instance.transform.position = _returnDoorPosition;
+            if(PlayerControl.Instance != null) PlayerControl.Instance.transform.position = _returnDoorPosition;
         }
 
         StartCoroutine(ResetCameraConfiner());
@@ -138,7 +136,7 @@ public class SceneLoading : MonoBehaviour
     {
         yield return null;
 
-        var confiner2D = FindObjectOfType<CinemachineConfiner2D>();
+        var confiner2D = FindFirstObjectByType<CinemachineConfiner2D>();
         if (confiner2D != null)
         {
             confiner2D.InvalidateCache();
@@ -165,10 +163,8 @@ public class SceneLoading : MonoBehaviour
 
     IEnumerator SetPlayerPositionWhenReady()
     {
-        int i = 0;
         while (PlayerControl.Instance == null)
         {
-            UnityEngine.Debug.Log(i++);
             yield return null;
         }
         PlayerControl.Instance.transform.position = _returnDoorPosition;

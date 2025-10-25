@@ -13,6 +13,16 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
+  - displayName: Dialogue
+    scenePath: 
+  - displayName: DialogueAsset
+    scenePath: 
+  - displayName: DialogueBubble
+    scenePath: 
+  - displayName: DialogueScriptableObject
+    scenePath: 
+  - displayName: NPCNames
+    scenePath: 
   - displayName: Main Camera
     scenePath: Assets/Scenes/Hub.unity
   - displayName: DialogueScriptableObject

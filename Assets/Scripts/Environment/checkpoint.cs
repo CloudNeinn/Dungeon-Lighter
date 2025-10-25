@@ -27,9 +27,9 @@ public class checkpoint : MonoBehaviour
     {
         popUpSave = transform.GetChild(0).gameObject;
         popUpMenu = transform.GetChild(1).gameObject;
-        dataPerMan = GameObject.FindObjectOfType<DataPersistanceManager>();
+        dataPerMan = GameObject.FindFirstObjectByType<DataPersistanceManager>();
         checkpMenu = GameObject.Find("CheckpointMenu");
-        gameUI = GameObject.FindObjectOfType<gameplayUI>(); 
+        gameUI = GameObject.FindFirstObjectByType<gameplayUI>(); 
         if(PlayerControl.Instance.transform.position.x <= transform.position.x + 3 
         && PlayerControl.Instance.transform.position.x >= transform.position.x - 3
         && PlayerControl.Instance.transform.position.y <= transform.position.y + 3 

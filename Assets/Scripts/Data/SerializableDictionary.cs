@@ -23,7 +23,7 @@ public class SerializableDictionary<TKey, Tvalue> : Dictionary<TKey, Tvalue>, IS
     {
         this.Clear();
 
-        if(keys.Count != values.Count)
+        if (keys.Count != values.Count)
         {
             Debug.LogError("Amount of keys: " + keys.Count + " not equal to amout of values:" + values.Count);
             Debug.LogError("Key: " + keys[0]);
@@ -33,7 +33,7 @@ public class SerializableDictionary<TKey, Tvalue> : Dictionary<TKey, Tvalue>, IS
             Debug.LogError("Key: " + keys[4]);
         }
 
-        for(int i = 0; i < keys.Count; i++)
+        for (int i = 0; i < keys.Count; i++)
         {
             this.Add(keys[i], values[i]);
         }
@@ -41,3 +41,6 @@ public class SerializableDictionary<TKey, Tvalue> : Dictionary<TKey, Tvalue>, IS
 
 
 }
+
+[System.Serializable]
+public class StringBoolDictionary : SerializableDictionary<string, bool> {}
