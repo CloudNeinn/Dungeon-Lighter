@@ -306,6 +306,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214465382}
   m_CullTransparentMesh: 1
+--- !u!1 &283650086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 283650087}
+  - component: {fileID: 283650088}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &283650087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283650086}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1670605273}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &283650088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283650086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9bbeac12bb12d448758633347b20b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <_toleranceLevel>k__BackingField: 0
+  <_completedLevels>k__BackingField: 0
+  _toleranceIncreaseThreshold: 0
+  _consecutiveShotsDrinken: 0
+  _needToDrinkConsecutiveShots: 0
+  _gameState: {fileID: 11400000, guid: ce436ea38de015b4ab1f4e37947e64d1, type: 2}
 --- !u!4 &324267907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9056813782103404560, guid: 2e8f1a06d8400824bac679a0f0f739cc, type: 3}
@@ -1138,6 +1188,7 @@ Transform:
   - {fileID: 959757239}
   - {fileID: 4477667089905621429}
   - {fileID: 2064773919}
+  - {fileID: 283650087}
   m_Father: {fileID: 101278351}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1791546245 stripped

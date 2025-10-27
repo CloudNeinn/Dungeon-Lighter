@@ -13,4 +13,12 @@ MonoBehaviour:
   m_Name: GameState
   m_EditorClassIdentifier: 
   _numberOfLevelsCompleted: 0
+  _listOfLevels:
+    keys:
+    - 
+    values: 00
+  _listOfNotes:
+    keys:
+    - 
+    values: 00
   _enoughShotsDrinken: 0

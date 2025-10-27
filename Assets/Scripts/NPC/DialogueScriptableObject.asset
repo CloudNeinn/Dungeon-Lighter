@@ -16,6 +16,4 @@ MonoBehaviour:
   dialogueID: 
   wasPlayed: 0
   playOnce: 0
-  dialogue:
-  - dialogueText: 
-  - dialogueText: 
+  dialogue: []

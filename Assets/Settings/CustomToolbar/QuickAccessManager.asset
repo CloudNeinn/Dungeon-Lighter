@@ -13,35 +13,33 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
-  - displayName: Dialogue
-    scenePath: 
-  - displayName: DialogueAsset
-    scenePath: 
-  - displayName: DialogueBubble
-    scenePath: 
-  - displayName: DialogueScriptableObject
+  - displayName: NPCNames
     scenePath: 
   - displayName: NPCNames
     scenePath: 
-  - displayName: Main Camera
+  - displayName: GameManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: NPCName
+    scenePath: 
+  - displayName: NPC
+    scenePath: 
+  - displayName: NPCNames1
+    scenePath: 
+  - displayName: NPCNames
+    scenePath: 
+  - displayName: NPC
+    scenePath: 
+  - displayName: NPCNames
+    scenePath: 
+  - displayName: GameState
+    scenePath: 
+  - displayName: GameObject
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: ===Managers===
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: DialogueBubble
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueScriptableObject
-    scenePath: 
-  - displayName: DialogueAsset
-    scenePath: 
-  - displayName: DialogueBubble
-    scenePath: 
-  - displayName: NPCNames
-    scenePath: 
-  - displayName: DialogueScriptableObject
-    scenePath: 
-  - displayName: NPC
-    scenePath: 
-  - displayName: DialogueAsset
-    scenePath: 
-  - displayName: Dialogue
-    scenePath: 
-  - displayName: NPCNames
-    scenePath: 
-  - displayName: NPC
-    scenePath: 
+  - displayName: Canvas
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BubbleText
+    scenePath: Assets/Scenes/Hub.unity

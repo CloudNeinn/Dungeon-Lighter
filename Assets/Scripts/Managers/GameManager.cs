@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _toleranceIncreaseThreshold;
     [SerializeField] private int _consecutiveShotsDrinken;
     [SerializeField] private int _needToDrinkConsecutiveShots;
+    [SerializeField] private GameState _gameState;
 
     void Awake()
     {
