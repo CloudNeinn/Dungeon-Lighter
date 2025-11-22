@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b329ff61c0bed4aac8b727a4dbd894, type: 3}
   m_Name: DialogueScriptableObject
   m_EditorClassIdentifier: 
-  npcName: 0
-  dialogueID: 
+  npcName: 1
+  dialogueID: after1
   wasPlayed: 0
-  playOnce: 0
-  dialogue: []
+  playOnce: 1
+  dialogue:
+  - dialogueText: first

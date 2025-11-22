@@ -15,8 +15,10 @@ MonoBehaviour:
   _numberOfLevelsCompleted: 0
   _listOfLevels:
     keys:
-    - 
-    values: 00
+    - First Challenge
+    - Spike Mayhem
+    - New Enemies
+    values: 000000
   _listOfNotes:
     keys:
     - 

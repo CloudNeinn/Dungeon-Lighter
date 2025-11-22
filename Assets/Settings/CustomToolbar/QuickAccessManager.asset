@@ -13,25 +13,27 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
-  - displayName: Data
+  - displayName: ShotManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: GameState
     scenePath: 
-  - displayName: GameDataSO
-    scenePath: 
-  - displayName: Data
-    scenePath: 
-  - displayName: DialogueScriptableObject
-    scenePath: 
-  - displayName: BackgroundMidLayer
+  - displayName: BubbleText
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Door
+  - displayName: Canvas
     scenePath: Assets/Scenes/Hub.unity
+  - displayName: DialogueBubble
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Bartender
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: GameState
+    scenePath: 
   - displayName: GameManager
     scenePath: Assets/Scenes/PersistentObjects.unity
   - displayName: NoteManager
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: InputManager
+  - displayName: GameManager (1)
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: ===Managers===
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: MenuCanvas
-    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: DialogueScriptableObject
+    scenePath: 
+  - displayName: DialogueScriptableObject 2
+    scenePath: 

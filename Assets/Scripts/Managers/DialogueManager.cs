@@ -15,5 +15,4 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }
