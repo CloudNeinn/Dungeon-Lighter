@@ -13,27 +13,29 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
-  - displayName: ShotManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: GameState
-    scenePath: 
-  - displayName: BubbleText
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Canvas
+  - displayName: DialogueBubble
     scenePath: Assets/Scenes/Hub.unity
   - displayName: DialogueBubble
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bartender
+  - displayName: Indicator
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: GameState
-    scenePath: 
-  - displayName: GameManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: NoteManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: GameManager (1)
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: DialogueScriptableObject
-    scenePath: 
-  - displayName: DialogueScriptableObject 2
-    scenePath: 
+  - displayName: Indicator
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Indicator
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Indicator
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: DialogueBubble
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: DialogueBubble
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Indicator
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Canvas
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Skeleton
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BackgroundMidLayer
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BackgroundBottomLayer
+    scenePath: Assets/Scenes/Hub.unity

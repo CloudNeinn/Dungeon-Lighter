@@ -17,6 +17,9 @@ public class SceneLoading : MonoBehaviour
     [field: SerializeField] public List<GameObject> Grids;
     [SerializeField] private LayerMask _detectColliderMask;
     [SerializeField] private Vector3 _returnDoorPosition;
+    [SerializeField] private Animator _loadingScreenAnimator;
+    [SerializeField] private GameObject _loadingScreen;
+    private bool _closeAnimationFinished;
     void Awake()
     {
         if (Instance == null)
@@ -71,26 +74,30 @@ public class SceneLoading : MonoBehaviour
     {
         LoadScene(GetCurrentSceneID());
     }
+    
+    public void SetCloseAnimationFinished()
+    {
+        _closeAnimationFinished = true;
+    }
 
     IEnumerator LoadSceneAsync(int sceneID, bool isAdditive)
     {
+        _loadingScreen.SetActive(true);
+        _closeAnimationFinished = false;
+        _loadingScreenAnimator.SetTrigger("Close");
+    
+        yield return new WaitUntil(() => _closeAnimationFinished);
+
         AsyncOperation operation;
         if (isAdditive) operation = SceneManager.LoadSceneAsync(sceneID, LoadSceneMode.Additive);
         else operation = SceneManager.LoadSceneAsync(sceneID);
-        loadingScreen.SetActive(true);
-
+        
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            loadingBar.fillAmount = progress;
             yield return null;
         }
-
-        if (operation.isDone)
-        {
-            loadingScreen.SetActive(false);
-            loadingBar.fillAmount = 0;
-        }
+        
+        _loadingScreenAnimator.SetTrigger("Open");
     }
 
     public int GetCurrentSceneID()
