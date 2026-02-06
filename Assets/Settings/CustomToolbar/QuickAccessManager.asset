@@ -13,29 +13,29 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
-  - displayName: DialogueBubble
+  - displayName: BackgroundMidLayer
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueBubble
+  - displayName: Ground
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueBubble
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueBubble
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Canvas
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Skeleton
+  - displayName: BlueTorch
     scenePath: Assets/Scenes/Hub.unity
   - displayName: BackgroundMidLayer
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundBottomLayer
+  - displayName: Door
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Ground
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BlueTorch
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Torch (1)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Light 2D
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Torch (5)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Torch (4)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Torch (3)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Torch (2)
     scenePath: Assets/Scenes/Hub.unity

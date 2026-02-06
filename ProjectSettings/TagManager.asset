@@ -49,5 +49,8 @@ TagManager:
   - name: Player
     uniqueID: 3195136991
     locked: 0
+  - name: Torch
+    uniqueID: 1761893399
+    locked: 0
   m_RenderingLayers:
   - Default

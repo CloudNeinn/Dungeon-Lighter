@@ -50,14 +50,12 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Vector2 groundBoxOffset;
     [SerializeField] private Vector2 wallBoxSize;
     [SerializeField] private Vector2 wallBoxOffset;
-    [SerializeField] private float torchLightRadius;
     [SerializeField] private Vector2 portalCheckBoxSize;
     [SerializeField] private Vector2 portalCheckBoxOffset;
 
     [Header("Layer Masks")]
     public LayerMask groundLayer;
     public LayerMask wallLayer;
-    public LayerMask torchLayer;
     public LayerMask portalLayer;
 
     #region UserInput
@@ -135,12 +133,6 @@ public class PlayerControl : MonoBehaviour
         }
         else isSliding = false;
 
-
-        if(_use1Input)
-        {
-            torch = getTorch()?.gameObject.transform.GetChild(0).gameObject;
-            if(torch != null) torch.SetActive(true);
-        }
     }
 
     void FixedUpdate()
@@ -258,11 +250,6 @@ public class PlayerControl : MonoBehaviour
         return Physics2D.OverlapBox((Vector2)transform.position + portalCheckBoxOffset, portalCheckBoxSize, 0, groundLayer);
     }
 
-    Collider2D getTorch()
-    {
-        return Physics2D.OverlapCircle((Vector2)transform.position, torchLightRadius, torchLayer);
-    }
-
     public bool isMoving()
     {
         if(playerRigidbody.linearVelocity.x != 0 && isGrounded()) return true;
@@ -282,9 +269,6 @@ public class PlayerControl : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(wallBoxOffset.x * transform.localScale.x, wallBoxOffset.y), wallBoxSize);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere((Vector2)transform.position, torchLightRadius);
     }
 
     void GetInput()
