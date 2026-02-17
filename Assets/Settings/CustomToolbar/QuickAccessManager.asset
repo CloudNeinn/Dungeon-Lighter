@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
+  - displayName: temp_background 3
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Player
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Player
+    scenePath: Assets/Scenes/Hub.unity
   - displayName: BackgroundMidLayer
     scenePath: Assets/Scenes/Hub.unity
   - displayName: Ground
@@ -28,14 +34,4 @@ MonoBehaviour:
   - displayName: BlueTorch
     scenePath: Assets/Scenes/Hub.unity
   - displayName: Torch (1)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Light 2D
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Torch (5)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Torch (4)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Torch (3)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Torch (2)
     scenePath: Assets/Scenes/Hub.unity

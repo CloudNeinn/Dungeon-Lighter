@@ -76,6 +76,8 @@ public class PlayerControl : MonoBehaviour
     [field: SerializeField] public Vector2 movementVector {get; private set;}
     private GameObject torch;
     private PlayerLight playerLight;
+    bool jumpPressed;
+    bool jumpReleased;
 
     #region GET/SET
     
@@ -118,12 +120,9 @@ public class PlayerControl : MonoBehaviour
     {
         Rotate();
         GetInput();
-        Movement();
-        
-        if(moveCooldownTimeCounter > 0) moveCooldownTimeCounter -= Time.deltaTime;
-        else canMove = true;
+        // Movement();
 
-        Jump();
+        // Jump();
         _isGrounded = isGrounded();
 
         if (isWalled() && Mathf.Abs(_moveInput.x) > 0 && canMove)
@@ -133,13 +132,27 @@ public class PlayerControl : MonoBehaviour
         }
         else isSliding = false;
 
+        if (UserInput.Instance._jumpAction.WasPressedThisFrame())
+            jumpPressed = true;
+        
+        if (UserInput.Instance._jumpAction.WasReleasedThisFrame())
+            jumpReleased = true;
     }
 
     void FixedUpdate()
     {
-        if(isSliding) Slide();
-        if(canMove && !isSliding) playerRigidbody.linearVelocity = new Vector2(_moveInput.x * currentSpeed + playerRigidbody.linearVelocity.x/4, playerRigidbody.linearVelocity.y);
+        if(moveCooldownTimeCounter > 0) moveCooldownTimeCounter -= Time.fixedDeltaTime;
+        else canMove = true;
+        
+        Movement();
+        Jump();
 
+        if(isSliding) Slide();
+        if(canMove && !isSliding) 
+            playerRigidbody.linearVelocity = new Vector2(_moveInput.x * currentSpeed/* + playerRigidbody.linearVelocity.x/4*/, playerRigidbody.linearVelocity.y);
+
+        jumpPressed = false;
+        jumpReleased = false;
     }
 
     void Movement()
@@ -162,7 +175,7 @@ public class PlayerControl : MonoBehaviour
         if(currentSpeed != targetSpeed)
         {
             speedDiff = targetSpeed - currentSpeed;
-            currentSpeed = Mathf.Clamp(currentSpeed += speedChangeRate * Time.deltaTime * Mathf.Sign(speedDiff), 0, runSpeed);
+            currentSpeed = Mathf.Clamp(currentSpeed += speedChangeRate * Time.fixedDeltaTime  * Mathf.Sign(speedDiff), 0, runSpeed);
             if(Mathf.Abs(speedDiff) < 0.01f) currentSpeed = targetSpeed;
         }
     }
@@ -176,9 +189,9 @@ public class PlayerControl : MonoBehaviour
             jumpCoyoteTimeCounter = jumpCoyoteTime;
             doubleJumpIndex = totalDoubleJumpCount;
         }
-        else jumpCoyoteTimeCounter -= Time.deltaTime;
+        else jumpCoyoteTimeCounter -= Time.fixedDeltaTime;
 
-        if (UserInput.Instance._jumpAction.WasPressedThisFrame() && !isSliding) 
+        if (jumpPressed && !isSliding) 
             jumpBufferTimeCounter = jumpBufferTime;
 
         if ((jumpBufferTimeCounter > 0) && (isGrounded() || jumpCoyoteTimeCounter > 0 || doubleJumpIndex > 0))
@@ -194,17 +207,17 @@ public class PlayerControl : MonoBehaviour
             playerRigidbody.linearVelocity = new Vector2(playerRigidbody.linearVelocity.x, force);
             PlayerAudio.Instance.PlayJumpSound();
         }
-        else if(jumpBufferTimeCounter > 0) jumpBufferTimeCounter -= Time.deltaTime;
+        else if(jumpBufferTimeCounter > 0) jumpBufferTimeCounter -= Time.fixedDeltaTime;
 
-        if (UserInput.Instance._jumpAction.WasPressedThisFrame()) 
+        if (jumpPressed) 
             jumpCoyoteTimeCounter = 0;
 
-        if (UserInput.Instance._jumpAction.WasReleasedThisFrame() && playerRigidbody.linearVelocity.y > 0 && doubleJumpIndex == totalDoubleJumpCount) 
+        if (jumpReleased && playerRigidbody.linearVelocity.y > 0 && doubleJumpIndex == totalDoubleJumpCount) 
         {
             playerRigidbody.linearVelocity = new Vector2(playerRigidbody.linearVelocity.x, playerRigidbody.linearVelocity.y * 0.5f);
         }
 
-        if(isSliding && UserInput.Instance._jumpAction.WasPressedThisFrame())
+        if(isSliding && jumpPressed)
         {
             playerRigidbody.linearVelocity = new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpStrengthX, wallJumpStrengthY);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             canMove = false;

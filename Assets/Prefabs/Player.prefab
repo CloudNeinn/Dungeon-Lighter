@@ -42,6 +42,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5561445837110664471
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60,6 +61,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,9 +84,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1099830305
   m_SortingLayer: 2
   m_SortingOrder: 5
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e0723561d5a3ad94c8f4477c95c3003b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,7 +98,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!70 &7353277815411045271
 CapsuleCollider2D:
@@ -201,10 +205,9 @@ MonoBehaviour:
   slideSpeed: 13
   slideAccel: 10
   groundBoxSize: {x: 1.1, y: 0.3}
-  groundBoxOffset: {x: 0.2, y: -2.07}
-  wallBoxSize: {x: 0.5, y: 2.38}
-  wallBoxOffset: {x: 1.1, y: -0.05}
-  torchLightRadius: 4
+  groundBoxOffset: {x: 0.2, y: -2}
+  wallBoxSize: {x: 0.5, y: 2.9}
+  wallBoxOffset: {x: 1.1, y: -0.25}
   portalCheckBoxSize: {x: 0, y: 0}
   portalCheckBoxOffset: {x: 0, y: 0}
   groundLayer:
@@ -213,9 +216,6 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 1032
-  torchLayer:
-    serializedVersion: 2
-    m_Bits: 64
   portalLayer:
     serializedVersion: 2
     m_Bits: 128
