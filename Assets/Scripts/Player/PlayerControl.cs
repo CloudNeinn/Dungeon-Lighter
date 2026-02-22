@@ -76,8 +76,9 @@ public class PlayerControl : MonoBehaviour
     [field: SerializeField] public Vector2 movementVector {get; private set;}
     private GameObject torch;
     private PlayerLight playerLight;
-    bool jumpPressed;
-    bool jumpReleased;
+    private bool jumpPressed;
+    private bool jumpReleased;
+    bool isAlive;
 
     #region GET/SET
     
@@ -113,16 +114,14 @@ public class PlayerControl : MonoBehaviour
             Destroy(gameObject);
         }
         currentSpeed = walkSpeed;
+        isAlive = true;
     }
 
 
     void Update()
     {
-        Rotate();
+        if(isAlive) Rotate();
         GetInput();
-        // Movement();
-
-        // Jump();
         _isGrounded = isGrounded();
 
         if (isWalled() && Mathf.Abs(_moveInput.x) > 0 && canMove)
@@ -142,10 +141,13 @@ public class PlayerControl : MonoBehaviour
     void FixedUpdate()
     {
         if(moveCooldownTimeCounter > 0) moveCooldownTimeCounter -= Time.fixedDeltaTime;
-        else canMove = true;
+        else if(isAlive) canMove = true;
         
-        Movement();
-        Jump();
+        if(canMove)
+        {
+            Movement();
+            Jump();
+        }
 
         if(isSliding) Slide();
         if(canMove && !isSliding) 
@@ -309,7 +311,11 @@ public class PlayerControl : MonoBehaviour
     public void Death()
     {
         // Implement death logic here
+        //Time.timeScale = 0;
         Debug.Log("Player has died.");
+        isAlive = false;
+        canMove = false;
+        playerRigidbody.bodyType = RigidbodyType2D.Static;
         SceneLoading.Instance.ReloadScene();
     }
 
