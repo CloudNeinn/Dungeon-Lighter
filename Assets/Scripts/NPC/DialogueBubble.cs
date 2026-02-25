@@ -14,7 +14,7 @@ public class DialogueBubble : MonoBehaviour
     [SerializeField] private float _interacivityRadius;
     [SerializeField] private LayerMask _playerLayer;
     private GameObject _canvas;
-    public RectTransform[] _dots; // Assign dot RectTransforms in inspector
+    [field: SerializeField] public RectTransform[] dots {get; private set;} // Assign dot RectTransforms in inspector
     [SerializeField] private float _jumpPower = 10f; // Height of the jump
     [SerializeField] private float _duration = 0.5f; // Duration of one jump
     [SerializeField] private float _delay = 0.1f; // Delay between dots
@@ -36,7 +36,7 @@ public class DialogueBubble : MonoBehaviour
         _parent = transform.parent.gameObject;
         //_bubble = transform.GetChild(0).GetChild(0).gameObject;
         //_indicator = transform.GetChild(0).GetChild(1).gameObject;
-        //_dots = _indicator.GetComponentsInChildren<RectTransform>();
+        //dots = _indicator.GetComponentsInChildren<RectTransform>();
         //_canvas.SetActive(false);
         //InteractionIndicator(true);
         facingRight = _parent != null && _parent.transform.localScale.x < 0;
@@ -45,7 +45,7 @@ public class DialogueBubble : MonoBehaviour
     {
         if (inInteractivityRadius() && isLookingForward())
         {
-            if (PlayerControl.Instance._use2Input && !_talking)
+            if (PlayerController.Instance.use2Input && !_talking)
             {
                 InteractionIndicator(false);
                 StartCoroutine(TypeText(_fullText));
@@ -63,8 +63,8 @@ public class DialogueBubble : MonoBehaviour
 
     bool isLookingForward()
     {
-        if (_parent == null && transform.position.x * transform.localScale.x < PlayerControl.Instance.transform.position.x * transform.localScale.x) return true;
-        else if (_parent != null && _parent.transform.position.x * _parent.transform.localScale.x < PlayerControl.Instance.transform.position.x * _parent.transform.localScale.x) return true;
+        if (_parent == null && transform.position.x * transform.localScale.x < PlayerController.Instance.transform.position.x * transform.localScale.x) return true;
+        else if (_parent != null && _parent.transform.position.x * _parent.transform.localScale.x < PlayerController.Instance.transform.position.x * _parent.transform.localScale.x) return true;
         else return false;
     }
 
@@ -96,11 +96,11 @@ public class DialogueBubble : MonoBehaviour
             _bubble.SetActive(false);
             _indicator.SetActive(true);
             
-            _dotTweens = new Tween[_dots.Length];
-            for (int i = 0; i < _dots.Length; i++)
+            _dotTweens = new Tween[dots.Length];
+            for (int i = 0; i < dots.Length; i++)
             {
                 int idx = i;
-                _dotTweens[idx] = _dots[idx].DOAnchorPosY(_jumpPower, _duration)
+                _dotTweens[idx] = dots[idx].DOAnchorPosY(_jumpPower, _duration)
                     .SetLoops(-1, LoopType.Yoyo)
                     .SetDelay(idx * _delay);
             }

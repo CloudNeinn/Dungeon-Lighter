@@ -7,7 +7,7 @@ public class RepeatingAssetLine : MonoBehaviour
     public List<Transform> points; // List of points to connect
     public float spacing = 1f;     // Distance between each instance
 
-    private List<GameObject> spawnedAssets = new List<GameObject>();
+    private List<GameObject> _spawnedAssets = new List<GameObject>();
 
     void Start()
     {
@@ -31,17 +31,17 @@ public class RepeatingAssetLine : MonoBehaviour
             {
                 Vector3 position = start.position + direction * spacing * j;
                 GameObject asset = Instantiate(assetPrefab, position, Quaternion.LookRotation(direction));
-                spawnedAssets.Add(asset);
+                _spawnedAssets.Add(asset);
             }
         }
     }
 
     void ClearAssets()
     {
-        foreach (GameObject obj in spawnedAssets)
+        foreach (GameObject obj in _spawnedAssets)
         {
             Destroy(obj);
         }
-        spawnedAssets.Clear();
+        _spawnedAssets.Clear();
     }
 }

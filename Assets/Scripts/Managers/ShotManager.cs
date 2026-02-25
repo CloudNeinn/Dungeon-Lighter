@@ -18,10 +18,10 @@ public class ShotManager : MonoBehaviour
         HotDamn = 7,
         NoctiDrop = 8
     }
-    [SerializeField] private float originalSpeed;
-    [SerializeField] private int originalDoubleJumpIndex;
-    [SerializeField] private float originalGravity;
-    [SerializeField] public Queue<Shots> activeShots;
+    [SerializeField] private float _originalSpeed;
+    [SerializeField] private int _originalDoubleJumpIndex;
+    [SerializeField] private float _originalGravity;
+    [field: SerializeField] public Queue<Shots> activeShots { get; private set; }
 
     // DEBUG PURPOSES
     // [SerializeField] private List<Shots> _activeShots;
@@ -41,14 +41,14 @@ public class ShotManager : MonoBehaviour
     void Start()
     {
         activeShots = new Queue<Shots>();
-        if (PlayerControl.Instance) getOriginalValues();
+        if (PlayerController.Instance) getOriginalValues();
     }
 
     public void setActiveShots(Shots shot)
     {
         if (!activeShots.Contains(shot))
         {
-            if (activeShots.Count == GameManager.Instance._toleranceLevel) activeShots.Dequeue();
+            if (activeShots.Count == GameManager.Instance.toleranceLevel) activeShots.Dequeue();
             activeShots.Enqueue(shot);
         }
         // DEBUG PURPOSES
@@ -63,16 +63,16 @@ public class ShotManager : MonoBehaviour
 
     void getOriginalValues()
     {
-        originalSpeed = PlayerControl.Instance.RunSpeed;
-        originalDoubleJumpIndex = PlayerControl.Instance.TotalDoubleJumpCount;
-        originalGravity = PlayerControl.Instance.GravityScale;
+        _originalSpeed = PlayerController.Instance.RunSpeed;
+        _originalDoubleJumpIndex = PlayerController.Instance.TotalDoubleJumpCount;
+        _originalGravity = PlayerController.Instance.GravityScale;
     }
 
     void revertToOriginal()
     {
-        PlayerControl.Instance.RunSpeed = originalSpeed;
-        PlayerControl.Instance.TotalDoubleJumpCount = originalDoubleJumpIndex;
-        PlayerControl.Instance.GravityScale = originalGravity;
+        PlayerController.Instance.RunSpeed = _originalSpeed;
+        PlayerController.Instance.TotalDoubleJumpCount = _originalDoubleJumpIndex;
+        PlayerController.Instance.GravityScale = _originalGravity;
     }
 
     public void applyShotEffects()
@@ -86,13 +86,13 @@ public class ShotManager : MonoBehaviour
                     case Shots.None:
                         break;
                     case Shots.QuickWick:
-                        PlayerControl.Instance.RunSpeed *= 1.5f;
+                        PlayerController.Instance.RunSpeed *= 1.5f;
                         break;
                     case Shots.FloatFlicker:
-                        PlayerControl.Instance.TotalDoubleJumpCount += 1;
+                        PlayerController.Instance.TotalDoubleJumpCount += 1;
                         break;
                     case Shots.OverBurn:
-                        PlayerControl.Instance.GravityScale = 2;
+                        PlayerController.Instance.GravityScale = 2;
                         break;
                     case Shots.SniffSpark:
                         // Add your effect

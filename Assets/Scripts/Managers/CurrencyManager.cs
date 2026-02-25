@@ -8,8 +8,8 @@ public class CurrencyManager : MonoBehaviour
 {
     public static CurrencyManager Instance;
 
-    [SerializeField] private int totalCurrency;
-    [SerializeField] private TextMeshProUGUI currencyDisplayText;
+    [SerializeField] private int _totalCurrency;
+    [SerializeField] private TextMeshProUGUI _currencyDisplayText;
 
 
     public void OnSceneLoaded()
@@ -29,7 +29,7 @@ public class CurrencyManager : MonoBehaviour
             Destroy(gameObject);
         }
         
-        totalCurrency = PlayerPrefs.GetInt("coins", 0);
+        _totalCurrency = PlayerPrefs.GetInt("coins", 0);
     }
 
     void Start()
@@ -39,43 +39,43 @@ public class CurrencyManager : MonoBehaviour
 
     public void addCurrency(int amount)
     {
-        totalCurrency += amount;
+        _totalCurrency += amount;
         SetCurrencyUI();
     }
 
     public void removeCurrency(int amount)
     {
-        totalCurrency -= amount;
+        _totalCurrency -= amount;
         SetCurrencyUI();
     }
 
     public void SetCurrencyUI()
     {
-        //if(!currencyDisplayText) findCurrencyUI();
-        if(currencyDisplayText) currencyDisplayText.text = totalCurrency.ToString();
+        //if(!_currencyDisplayText) findCurrencyUI();
+        if(_currencyDisplayText) _currencyDisplayText.text = _totalCurrency.ToString();
         saveCurrency();
     }
 
     public void SetTotalCurrency(int amount)
     {
-        totalCurrency = amount;
+        _totalCurrency = amount;
         SetCurrencyUI();
     }
 
     public int getTotalCurrency()
     {
-        return totalCurrency;
+        return _totalCurrency;
     }
 
     private void saveCurrency()
     {
-        PlayerPrefs.SetInt("coins", totalCurrency);
+        PlayerPrefs.SetInt("coins", _totalCurrency);
         PlayerPrefs.Save();
     }
 
     private void findCurrencyUI()
     {
         GameObject currencyUI = GameObject.Find("CurrencyUI");
-        if(currencyUI) currencyDisplayText = currencyUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        if(currencyUI) _currencyDisplayText = currencyUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 }

@@ -8,7 +8,7 @@ public class Bar : MonoBehaviour
     public static Bar Instance { get; private set; }
     [SerializeField] private GameObject[] _barPages;
     private int _currentPage = 0;
-    [SerializeField] private GameObject[] shotButtons;
+    [SerializeField] private GameObject[] _shotButtons;
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class Bar : MonoBehaviour
 
     void setButtonActions()
     {
-        foreach(var button in shotButtons)
+        foreach(var button in _shotButtons)
         {
             button.GetComponent<Button>().onClick.AddListener(() => ShotManager.Instance.setActiveShots(button.name));
         }

@@ -1,212 +1,339 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace TarodevController
+public class PlayerController : MonoBehaviour
 {
-    /// <summary>
-    /// Hey!
-    /// Tarodev here. I built this controller as there was a severe lack of quality & free 2D controllers out there.
-    /// I have a premium version on Patreon, which has every feature you'd expect from a polished controller. Link: https://www.patreon.com/tarodev
-    /// You can play and compete for best times here: https://tarodev.itch.io/extended-ultimate-2d-controller
-    /// If you hve any questions or would like to brag about your score, come to discord: https://discord.gg/tarodev
-    /// </summary>
-    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-    public class PlayerController : MonoBehaviour, IPlayerController
+    public static PlayerController Instance;
+
+    [Header("Components")]
+    [SerializeField] private Rigidbody2D _playerRigidbody;
+    [SerializeField] private CapsuleCollider2D _playerCollider;
+    private PlayerLight _playerLight;
+
+    #region States
+    [SerializeField] private bool _isGrounded;
+    [SerializeField] private bool _isSliding;
+    [SerializeField] private bool _isJumping;
+    [SerializeField] private bool _isAtApex;
+    [SerializeField] private bool _isAlive;
+    #endregion
+
+    #region Movement
+    [Header("Movement Parameters")]
+    [SerializeField] private Vector2 _movementVector;
+    [SerializeField] private float _walkSpeed;
+    [SerializeField] private float _runSpeed;
+    [SerializeField] private float _airSpeed;
+    [SerializeField] private bool _canMove;
+    [SerializeField] private float _moveCooldownTime;
+    [SerializeField] private float _moveCooldownTimeCounter;
+    [SerializeField] private float _currentSpeed;
+    [SerializeField] private float _speedChangeRate;
+    [SerializeField] private float _targetSpeed;
+    [SerializeField] private float _speedDiff;
+    #endregion
+
+    #region Jump
+    [Header("Jump Parameters")]
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private float _jumpCoyoteTime;
+    [SerializeField] private float _jumpCoyoteTimeCounter;
+    [SerializeField] private float _jumpBufferTime;
+    [SerializeField] private float _jumpBufferTimeCounter;
+    [SerializeField] private int _doubleJumpIndex;
+    [SerializeField] private int _totalDoubleJumpCount;
+    [SerializeField] private int _doubleJumpCount;
+    [SerializeField] private float _wallJumpStrengthX;
+    [SerializeField] private float _wallJumpStrengthY;
+    [SerializeField] private float _jumpFallForce;
+    [SerializeField] private float _jumpApexThreshold;
+    [SerializeField] private float _apexSpeedMultiplier;
+    private bool _jumpPressed;
+    private bool _jumpReleased;
+    #endregion
+
+    #region Slide
+    [SerializeField] private float _slideSpeed;
+    [SerializeField] private float _slideAccel;
+    #endregion
+
+    #region Hitboxes
+    [Header("Hitboxes Parameters")]
+    [SerializeField] private Vector2 _groundBoxSize;
+    [SerializeField] private Vector2 _groundBoxOffset;
+    [SerializeField] private Vector2 _wallBoxSize;
+    [SerializeField] private Vector2 _wallBoxOffset;
+    [SerializeField] private Vector2 _portalCheckBoxSize;
+    [SerializeField] private Vector2 _portalCheckBoxOffset;
+    #endregion
+
+    #region Layer Masks
+    [Header("Layer Masks")]
+    public LayerMask groundLayer;
+    public LayerMask wallLayer;
+    public LayerMask portalLayer;
+    #endregion
+
+    #region User Inputs
+    [field: Header ("Inputs")]    
+    [field: SerializeField] public Vector2 moveInput {get; private set;}
+    public bool jumpInput {get; private set;}
+    public bool dashInput {get; private set;}
+    public bool runInput {get; private set;}
+    public bool use1Input {get; private set;}
+    public bool use2Input {get; private set;}
+    public bool menuToggleInput {get; private set;}
+    public bool activeItem1Input {get; private set;}
+    public bool mapInput {get; private set;}
+    #endregion
+
+    #region GET/SET
+    
+    public float RunSpeed
     {
-        [SerializeField] private ScriptableStats _stats;
-        private Rigidbody2D _rb;
-        private CapsuleCollider2D _col;
-        private FrameInput _frameInput;
-        private Vector2 _frameVelocity;
-        private bool _cachedQueryStartInColliders;
+        get => _runSpeed;
+        set => _runSpeed = value;
+    }
 
-        #region Interface
+    public int TotalDoubleJumpCount
+    {
+        get => _totalDoubleJumpCount;
+        set => _totalDoubleJumpCount = value;
+    }
 
-        public Vector2 FrameInput => _frameInput.Move;
-        public event Action<bool, float> GroundedChanged;
-        public event Action Jumped;
+    public float GravityScale
+    {
+        get => _playerRigidbody.gravityScale;
+        set => _playerRigidbody.gravityScale = value;
+    }
 
-        #endregion
-
-        private float _time;
-
-        private void Awake()
+    public Rigidbody2D PlayerRigidbody => _playerRigidbody;
+    #endregion
+    
+    void Awake()
+    {
+        if (Instance == null)
         {
-            _rb = GetComponent<Rigidbody2D>();
-            _col = GetComponent<CapsuleCollider2D>();
-
-            _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
+            Instance = this;
         }
-
-        private void Update()
+        else
         {
-            _time += Time.deltaTime;
-            GatherInput();
+            Destroy(gameObject);
         }
+        _currentSpeed = _walkSpeed;
+        _isAlive = true;
+    }
 
-        private void GatherInput()
+
+    void Update()
+    {
+        if(_isAlive) Rotate();
+        GetInput();
+        _isGrounded = isGrounded();
+
+        if (isWalled() && Mathf.Abs(moveInput.x) > 0 && _canMove)
         {
-            _frameInput = new FrameInput
-            {
-                JumpDown = Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.C),
-                JumpHeld = Input.GetButton("Jump") || Input.GetKey(KeyCode.C),
-                Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))
-            };
-
-            if (_stats.SnapInput)
-            {
-                _frameInput.Move.x = Mathf.Abs(_frameInput.Move.x) < _stats.HorizontalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Move.x);
-                _frameInput.Move.y = Mathf.Abs(_frameInput.Move.y) < _stats.VerticalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Move.y);
-            }
-
-            if (_frameInput.JumpDown)
-            {
-                _jumpToConsume = true;
-                _timeJumpWasPressed = _time;
-            }
+            _isSliding = true;
+            _playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
         }
+        else _isSliding = false;
 
-        private void FixedUpdate()
-        {
-            CheckCollisions();
-
-            HandleJump();
-            HandleDirection();
-            HandleGravity();
-            
-            ApplyMovement();
-        }
-
-        #region Collisions
+        if (UserInput.Instance.jumpAction.WasPressedThisFrame())
+            _jumpPressed = true;
         
-        private float _frameLeftGrounded = float.MinValue;
-        private bool _grounded;
-
-        private void CheckCollisions()
-        {
-            Physics2D.queriesStartInColliders = false;
-
-            // Ground and Ceiling
-            bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, ~_stats.PlayerLayer);
-            bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.PlayerLayer);
-
-            // Hit a Ceiling
-            if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
-
-            // Landed on the Ground
-            if (!_grounded && groundHit)
-            {
-                _grounded = true;
-                _coyoteUsable = true;
-                _bufferedJumpUsable = true;
-                _endedJumpEarly = false;
-                GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
-            }
-            // Left the Ground
-            else if (_grounded && !groundHit)
-            {
-                _grounded = false;
-                _frameLeftGrounded = _time;
-                GroundedChanged?.Invoke(false, 0);
-            }
-
-            Physics2D.queriesStartInColliders = _cachedQueryStartInColliders;
-        }
-
-        #endregion
-
-
-        #region Jumping
-
-        private bool _jumpToConsume;
-        private bool _bufferedJumpUsable;
-        private bool _endedJumpEarly;
-        private bool _coyoteUsable;
-        private float _timeJumpWasPressed;
-
-        private bool HasBufferedJump => _bufferedJumpUsable && _time < _timeJumpWasPressed + _stats.JumpBuffer;
-        private bool CanUseCoyote => _coyoteUsable && !_grounded && _time < _frameLeftGrounded + _stats.CoyoteTime;
-
-        private void HandleJump()
-        {
-            if (!_endedJumpEarly && !_grounded && !_frameInput.JumpHeld && _rb.linearVelocity.y > 0) _endedJumpEarly = true;
-
-            if (!_jumpToConsume && !HasBufferedJump) return;
-
-            if (_grounded || CanUseCoyote) ExecuteJump();
-
-            _jumpToConsume = false;
-        }
-
-        private void ExecuteJump()
-        {
-            _endedJumpEarly = false;
-            _timeJumpWasPressed = 0;
-            _bufferedJumpUsable = false;
-            _coyoteUsable = false;
-            _frameVelocity.y = _stats.JumpPower;
-            Jumped?.Invoke();
-        }
-
-        #endregion
-
-        #region Horizontal
-
-        private void HandleDirection()
-        {
-            if (_frameInput.Move.x == 0)
-            {
-                var deceleration = _grounded ? _stats.GroundDeceleration : _stats.AirDeceleration;
-                _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, 0, deceleration * Time.fixedDeltaTime);
-            }
-            else
-            {
-                _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
-            }
-        }
-
-        #endregion
-
-        #region Gravity
-
-        private void HandleGravity()
-        {
-            if (_grounded && _frameVelocity.y <= 0f)
-            {
-                _frameVelocity.y = _stats.GroundingForce;
-            }
-            else
-            {
-                var inAirGravity = _stats.FallAcceleration;
-                if (_endedJumpEarly && _frameVelocity.y > 0) inAirGravity *= _stats.JumpEndEarlyGravityModifier;
-                _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
-            }
-        }
-
-        #endregion
-
-        private void ApplyMovement() => _rb.linearVelocity = _frameVelocity;
-
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (_stats == null) Debug.LogWarning("Please assign a ScriptableStats asset to the Player Controller's Stats slot", this);
-        }
-#endif
+        if (UserInput.Instance.jumpAction.WasReleasedThisFrame())
+            _jumpReleased = true;
     }
 
-    public struct FrameInput
+    void FixedUpdate()
     {
-        public bool JumpDown;
-        public bool JumpHeld;
-        public Vector2 Move;
+        if(_moveCooldownTimeCounter > 0) _moveCooldownTimeCounter -= Time.fixedDeltaTime;
+        else if(_isAlive) _canMove = true;
+        
+        if(_canMove)
+        {
+            Movement();
+            Jump();
+        }
+
+        if(_isSliding) Slide();
+        if(_canMove && !_isSliding) 
+            _playerRigidbody.linearVelocity = new Vector2(moveInput.x * _currentSpeed/* + _playerRigidbody.linearVelocity.x/4*/, _playerRigidbody.linearVelocity.y);
+
+        _jumpPressed = false;
+        _jumpReleased = false;
     }
 
-    public interface IPlayerController
+    void Movement()
     {
-        public event Action<bool, float> GroundedChanged;
+        if(isGrounded())
+        {
+            if(UserInput.Instance.runAction.IsPressed()) _targetSpeed = _runSpeed;
+            else if(!UserInput.Instance.runAction.IsPressed()) _targetSpeed = _walkSpeed;
+        }
+        else if(!isGrounded() && !isWalled())
+        {
+            if(_isAtApex) _targetSpeed = _airSpeed * _apexSpeedMultiplier; 
+            else _targetSpeed = _airSpeed; 
+        }
+        else if(isWalled())
+        {
+            _targetSpeed = 0;
+        }
 
-        public event Action Jumped;
-        public Vector2 FrameInput { get; }
+        if(_currentSpeed != _targetSpeed)
+        {
+            _speedDiff = _targetSpeed - _currentSpeed;
+            _currentSpeed = Mathf.Clamp(_currentSpeed += _speedChangeRate * Time.fixedDeltaTime  * Mathf.Sign(_speedDiff), 0, _runSpeed);
+            if(Mathf.Abs(_speedDiff) < 0.01f) _currentSpeed = _targetSpeed;
+        }
+    }
+
+    void Jump()
+    {
+        float force = _jumpForce;
+
+        if (isGrounded() || _isSliding) 
+        {
+            _jumpCoyoteTimeCounter = _jumpCoyoteTime;
+            _doubleJumpIndex = _totalDoubleJumpCount;
+        }
+        else _jumpCoyoteTimeCounter -= Time.fixedDeltaTime;
+
+        if (_jumpPressed && !_isSliding) 
+            _jumpBufferTimeCounter = _jumpBufferTime;
+
+        if ((_jumpBufferTimeCounter > 0) && (isGrounded() || _jumpCoyoteTimeCounter > 0 || _doubleJumpIndex > 0))
+        {
+            _jumpBufferTimeCounter = 0;
+
+            if (_playerRigidbody.linearVelocity.y > 0)
+                force -= _playerRigidbody.linearVelocity.y;
+
+            if (!isGrounded() && _jumpCoyoteTimeCounter <= 0) 
+                --_doubleJumpIndex;
+
+            _playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, force);
+            PlayerAudio.Instance.PlayJumpSound();
+        }
+        else if(_jumpBufferTimeCounter > 0) _jumpBufferTimeCounter -= Time.fixedDeltaTime;
+
+        if (_jumpPressed) 
+            _jumpCoyoteTimeCounter = 0;
+
+        if (_jumpReleased && _playerRigidbody.linearVelocity.y > 0 && _doubleJumpIndex == _totalDoubleJumpCount) 
+        {
+            _playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, _playerRigidbody.linearVelocity.y * 0.5f);
+        }
+
+        if(_isSliding && _jumpPressed)
+        {
+            _playerRigidbody.linearVelocity = new Vector2(Mathf.Sign(transform.localScale.x) * _wallJumpStrengthX, _wallJumpStrengthY);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            _canMove = false;
+            _moveCooldownTimeCounter = _moveCooldownTime;
+            _isSliding = false;
+        }
+
+        if(!_isJumping  && _playerRigidbody.linearVelocity.y > 0) _isJumping = true;
+        if(_isJumping && _playerRigidbody.linearVelocity.y < 0 && !_isAtApex) _playerRigidbody.AddForce(Vector2.up * -_jumpFallForce);
+        if(isGrounded() && _isJumping) _isJumping = false;
+        if(_isJumping && Mathf.Abs(_playerRigidbody.linearVelocity.y) <= _jumpApexThreshold) _isAtApex = true;
+        else _isAtApex = false;
+    }
+
+    void Rotate()
+    {
+        _movementVector = new Vector2(_playerRigidbody.linearVelocity.x, _playerRigidbody.linearVelocity.y);
+        if(!_canMove && Mathf.Abs(_playerRigidbody.linearVelocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(_playerRigidbody.linearVelocity.x), transform.localScale.y);
+        else if(moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
+        else if(moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+    }
+
+    public void Slide()
+    {
+        float speedDif = _slideSpeed - _playerRigidbody.linearVelocity.y;	
+		float movement = speedDif * _slideAccel;
+		movement = Mathf.Clamp(movement, -Mathf.Abs(speedDif)  * (1 / Time.fixedDeltaTime), Mathf.Abs(speedDif) * (1 / Time.fixedDeltaTime));
+		if (_canMove) _playerRigidbody.AddForce(movement * Vector2.up);
+    }
+
+    bool isGrounded()
+    {
+        return Physics2D.OverlapBox((Vector2)transform.position + _groundBoxOffset, _groundBoxSize, 0, groundLayer);
+    }
+
+    bool isWalled()
+    {
+        return Physics2D.OverlapBox((Vector2)transform.position + new Vector2(_wallBoxOffset.x * transform.localScale.x, _wallBoxOffset.y), _wallBoxSize, 0, wallLayer);
+    }
+
+    Collider2D getPortal()
+    {
+        return Physics2D.OverlapBox((Vector2)transform.position + _portalCheckBoxOffset, _portalCheckBoxSize, 0, groundLayer);
+    }
+
+    public bool isMoving()
+    {
+        if(_playerRigidbody.linearVelocity.x != 0 && isGrounded()) return true;
+        else return false;
+    }
+
+    private bool movingWithoutInput()
+    {
+        if(isMoving() && Mathf.Abs(moveInput.x) == 0) return true;
+        else return false;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube((Vector2)transform.position + _groundBoxOffset, _groundBoxSize);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(_wallBoxOffset.x * transform.localScale.x, _wallBoxOffset.y), _wallBoxSize);
+    }
+
+    void GetInput()
+    {
+        moveInput = UserInput.Instance.moveInput;
+        jumpInput = UserInput.Instance.jumpInput;
+        dashInput = UserInput.Instance.dashInput;
+        runInput = UserInput.Instance.runInput;
+        use1Input = UserInput.Instance.use1Input;
+        use2Input = UserInput.Instance.use2Input;
+        menuToggleInput = UserInput.Instance.menuToggleInput; 
+        activeItem1Input = UserInput.Instance.activeItem1Input;
+        mapInput = UserInput.Instance.mapInput;
+    }
+    
+    public bool GetIsAlive()
+    {
+        return _isAlive;
+    }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Trap")
+        {
+            Debug.Log("Player has collided with an enemy.");
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        // Implement death logic here
+        //Time.timeScale = 0;
+        Debug.Log("Player has died.");
+        _isAlive = false;
+        _canMove = false;
+        _playerRigidbody.bodyType = RigidbodyType2D.Static;
+        SceneLoading.Instance.ReloadScene();
+    }
+
+    public float getFlickerSpeedModifier()
+    {
+        return _currentSpeed / _runSpeed;
     }
 }

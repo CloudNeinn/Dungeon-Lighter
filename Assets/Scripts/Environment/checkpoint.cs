@@ -30,10 +30,10 @@ public class checkpoint : MonoBehaviour
         dataPerMan = GameObject.FindFirstObjectByType<DataPersistanceManager>();
         checkpMenu = GameObject.Find("CheckpointMenu");
         gameUI = GameObject.FindFirstObjectByType<gameplayUI>(); 
-        if(PlayerControl.Instance.transform.position.x <= transform.position.x + 3 
-        && PlayerControl.Instance.transform.position.x >= transform.position.x - 3
-        && PlayerControl.Instance.transform.position.y <= transform.position.y + 3 
-        && PlayerControl.Instance.transform.position.y >= transform.position.y - 3)
+        if(PlayerController.Instance.transform.position.x <= transform.position.x + 3 
+        && PlayerController.Instance.transform.position.x >= transform.position.x - 3
+        && PlayerController.Instance.transform.position.y <= transform.position.y + 3 
+        && PlayerController.Instance.transform.position.y >= transform.position.y - 3)
         {
             CheckpointManager.Instance.updateCheckpoint();
             CheckpointManager.Instance.currentCheckpointPosition = transform.position;
@@ -48,30 +48,30 @@ public class checkpoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkPosition = PlayerControl.Instance.transform.position;
-        if(PlayerControl.Instance.transform.position.x <= transform.position.x + 4 
-        && PlayerControl.Instance.transform.position.x >= transform.position.x - 4
-        && PlayerControl.Instance.transform.position.y <= transform.position.y + 4 
-        && PlayerControl.Instance.transform.position.y >= transform.position.y - 4)
+        checkPosition = PlayerController.Instance.transform.position;
+        if(PlayerController.Instance.transform.position.x <= transform.position.x + 4 
+        && PlayerController.Instance.transform.position.x >= transform.position.x - 4
+        && PlayerController.Instance.transform.position.y <= transform.position.y + 4 
+        && PlayerController.Instance.transform.position.y >= transform.position.y - 4)
         {
-            if(PlayerControl.Instance._use2Input && !menuOpen 
+            if(PlayerController.Instance.use2Input && !menuOpen 
             /*&& isActivated*/ && Time.timeScale != 0) // Input.GetKeyDown(KeyCode.F)
             {        
                 menuOpen = true;
                 checkpMenu.SetActive(menuOpen);
             }
-            else if(PlayerControl.Instance._use2Input && menuOpen) // Input.GetKeyDown(KeyCode.F)
+            else if(PlayerController.Instance.use2Input && menuOpen) // Input.GetKeyDown(KeyCode.F)
             {
                 menuOpen = false;
                 checkpMenu.SetActive(menuOpen);
             }
             //show e popup icon
-            if(checkpointIsSaved && PlayerControl.Instance._use1Input && !isHealed) // Input.GetKeyDown(KeyCode.E)
+            if(checkpointIsSaved && PlayerController.Instance.use1Input && !isHealed) // Input.GetKeyDown(KeyCode.E)
             {
                 gameUI.Respawn();
                 isHealed = true;
             }
-            else if(PlayerControl.Instance._use1Input && !checkpointIsSaved) // Input.GetKeyDown(KeyCode.E)
+            else if(PlayerController.Instance.use1Input && !checkpointIsSaved) // Input.GetKeyDown(KeyCode.E)
             {
                 //save checkpoint
                 CheckpointManager.Instance.updateCheckpoint();
@@ -91,10 +91,10 @@ public class checkpoint : MonoBehaviour
             checkpMenu.SetActive(false);
         }
         
-        if(PlayerControl.Instance.transform.position.x <= transform.position.x + 8 
-        && PlayerControl.Instance.transform.position.x >= transform.position.x - 8
-        && PlayerControl.Instance.transform.position.y <= transform.position.y + 8 
-        && PlayerControl.Instance.transform.position.y >= transform.position.y - 8)
+        if(PlayerController.Instance.transform.position.x <= transform.position.x + 8 
+        && PlayerController.Instance.transform.position.x >= transform.position.x - 8
+        && PlayerController.Instance.transform.position.y <= transform.position.y + 8 
+        && PlayerController.Instance.transform.position.y >= transform.position.y - 8)
         {
             popUpSave.SetActive(true);
             /*if(isActivated)*/ popUpMenu.SetActive(true);

@@ -6,17 +6,17 @@ using System.Linq;
 public class DataPersistanceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
-    [SerializeField] private string saveFileName = "savegame.json";
-    [SerializeField] private string settingsFileName = "settings.json";
-    [SerializeField] private string notesFileName = "NoteData.json";
+    [SerializeField] private string _saveFileName = "savegame.json";
+    [SerializeField] private string _settingsFileName = "settings.json";
+    [SerializeField] private string _notesFileName = "NoteData.json";
 
-    private GameData gameData;
-    private NoteData noteData;
+    private GameData _gameData;
+    private NoteData _noteData;
 
-    private List<IDataPersistance> dataPersistenceObjects;
+    private List<IDataPersistance> _dataPersistenceObjects;
 
-    private FileDataHandler<GameData> gameDataHandler;
-    private FileDataHandler<NoteData> notesHandler;
+    private FileDataHandler<GameData> _gameDataHandler;
+    private FileDataHandler<NoteData> _notesHandler;
 
     public static DataPersistanceManager Instance { get; private set; }
 
@@ -43,38 +43,38 @@ public class DataPersistanceManager : MonoBehaviour
     private void InitializeHandlers()
     {
         string dataPath = Application.persistentDataPath;
-        gameDataHandler = new FileDataHandler<GameData>(dataPath, saveFileName);
-        notesHandler = new FileDataHandler<NoteData>("Assets/Resources/", notesFileName);
+        _gameDataHandler = new FileDataHandler<GameData>(dataPath, _saveFileName);
+        _notesHandler = new FileDataHandler<NoteData>("Assets/Resources/", _notesFileName);
     }
     public void NewGame()
     {
-        this.gameData = new GameData();
+        this._gameData = new GameData();
     }
 
     public void LoadGame()
     {
-        this.gameData = gameDataHandler.Load();
+        this._gameData = _gameDataHandler.Load();
 
-        if (this.gameData == null)
+        if (this._gameData == null)
         {
             Debug.Log("No data was found. Initializing data to defaults.");
             NewGame();
         }
 
-        foreach (IDataPersistance dataPersistenceObj in dataPersistenceObjects)
+        foreach (IDataPersistance dataPersistenceObj in _dataPersistenceObjects)
         {
-            dataPersistenceObj.LoadData(gameData);
+            dataPersistenceObj.LoadData(_gameData);
         }
     }
 
     public void SaveGame()
     {
-        foreach (IDataPersistance dataPersistenceObj in dataPersistenceObjects)
+        foreach (IDataPersistance dataPersistenceObj in _dataPersistenceObjects)
         {
-            dataPersistenceObj.SaveData(ref gameData);
+            dataPersistenceObj.SaveData(ref _gameData);
         }
 
-        gameDataHandler.Save(gameData);
+        _gameDataHandler.Save(_gameData);
     }
 
     private void OnApplicationQuit()
@@ -84,22 +84,22 @@ public class DataPersistanceManager : MonoBehaviour
 
     private List<IDataPersistance> FindAllDataPersistenceObjects()
     {
-        IEnumerable<IDataPersistance> dataPersistenceObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+        IEnumerable<IDataPersistance> _dataPersistenceObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
         .OfType<IDataPersistance>();
 
-        return new List<IDataPersistance>(dataPersistenceObjects);
+        return new List<IDataPersistance>(_dataPersistenceObjects);
     }
 
     public void LoadNotes()
     {
-        this.noteData = notesHandler.Load();
+        this._noteData = _notesHandler.Load();
         
-        if (this.noteData != null) NoteManager.Instance.notes = noteData.notes;
+        if (this._noteData != null) NoteManager.Instance.notes = _noteData.notes;
     }
 
     public void PopulateNoteFile()
     {
-        this.noteData = new NoteData();
-        notesHandler.Save(noteData);
+        this._noteData = new NoteData();
+        _notesHandler.Save(_noteData);
     }
 }

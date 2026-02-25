@@ -3,8 +3,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    [field: SerializeField] public int _toleranceLevel { get; private set; }
-    [field: SerializeField] public int _completedLevels { get; private set; }
+    [field: SerializeField] public int toleranceLevel { get; private set; }
+    [field: SerializeField] public int completedLevels { get; private set; }
     [SerializeField] private int _toleranceIncreaseThreshold;
     [SerializeField] private int _consecutiveShotsDrinken;
     [SerializeField] private int _needToDrinkConsecutiveShots;
@@ -24,12 +24,12 @@ public class GameManager : MonoBehaviour
 
     public void checkIfToleranceIncreases()
     {
-        if (_toleranceLevel * _toleranceIncreaseThreshold <= _completedLevels) _toleranceLevel++;
+        if (toleranceLevel * _toleranceIncreaseThreshold <= completedLevels) toleranceLevel++;
     }
 
     public void increaseCompletedLevels()
     {
-        _completedLevels++;
+        completedLevels++;
         checkIfToleranceIncreases();
     }
 }

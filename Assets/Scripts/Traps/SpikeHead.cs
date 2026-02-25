@@ -19,62 +19,57 @@ public class SpikeHead : MonoBehaviour
         Vector3.right
     };
 
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private LayerMask raycastLayer;
-    [SerializeField] private SpikeHeadDirection movementDirection; 
-    [SerializeField] private float attackSpeed = 5f;
-    [SerializeField] private float returnSpeed = 1f;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private BoxCollider2D coll;
-    //private bool inInitialPosition = true;
-    private bool ready = true;
-    private Vector3 initialPosition;
-    [SerializeField] private float cooldownTime = 2f;
-    private float cooldownTimeCounter = 0f;
+    [SerializeField] private LayerMask _playerLayer;
+    [SerializeField] private LayerMask _raycastLayer;
+    [SerializeField] private SpikeHeadDirection _movementDirection; 
+    [SerializeField] private float _attackSpeed = 5f;
+    [SerializeField] private float _returnSpeed = 1f;
+    [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private BoxCollider2D _collider;
+    private bool _ready = true;
+    private Vector3 _initialPosition;
+    [SerializeField] private float _cooldownTime = 2f;
+    private float _cooldownTimeCounter = 0f;
 
-    // Start is called before the first frame update
     void Start()
     {  
-       initialPosition = transform.position; 
-       cooldownTimeCounter = cooldownTime;
+       _initialPosition = transform.position; 
+       _cooldownTimeCounter = _cooldownTime;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(playerInSight() && ready) Attack();
-        if(checkIfCollidingWithWall()) ready = false;
+        if(playerInSight() && _ready) Attack();
+        if(checkIfCollidingWithWall()) _ready = false;
 
-        if(!ready && cooldownTimeCounter > 0f)
+        if(!_ready && _cooldownTimeCounter > 0f)
         {
-            cooldownTimeCounter -= Time.deltaTime;
+            _cooldownTimeCounter -= Time.deltaTime;
         }
-        else if(!ready && cooldownTimeCounter <= 0f)
+        else if(!_ready && _cooldownTimeCounter <= 0f)
         {
-            rb.linearVelocity = Vector3.zero;
-            if (Vector3.Distance(transform.position, initialPosition) > .1f)
+            _rigidbody.linearVelocity = Vector3.zero;
+            if (Vector3.Distance(transform.position, _initialPosition) > .1f)
             {
-                rb.linearVelocity = -vectorDir[(int)movementDirection] * returnSpeed;
+                _rigidbody.linearVelocity = -vectorDir[(int)_movementDirection] * _returnSpeed;
             }
             else
             {
-                rb.linearVelocity = Vector3.zero;
-                ready = true;
-                //inInitialPosition = true;
-                cooldownTimeCounter = cooldownTime;
+                _rigidbody.linearVelocity = Vector3.zero;
+                _ready = true;
+                _cooldownTimeCounter = _cooldownTime;
             }
         }
     }
 
     void Attack()
     {
-        //inInitialPosition = false;
-        rb.linearVelocity = vectorDir[(int)movementDirection] * attackSpeed;
+        _rigidbody.linearVelocity = vectorDir[(int)_movementDirection] * _attackSpeed;
     }
 
     bool playerInSight()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, vectorDir[(int)movementDirection], 20f, raycastLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, vectorDir[(int)_movementDirection], 20f, _raycastLayer);
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
             return true;
@@ -84,15 +79,15 @@ public class SpikeHead : MonoBehaviour
 
     bool checkIfCollidingWithWall()
     {
-        return Physics2D.OverlapBox(transform.position + vectorDir[(int)movementDirection] * .02f, coll.bounds.size, 0f, raycastLayer);
+        return Physics2D.OverlapBox(transform.position + vectorDir[(int)_movementDirection] * .02f, _collider.bounds.size, 0f, _raycastLayer);
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, vectorDir[(int)movementDirection] * 20f);
+        Gizmos.DrawRay(transform.position, vectorDir[(int)_movementDirection] * 20f);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position + vectorDir[(int)movementDirection] * .02f, coll.bounds.size);
+        Gizmos.DrawWireCube(transform.position + vectorDir[(int)_movementDirection] * .02f, _collider.bounds.size);
     }
 }

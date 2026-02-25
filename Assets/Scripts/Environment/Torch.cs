@@ -16,7 +16,7 @@ public class Torch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerInRange() && PlayerControl.Instance._use1Input)
+        if(playerInRange() && PlayerController.Instance.use1Input)
         {
             LightUpTorch();
         }

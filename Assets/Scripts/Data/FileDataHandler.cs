@@ -7,18 +7,18 @@ using System.IO;
 
 public class FileDataHandler<T>
 {
-    private string dataDirPath;
-    private string dataFileName;
+    private string _dataDirPath;
+    private string _dataFileName;
 
-    public FileDataHandler(string dataDirPath, string dataFileName)
+    public FileDataHandler(string _dataDirPath, string _dataFileName)
     {
-        this.dataDirPath = dataDirPath;
-        this.dataFileName = dataFileName;
+        this._dataDirPath = _dataDirPath;
+        this._dataFileName = _dataFileName;
     }
 
     public T Load()
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string fullPath = Path.Combine(_dataDirPath, _dataFileName);
         T loadedData = default(T);
         if (File.Exists(fullPath))
         {
@@ -45,7 +45,7 @@ public class FileDataHandler<T>
 
     public void Save(T data)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string fullPath = Path.Combine(_dataDirPath, _dataFileName);
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));

@@ -1,0 +1,13 @@
+﻿<Solution>
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="CustomInspector.Editor.csproj" />
+  <Project Path="CustomInspector.csproj" />
+  <Project Path="CustomInspector.Helpers.Editor.csproj" />
+  <Project Path="CustomInspector.Helpers.csproj" />
+  <Project Path="Assembly-CSharp-firstpass.csproj" />
+  <Project Path="CustomToolbar.csproj" />
+  <Project Path="CustomInspector.Documentation.Editor.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="VoxelLabs.UltimatePreview.Lib.csproj" />
+  <Project Path="CustomInspector.Demo.csproj" />
+</Solution>

@@ -6,9 +6,9 @@ using Cinemachine;
 public class CameraController : MonoBehaviour
 {
     public static CameraController Instance;
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private CinemachineVirtualCamera _virtualCamera;
     public CinemachineFramingTransposer transposer {get; private set;}
-    float startingScreenX;
+    private float _startingScreenX;
 
     void Awake()
     {
@@ -24,13 +24,13 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        transposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-        if(transposer != null) startingScreenX = transposer.m_ScreenX;
+        transposer = _virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        if(transposer != null) _startingScreenX = transposer.m_ScreenX;
     }
 
     public float getCameraScreenX()
     {
-        return startingScreenX;
+        return _startingScreenX;
     }
 
     public void setCameraScreenX(float screenX)

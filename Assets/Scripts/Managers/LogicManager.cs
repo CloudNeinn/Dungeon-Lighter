@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class LogicManager : MonoBehaviour
 {
-    private bool isPaused = false;
-    [SerializeField] GameObject pauseMenu;
+    private bool _isPaused = false;
+    [SerializeField] private GameObject _pauseMenu;
 
     void Start()
     {
-        if(pauseMenu) disablePause();
+        if(_pauseMenu) disablePause();
     }
 
     void Update()
     {
-        if (UserInput.Instance && UserInput.Instance.MenuToggleInput && pauseMenu)
+        if (UserInput.Instance && UserInput.Instance.menuToggleInput && _pauseMenu)
         {
             TogglePause();
         }
@@ -22,20 +22,20 @@ public class LogicManager : MonoBehaviour
 
     public void TogglePause()
     {
-        isPaused = !isPaused;
-        pauseMenu.SetActive(isPaused);
-        Time.timeScale = isPaused ? 0f : 1f;
+        _isPaused = !_isPaused;
+        _pauseMenu.SetActive(_isPaused);
+        Time.timeScale = _isPaused ? 0f : 1f;
     }
 
     public void disablePause()
     {
-        isPaused = false;
-        pauseMenu.SetActive(isPaused);
+        _isPaused = false;
+        _pauseMenu.SetActive(_isPaused);
     }
 
     public bool IsPaused()
     {
-        return isPaused;
+        return _isPaused;
     }
 
     public void QuitApp()

@@ -9,18 +9,18 @@ public class Door : MonoBehaviour
     [SerializeField] private float _interacivityRadius;
     [SerializeField] private Vector3 _interactiovityOffset;
     [SerializeField] private LayerMask _playerLayer;
-    [SerializeField] private int returnCurrency;
+    [SerializeField] private int _returnCurrency;
 
     void Update()
     {
-        if(PlayerControl.Instance._use1Input && InRange()) EnterDungeon();
+        if(PlayerController.Instance.use1Input && InRange()) EnterDungeon();
     }
 
     public void EnterDungeon()
     {
-        if (returnCurrency > 0)
+        if (_returnCurrency > 0)
         {
-            CurrencyManager.Instance.addCurrency(returnCurrency);
+            CurrencyManager.Instance.addCurrency(_returnCurrency);
             GameManager.Instance.increaseCompletedLevels();
         }
         if (SceneLoading.Instance.currentSceneType != SceneLoading.SceneType.Level) SceneLoading.Instance.SetReturnDoor(this.transform.position);

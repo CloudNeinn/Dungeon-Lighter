@@ -9,12 +9,17 @@ using System.Diagnostics;
 
 public class SceneLoading : MonoBehaviour
 {
-    public enum SceneType { Hub, Level }
-    [SerializeField] public SceneType currentSceneType;
+    public enum SceneType 
+    { 
+        Hub,
+        Level 
+    }
+
     public static SceneLoading Instance;
-    public GameObject loadingScreen;
-    public Image loadingBar;
-    [field: SerializeField] public List<GameObject> Grids;
+    [field: SerializeField] public SceneType currentSceneType {get; private set;}
+    public GameObject loadingScreen  {get; private set;}
+    public Image loadingBar  {get; private set;}
+    [field: SerializeField] public List<GameObject> grids {get; private set;}
     [SerializeField] private LayerMask _detectColliderMask;
     [SerializeField] private Vector3 _returnDoorPosition;
     [SerializeField] private Animator _loadingScreenAnimator;
@@ -41,7 +46,7 @@ public class SceneLoading : MonoBehaviour
 
     void Start()
     {
-        Grids = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Grid").ToList();
+        grids = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Grid").ToList();
     }
 
     // May be useful in the  future
@@ -102,13 +107,13 @@ public class SceneLoading : MonoBehaviour
 
     public int GetCurrentSceneID()
     {
-        Collider2D collider = Physics2D.OverlapCircle(PlayerControl.Instance.transform.position, 10f, _detectColliderMask);
+        Collider2D collider = Physics2D.OverlapCircle(PlayerController.Instance.transform.position, 10f, _detectColliderMask);
         return collider.gameObject.scene.buildIndex;
     }
 
     public string GetCurrentSceneName()
     {
-        Collider2D collider = Physics2D.OverlapCircle(PlayerControl.Instance.transform.position, 10f, _detectColliderMask);
+        Collider2D collider = Physics2D.OverlapCircle(PlayerController.Instance.transform.position, 10f, _detectColliderMask);
         return collider.gameObject.scene.name;
     }
 
@@ -133,7 +138,7 @@ public class SceneLoading : MonoBehaviour
 
         if (currentSceneType == SceneType.Hub)
         {
-            if(PlayerControl.Instance != null) PlayerControl.Instance.transform.position = _returnDoorPosition;
+            if(PlayerController.Instance != null) PlayerController.Instance.transform.position = _returnDoorPosition;
         }
 
         StartCoroutine(ResetCameraConfiner());
@@ -170,10 +175,10 @@ public class SceneLoading : MonoBehaviour
 
     IEnumerator SetPlayerPositionWhenReady()
     {
-        while (PlayerControl.Instance == null)
+        while (PlayerController.Instance == null)
         {
             yield return null;
         }
-        PlayerControl.Instance.transform.position = _returnDoorPosition;
+        PlayerController.Instance.transform.position = _returnDoorPosition;
     }
 }

@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class gameplayUI : MonoBehaviour
 {
-    public GameObject pauseMenu;
-    public GameObject pauseButton;
-    public GameObject deathScreen;
-    public GameObject settingsMenu;
-    public GameObject checkpointMenu;
-    public GameObject CHB;
-    public Rigidbody2D charRigid;
-    public DataPersistanceManager dataPerMan;
+    [field: SerializeField] public GameObject pauseMenu { get; private set; }
+    [field: SerializeField] public GameObject pauseButton { get; private set; }
+    [field: SerializeField] public GameObject deathScreen { get; private set; }
+    [field: SerializeField] public GameObject settingsMenu { get; private set; }
+    [field: SerializeField] public GameObject checkpointMenu { get; private set; }
+    [field: SerializeField] public GameObject CHB { get; private set; }
+    [field: SerializeField] public Rigidbody2D charRigid { get; private set; }
+    [field: SerializeField] public DataPersistanceManager dataPerMan { get; private set; }
+    
     void Start()
     {
-        charRigid = PlayerControl.Instance.gameObject.GetComponent<Rigidbody2D>();
+        charRigid = PlayerController.Instance.gameObject.GetComponent<Rigidbody2D>();
         dataPerMan = GameObject.FindFirstObjectByType<DataPersistanceManager>();
         pauseMenu = GameObject.Find("Pause Menu");
         settingsMenu =  GameObject.Find("Settings Menu");
@@ -77,7 +78,7 @@ public class gameplayUI : MonoBehaviour
 
     public void Respawn()
     {
-        PlayerControl.Instance.transform.position = CheckpointManager.Instance.currentCheckpoint.transform.position + Vector3.up;
+        PlayerController.Instance.transform.position = CheckpointManager.Instance.currentCheckpoint.transform.position + Vector3.up;
         charRigid.bodyType = RigidbodyType2D.Dynamic;
         deathScreen.SetActive(false);
         turnOffPause();

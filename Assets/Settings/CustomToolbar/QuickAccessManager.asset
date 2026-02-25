@@ -13,25 +13,49 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
-  - displayName: temp_background 3
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
+  - displayName: shadow_caster_3
+    scenePath: Assets/Scenes/TestingScene 3.unity
+  - displayName: shadow_caster_2
+    scenePath: Assets/Scenes/TestingScene 3.unity
+  - displayName: shadow_caster_1
+    scenePath: Assets/Scenes/TestingScene 3.unity
+  - displayName: shadow_caster_0
+    scenePath: Assets/Scenes/TestingScene 3.unity
   - displayName: Ground
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BlueTorch
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Door
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ground
+    scenePath: Assets/Scenes/TestingScene 3.unity
+  - displayName: Grid
+    scenePath: Assets/Scenes/TestingScene 3.unity
+  - displayName: TestingScene 3
+    scenePath: Assets/Scenes/TestingScene 3.unity
+  - displayName: shadow_caster_3
+    scenePath: Assets/Scenes/TestingScene 4.unity
+  - displayName: shadow_caster_2
+    scenePath: Assets/Scenes/TestingScene 4.unity
+  - displayName: shadow_caster_1
+    scenePath: Assets/Scenes/TestingScene 4.unity
+  - displayName: shadow_caster_0
+    scenePath: Assets/Scenes/TestingScene 4.unity
+  - displayName: TestingScene 4
+    scenePath: Assets/Scenes/TestingScene 4.unity
+  - displayName: TestingScene 2
+    scenePath: Assets/Scenes/TestingScene 2.unity
+  - displayName: Torches
     scenePath: Assets/Scenes/Hub.unity
   - displayName: BlueTorch
     scenePath: Assets/Scenes/Hub.unity
   - displayName: Torch (1)
     scenePath: Assets/Scenes/Hub.unity
+  - displayName: BackgroundMidLayer
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Torch (3)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Torch
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Torch (2)
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Background
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: TestingScene 1
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: shadow_caster_4
+    scenePath: Assets/Scenes/TestingScene 1.unity

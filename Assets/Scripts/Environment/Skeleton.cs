@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour
 {
-    [SerializeField] private float dialogueRadius;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float _dialogueRadius;
+    [SerializeField] private LayerMask _playerLayer;
 
     void Update()
     {
@@ -14,6 +14,6 @@ public class Skeleton : MonoBehaviour
 
     bool inRadius()
     {
-        return Physics2D.OverlapCircle(transform.position, dialogueRadius, playerLayer);
+        return Physics2D.OverlapCircle(transform.position, _dialogueRadius, _playerLayer);
     }
 }
