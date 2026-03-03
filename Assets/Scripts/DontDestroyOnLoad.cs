@@ -7,14 +7,14 @@ public class DontDestroyOnLoad : MonoBehaviour
     public static DontDestroyOnLoad Instance;
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // if (Instance == null)
+        // {
+        //     Instance = this;
+        // }
+        // else
+        // {
+        //     Destroy(gameObject);
+        // }
         DontDestroyOnLoad(this.gameObject);
     }
 }

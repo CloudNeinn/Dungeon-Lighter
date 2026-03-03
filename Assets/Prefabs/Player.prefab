@@ -175,41 +175,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cda517a898a28b4c89176db0fbff387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRigidbody: {fileID: 471496188600353898}
-  playerCollider: {fileID: 7353277815411045271}
-  walkSpeed: 12
-  runSpeed: 18
-  airSpeed: 16
-  canMove: 0
-  moveCooldownTime: 0.2
-  moveCooldownTimeCounter: 0.2
-  currentSpeed: 0
-  speedChangeRate: 5
-  speedDiff: 0
-  jumpForce: 24
-  jumpCoyoteTime: 0.2
-  jumpCoyoteTimeCounter: 0.2
-  jumpBufferTime: 0.2
-  jumpBufferTimeCounter: 0
-  doubleJumpIndex: 1
-  totalDoubleJumpCount: 1
-  doubleJumpCount: 1
-  wallJumpStrengthX: -10
-  wallJumpStrengthY: 18
-  isSliding: 0
-  isJumping: 0
-  isAtApex: 0
-  jumpFallForce: 12
-  jumpApexThreshold: 2
-  apexSpeedMultiplier: 2
-  slideSpeed: 13
-  slideAccel: 10
-  groundBoxSize: {x: 1.1, y: 0.3}
-  groundBoxOffset: {x: 0.2, y: -2}
-  wallBoxSize: {x: 0.5, y: 2.9}
-  wallBoxOffset: {x: 1.1, y: -0.25}
-  portalCheckBoxSize: {x: 0, y: 0}
-  portalCheckBoxOffset: {x: 0, y: 0}
+  _playerRigidbody: {fileID: 471496188600353898}
+  _playerCollider: {fileID: 7353277815411045271}
+  _isGrounded: 0
+  _isSliding: 0
+  _isJumping: 0
+  _isAtApex: 0
+  _isAlive: 0
+  _movementVector: {x: 0, y: 0}
+  _walkSpeed: 12
+  _runSpeed: 18
+  _airSpeed: 16
+  _canMove: 0
+  _moveCooldownTime: 0.2
+  _moveCooldownTimeCounter: 0.2
+  _currentSpeed: 0
+  _speedChangeRate: 0
+  _targetSpeed: 0
+  _speedDiff: 0
+  _jumpForce: 24
+  _jumpCoyoteTime: 0.2
+  _jumpCoyoteTimeCounter: 0.2
+  _jumpBufferTime: 0.2
+  _jumpBufferTimeCounter: 0
+  _doubleJumpIndex: 1
+  _totalDoubleJumpCount: 1
+  _doubleJumpCount: 1
+  _wallJumpStrengthX: -10
+  _wallJumpStrengthY: 18
+  _jumpFallForce: 12
+  _jumpApexThreshold: 2
+  _apexSpeedMultiplier: 2
+  _slideSpeed: 13
+  _slideAccel: 10
+  _groundBoxSize: {x: 1, y: 0.3}
+  _groundBoxOffset: {x: 0.2, y: -2.1}
+  _wallBoxSize: {x: 0.5, y: 2.5}
+  _wallBoxOffset: {x: 1.25, y: -0.2}
+  _portalCheckBoxSize: {x: 0, y: 0}
+  _portalCheckBoxOffset: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -219,9 +223,7 @@ MonoBehaviour:
   portalLayer:
     serializedVersion: 2
     m_Bits: 128
-  <_moveInput>k__BackingField: {x: 0, y: 0}
-  <_isGrounded>k__BackingField: 0
-  <movementVector>k__BackingField: {x: 0, y: 0}
+  <moveInput>k__BackingField: {x: 0, y: 0}
 --- !u!114 &2989726128419885480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df7d11e82df4e842831b3b3f59cbcda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSource: {fileID: 4930338817207527176}
+  _jumpSource: {fileID: 4930338817207527176}
 --- !u!95 &4596609224149716966
 Animator:
   serializedVersion: 7
@@ -414,12 +416,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2054c5c56f2584a933a809918a8060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _light2D: {fileID: 0}
+  _light2D: {fileID: 1797052730678982735}
   _flickerSpeed: 2
   _minIntensity: 1.3
   _maxIntensity: 2
-  burningTime: 60
-  burningTimeCounter: 60
+  _burningTime: 4
+  _burningTimeCounter: 4
 --- !u!1 &6879664894493196180
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c2bd453b60ef248b9e683de252ebb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _light2D: {fileID: 0}
+  _light2D: {fileID: 7235440039600468007}
   _flickerSpeed: 1.5
   _minIntensity: 2
   _maxIntensity: 3
