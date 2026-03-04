@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using System.Diagnostics;
 
 public class DialogueBubble : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class DialogueBubble : MonoBehaviour
         //_canvas.SetActive(false);
         //InteractionIndicator(true);
         facingRight = _parent != null && _parent.transform.localScale.x < 0;
+        GetDialogue();
     }
     void Update()
     {
@@ -150,5 +152,19 @@ public class DialogueBubble : MonoBehaviour
             }
         }
         _talking = false;
+    }
+
+    void GetDialogue()
+    {
+        var LevelList = GameManager.Instance.gameState.GetListOfLevel();
+        if(LevelList["First Challenge"])
+        {
+            UnityEngine.Debug.Log("hekllospaoidfasiodfhoiasdg");
+        }
+    }
+
+    void ConditionsMet(StringBoolDictionary LevelList)
+    {
+        
     }
 }

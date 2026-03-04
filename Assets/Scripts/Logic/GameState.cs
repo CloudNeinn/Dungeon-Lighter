@@ -9,4 +9,9 @@ public class GameState : ScriptableObject
     [SerializeField] private StringBoolDictionary _listOfLevels;
     [SerializeField] private StringBoolDictionary _listOfNotes;
     [SerializeField] private bool _enoughShotsDrinken;
+    
+    public StringBoolDictionary GetListOfLevel()
+    {
+        return _listOfLevels;
+    }
 }

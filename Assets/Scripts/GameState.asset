@@ -18,9 +18,10 @@ MonoBehaviour:
     - First Challenge
     - Spike Mayhem
     - New Enemies
-    values: 000000
+    values: 010000
   _listOfNotes:
     keys:
-    - 
-    values: 00
+    - Howdy cowboy
+    - Second thought
+    values: 0000
   _enoughShotsDrinken: 0

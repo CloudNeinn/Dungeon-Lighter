@@ -16,7 +16,7 @@ public class checkpoint : MonoBehaviour
     public GameObject popUpMenu;
     public bool isActivated;
     public DataPersistanceManager dataPerMan;
-    private gameplayUI gameUI;
+    private GameplayUI gameUI;
     public Vector3 checkPosition;
     public bool isHealed;
     public bool menuOpen;
@@ -29,7 +29,7 @@ public class checkpoint : MonoBehaviour
         popUpMenu = transform.GetChild(1).gameObject;
         dataPerMan = GameObject.FindFirstObjectByType<DataPersistanceManager>();
         checkpMenu = GameObject.Find("CheckpointMenu");
-        gameUI = GameObject.FindFirstObjectByType<gameplayUI>(); 
+        gameUI = GameObject.FindFirstObjectByType<GameplayUI>(); 
         if(PlayerController.Instance.transform.position.x <= transform.position.x + 3 
         && PlayerController.Instance.transform.position.x >= transform.position.x - 3
         && PlayerController.Instance.transform.position.y <= transform.position.y + 3 

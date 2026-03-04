@@ -13,27 +13,31 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: 
   items:
-  - displayName: Main Camera
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Light 2D (Bigger)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Light 2D (Smaller)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Main Camera
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: CM vcam1
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Main Camera
+  - displayName: DialogueScriptableObject
+    scenePath: 
+  - displayName: DialogueScriptableObject 2
+    scenePath: 
+  - displayName: DialogueScriptableObject 1
+    scenePath: 
+  - displayName: DialogueManager
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Player
+  - displayName: DialogueScriptableObject
+    scenePath: 
+  - displayName: DialogueManager
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Main Camera
+  - displayName: DialogueScriptableObject
+    scenePath: 
+  - displayName: NPC
+    scenePath: 
+  - displayName: GameState
+    scenePath: 
+  - displayName: GameManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: GameState
+    scenePath: 
+  - displayName: DialogueBubble
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
+  - displayName: Bartender
     scenePath: Assets/Scenes/Hub.unity
+  - displayName: DialogueScriptableObject
+    scenePath: 

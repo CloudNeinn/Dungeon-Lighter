@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class gameplayUI : MonoBehaviour
+public class GameplayUI : MonoBehaviour
 {
     [field: SerializeField] public GameObject pauseMenu { get; private set; }
     [field: SerializeField] public GameObject pauseButton { get; private set; }
