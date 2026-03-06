@@ -11,33 +11,27 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a60da2a327ac4a3fae1fcf7e65264165, type: 3}
   m_Name: QuickAccessManager
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: DialogueScriptableObject
-    scenePath: 
-  - displayName: DialogueScriptableObject 2
-    scenePath: 
-  - displayName: DialogueScriptableObject 1
-    scenePath: 
-  - displayName: DialogueManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: DialogueScriptableObject
-    scenePath: 
-  - displayName: DialogueManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: DialogueScriptableObject
-    scenePath: 
-  - displayName: NPC
-    scenePath: 
-  - displayName: GameState
-    scenePath: 
-  - displayName: GameManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: GameState
-    scenePath: 
+  - displayName: Indicator
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: DialogueBubble
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Indicator
+    scenePath: Assets/Scenes/Hub.unity
   - displayName: DialogueBubble
     scenePath: Assets/Scenes/Hub.unity
   - displayName: Bartender
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueScriptableObject
-    scenePath: 
+  - displayName: BubbleText
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Indicator
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BubbleText
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Indicator
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BubbleText
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Canvas
+    scenePath: Assets/Scenes/Hub.unity

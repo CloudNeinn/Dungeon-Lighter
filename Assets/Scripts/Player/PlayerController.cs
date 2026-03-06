@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private PlayerLight _playerLight;
 
     #region States
+    [Header("States")]
     [SerializeField] private bool _isGrounded;
     [SerializeField] private bool _isSliding;
     [SerializeField] private bool _isJumping;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Slide
+    [Header("Slide Parameters")]
     [SerializeField] private float _slideSpeed;
     [SerializeField] private float _slideAccel;
     #endregion

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79cfdecf0de9a6745b2ef7beede7cb87, type: 3}
   m_Name: GameState
   m_EditorClassIdentifier: 
-  _numberOfLevelsCompleted: 0
+  _numberOfLevelsCompleted: 1
   _listOfLevels:
     keys:
     - First Challenge
@@ -23,5 +23,6 @@ MonoBehaviour:
     keys:
     - Howdy cowboy
     - Second thought
-    values: 0000
-  _enoughShotsDrinken: 0
+    - 
+    values: 000000
+  _enoughShotsConsumed: 0

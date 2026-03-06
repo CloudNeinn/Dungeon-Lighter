@@ -17,7 +17,7 @@ MonoBehaviour:
   wasPlayed: 0
   playOnce: 1
   dialogue:
-  - dialogueText: first
-  - dialogueText: 'first heloo theeeeeeeeere
-
-      fghdfghdfghdfghdfgh'
+  - dialogueText: the dialoguee
+  - dialogueText: the dialoguesdfasdgasdgasdgfa
+  requiredLevels:
+  - {fileID: 11400000, guid: 617542de446a6441faccb978f576860a, type: 2}

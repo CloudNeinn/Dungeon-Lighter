@@ -26,6 +26,7 @@ public class DialogueBubble : MonoBehaviour
     private RectTransform _bubbleTransform;
     private bool facingRight;
     private bool _talking;
+    [SerializeField] private DialogueScriptableObject _currentDialogue;
 
     void Start()
     {
@@ -42,18 +43,26 @@ public class DialogueBubble : MonoBehaviour
         //InteractionIndicator(true);
         facingRight = _parent != null && _parent.transform.localScale.x < 0;
         GetDialogue();
+        if(_currentDialogue == null)
+        {
+            _indicator.SetActive(false);
+            _bubble.SetActive(false);
+        }
     }
     void Update()
     {
-        if (inInteractivityRadius() && isLookingForward())
+        if(_currentDialogue != null)
         {
-            if (PlayerController.Instance.use2Input && !_talking)
+            if (inInteractivityRadius() && isLookingForward())
             {
-                InteractionIndicator(false);
-                StartCoroutine(TypeText(_fullText));
+                if (PlayerController.Instance.use2Input && !_talking)
+                {
+                    InteractionIndicator(false);
+                    StartCoroutine(TypeText(_fullText));
+                }
             }
+            else InteractionIndicator(true);
         }
-        else InteractionIndicator(true);
 
         FlipDialogueBubble();
     }
@@ -156,15 +165,46 @@ public class DialogueBubble : MonoBehaviour
 
     void GetDialogue()
     {
-        var LevelList = GameManager.Instance.gameState.GetListOfLevel();
-        if(LevelList["First Challenge"])
+        DialogueScriptableObject[] availableDialogues = DialogueManager.Instance.bartenderDialogues;
+        
+        if (availableDialogues == null || availableDialogues.Length == 0)
         {
-            UnityEngine.Debug.Log("hekllospaoidfasiodfhoiasdg");
+            UnityEngine.Debug.LogWarning("No bartender dialogues found in DialogueManager!");
+            return;
+        }
+
+        StringBoolDictionary levelList = GameManager.Instance.gameState.GetListOfLevel();
+        
+        foreach (DialogueScriptableObject dialogueOption in availableDialogues)
+        {
+            if (ConditionsMet(levelList, dialogueOption.requiredLevels))
+            {
+                _fullText = "";
+                foreach (Dialogue dialogueLine in dialogueOption.dialogue)
+                {
+                    _fullText += dialogueLine.dialogueText + " ";
+                }
+                
+                _fullText = _fullText.Trim();
+                _currentDialogue = dialogueOption;
+                return;
+            }
         }
     }
 
-    void ConditionsMet(StringBoolDictionary LevelList)
+    bool ConditionsMet(StringBoolDictionary levelList, LevelSO[] requiredLevels)
     {
-        
+        if (requiredLevels == null || requiredLevels.Length == 0)
+            return false;
+
+        foreach (LevelSO requiredLevel in requiredLevels)
+        {
+            if (!levelList.ContainsKey(requiredLevel.levelKey) || !levelList[requiredLevel.levelKey])
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
