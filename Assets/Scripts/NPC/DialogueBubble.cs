@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using System.Diagnostics;
+using System.Drawing;
 
 public class DialogueBubble : MonoBehaviour
 {
     [SerializeField] private float _typeSpeed = 0.05f;
     [SerializeField] private GameObject _indicator;
+    [SerializeField] private GameObject _dialogueDoneIndicator;
     [SerializeField] private GameObject _bubble;
     private TextMeshProUGUI _textComponent;
     private string _fullText;
@@ -27,6 +30,9 @@ public class DialogueBubble : MonoBehaviour
     private bool facingRight;
     private bool _talking;
     [SerializeField] private DialogueScriptableObject _currentDialogue;
+    [SerializeField] private int _dialogueLength;
+    [SerializeField] private int _currentDialoguePart;
+    private Coroutine _typingCoroutine;
 
     void Start()
     {
@@ -48,6 +54,8 @@ public class DialogueBubble : MonoBehaviour
             _indicator.SetActive(false);
             _bubble.SetActive(false);
         }
+        else _dialogueLength = _currentDialogue.dialogue.Length;
+        _currentDialoguePart = 0;
     }
     void Update()
     {
@@ -58,7 +66,24 @@ public class DialogueBubble : MonoBehaviour
                 if (PlayerController.Instance.use2Input && !_talking)
                 {
                     InteractionIndicator(false);
-                    StartCoroutine(TypeText(_fullText));
+                    if(_currentDialoguePart >= _dialogueLength) 
+                    {
+                        _currentDialoguePart = 0;
+                        _indicator.GetComponent<Image>().color = UnityEngine.Color.gray;
+                        _dialogueDoneIndicator.SetActive(true);
+                        InteractionIndicator(true);
+                    }
+                    else _typingCoroutine = StartCoroutine(TypeText(_currentDialogue.dialogue[_currentDialoguePart++].dialogueText));
+                }
+                else if(PlayerController.Instance.use2Input)
+                {
+                    if (_typingCoroutine != null)
+                    {
+                        StopCoroutine(_typingCoroutine);
+                        _typingCoroutine = null;
+                        _talking = false;
+                        _textComponent.text = _currentDialogue.dialogue[_currentDialoguePart-1].dialogueText;  // Or handle UI as needed
+                    }
                 }
             }
             else InteractionIndicator(true);
@@ -137,7 +162,7 @@ public class DialogueBubble : MonoBehaviour
     void OnDrawGizmos()
     {
         _parent = transform.parent.gameObject;
-        Gizmos.color = Color.green;
+        Gizmos.color = UnityEngine.Color.green;
         if (_parent == null) Gizmos.DrawWireSphere(transform.position, _interacivityRadius);
         else Gizmos.DrawWireSphere(_parent.transform.position, _interacivityRadius);
     }

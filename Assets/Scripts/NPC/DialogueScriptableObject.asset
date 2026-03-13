@@ -17,7 +17,15 @@ MonoBehaviour:
   wasPlayed: 0
   playOnce: 1
   dialogue:
-  - dialogueText: the dialoguee
-  - dialogueText: the dialoguesdfasdgasdgasdgfa
+  - dialogueText: 'Hey there cowboy,
+
+      how are you doing
+
+      this fine evening?'
+  - dialogueText: 'Honestly... i dont
+
+      really care. Go down
+
+      to the dungeon.'
   requiredLevels:
   - {fileID: 11400000, guid: 617542de446a6441faccb978f576860a, type: 2}

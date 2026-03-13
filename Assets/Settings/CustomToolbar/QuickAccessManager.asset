@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
   - displayName: DialogueBubble
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueBubble
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bartender
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BubbleText
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BubbleText
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Indicator
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BubbleText
-    scenePath: Assets/Scenes/Hub.unity
+  - displayName: DialogueDone
+    scenePath: Assets/Prefabs/DialogueBubble.prefab
   - displayName: Canvas
+    scenePath: Assets/Prefabs/DialogueBubble.prefab
+  - displayName: DialogueBubble
+    scenePath: Assets/Prefabs/DialogueBubble.prefab
+  - displayName: DialogueBubble
     scenePath: Assets/Scenes/Hub.unity
+  - displayName: DialogueBubble
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: DialogueDone
+    scenePath: Assets/Prefabs/DialogueBubble.prefab
+  - displayName: Test
+    scenePath: 
+  - displayName: Art
+    scenePath: 
+  - displayName: DialogueBubble
+    scenePath: Assets/Prefabs/DialogueBubble.prefab
+  - displayName: DialogueBubble
+    scenePath: 
