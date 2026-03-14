@@ -30,10 +30,20 @@ public class DialogueBubble : MonoBehaviour
     private bool facingRight;
     private bool _talking;
     [SerializeField] private DialogueScriptableObject _currentDialogue;
-    [SerializeField] private int _dialogueLength;
-    [SerializeField] private int _currentDialoguePart;
+    private int _dialogueLength;
+    private int _currentDialoguePart;
     private Coroutine _typingCoroutine;
+    private float[] _dotOriginalY;
+    [SerializeField] private NPCName _npcName;
 
+
+    void Awake()
+    {
+        _dotOriginalY = new float[dots.Length];
+        for (int i = 0; i < dots.Length; i++)
+            _dotOriginalY[i] = dots[i].anchoredPosition.y;
+    }
+    
     void Start()
     {
         _textComponent = GetComponentInChildren<TextMeshProUGUI>();
@@ -69,7 +79,7 @@ public class DialogueBubble : MonoBehaviour
                     if(_currentDialoguePart >= _dialogueLength) 
                     {
                         _currentDialoguePart = 0;
-                        _indicator.GetComponent<Image>().color = UnityEngine.Color.gray;
+                        //_indicator.GetComponent<Image>().color = UnityEngine.Color.gray;
                         _dialogueDoneIndicator.SetActive(true);
                         InteractionIndicator(true);
                     }
@@ -113,6 +123,7 @@ public class DialogueBubble : MonoBehaviour
             _textTransform.localScale = new Vector3(-1, _textTransform.localScale.y, _textTransform.localScale.z);
             _textTransform.pivot = new Vector2(1, 0);
             _bubbleTransform.localScale = new Vector3(-1, _bubbleTransform.localScale.y, _bubbleTransform.localScale.z);
+            _dialogueDoneIndicator.transform.localScale = new Vector3(-1, _dialogueDoneIndicator.transform.localScale.y, _dialogueDoneIndicator.transform.localScale.z);
         }
         else if (_parent.transform.localScale.x == 1 && !facingRight)
         {
@@ -121,6 +132,7 @@ public class DialogueBubble : MonoBehaviour
             _textTransform.localScale = new Vector3(1, _textTransform.localScale.y, _textTransform.localScale.z);
             _textTransform.pivot = new Vector2(0, 0);
             _bubbleTransform.localScale = new Vector3(1, _bubbleTransform.localScale.y, _bubbleTransform.localScale.z);
+            _dialogueDoneIndicator.transform.localScale = new Vector3(1, _dialogueDoneIndicator.transform.localScale.y, _dialogueDoneIndicator.transform.localScale.z);
         }
     }
 
@@ -136,6 +148,11 @@ public class DialogueBubble : MonoBehaviour
             for (int i = 0; i < dots.Length; i++)
             {
                 int idx = i;
+
+                Vector2 pos = dots[idx].anchoredPosition;
+                pos.y = _dotOriginalY[idx];
+                dots[idx].anchoredPosition = pos;
+
                 _dotTweens[idx] = dots[idx].DOAnchorPosY(_jumpPower, _duration)
                     .SetLoops(-1, LoopType.Yoyo)
                     .SetDelay(idx * _delay);
@@ -190,11 +207,11 @@ public class DialogueBubble : MonoBehaviour
 
     void GetDialogue()
     {
-        DialogueScriptableObject[] availableDialogues = DialogueManager.Instance.bartenderDialogues;
+        DialogueScriptableObject[] availableDialogues = DialogueManager.Instance.GetDialogues(_npcName);
         
         if (availableDialogues == null || availableDialogues.Length == 0)
         {
-            UnityEngine.Debug.LogWarning("No bartender dialogues found in DialogueManager!");
+            UnityEngine.Debug.LogWarning("No dialogues found in DialogueManager for NPC: " + _npcName);
             return;
         }
 

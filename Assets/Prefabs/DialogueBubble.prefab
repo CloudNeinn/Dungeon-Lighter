@@ -301,14 +301,14 @@ RectTransform:
   m_GameObject: {fileID: 2022707413304358564}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2259455788687491872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.61, y: 0.774}
+  m_AnchoredPosition: {x: -0.6099695, y: 0.773999}
   m_SizeDelta: {x: 0.8249, y: 0.7172}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8719819947812791448
@@ -403,7 +403,10 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 512
-  <dots>k__BackingField: []
+  <dots>k__BackingField:
+  - {fileID: 4621207340376918380}
+  - {fileID: 6045995497628275427}
+  - {fileID: 5224126343112796833}
   _jumpPower: 0.3
   _duration: 0.4
   _delay: 0.1
@@ -575,7 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 187f5f05c29cc450d8c15b566f1f166b, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -674,7 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 187f5f05c29cc450d8c15b566f1f166b, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
