@@ -13,27 +13,25 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Ground
+  - displayName: Player
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: OneWayPlatforms
+  - displayName: InputManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Player
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ground
+  - displayName: Bar
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ground (1)
+  - displayName: Canvas
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Wall
+  - displayName: BarUI
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ground
+  - displayName: Book
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Light
+  - displayName: PagePanel 2
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Grid
+  - displayName: PagePanel 1
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueBubble
+  - displayName: CurrencyUI
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueBubble
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bartender
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueBubble
+  - displayName: Player
     scenePath: Assets/Scenes/Hub.unity

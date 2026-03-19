@@ -17,7 +17,7 @@ public class PlayerLight : LightFlickering
 
     protected override void Flicker()
     {
-        _flicker = Mathf.Sin((Time.time + _timeOffset) * _flickerSpeed) + PlayerController.Instance.getFlickerSpeedModifier();
+        _flicker = Mathf.Sin((Time.time + _timeOffset) * _flickerSpeed) + PlayerController.Instance.GetFlickerSpeedModifier();
         _light2D.intensity = Mathf.Lerp(_minIntensity, _maxIntensity, (_flicker + 1f) / 2f) * _burningTimeCounter / _burningTime;
     }    
 }

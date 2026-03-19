@@ -125,16 +125,18 @@ public class PlayerController : MonoBehaviour
         }
         _currentSpeed = _walkSpeed;
         _isAlive = true;
+        //_airSpeed = _runSpeed * 1.2f; 
     }
 
 
     void Update()
     {
         if(_isAlive) Rotate();
-        GetInput();
-        _isGrounded = isGrounded();
 
-        if (isWalled() && Mathf.Abs(moveInput.x) > 0 && _canMove)
+        GetInput();
+        _isGrounded = IsGrounded();
+
+        if (IsWalled() && Mathf.Abs(moveInput.x) > 0 && _canMove)
         {
             _isSliding = true;
             _playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
@@ -160,6 +162,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if(_isSliding) Slide();
+
         if(_canMove && !_isSliding) 
             _playerRigidbody.linearVelocity = new Vector2(moveInput.x * _currentSpeed/* + _playerRigidbody.linearVelocity.x/4*/, _playerRigidbody.linearVelocity.y);
 
@@ -169,17 +172,17 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        if(isGrounded())
+        if(IsGrounded())
         {
             if(UserInput.Instance.runAction.IsPressed()) _targetSpeed = _runSpeed;
             else if(!UserInput.Instance.runAction.IsPressed()) _targetSpeed = _walkSpeed;
         }
-        else if(!isGrounded() && !isWalled())
+        else if(!IsGrounded() && !IsWalled())
         {
             if(_isAtApex) _targetSpeed = _airSpeed * _apexSpeedMultiplier; 
             else _targetSpeed = _airSpeed; 
         }
-        else if(isWalled())
+        else if(IsWalled())
         {
             _targetSpeed = 0;
         }
@@ -196,7 +199,7 @@ public class PlayerController : MonoBehaviour
     {
         float force = _jumpForce;
 
-        if (isGrounded() || _isSliding) 
+        if (IsGrounded() || _isSliding) 
         {
             _jumpCoyoteTimeCounter = _jumpCoyoteTime;
             _doubleJumpIndex = _totalDoubleJumpCount;
@@ -206,14 +209,14 @@ public class PlayerController : MonoBehaviour
         if (_jumpPressed && !_isSliding) 
             _jumpBufferTimeCounter = _jumpBufferTime;
 
-        if ((_jumpBufferTimeCounter > 0) && (isGrounded() || _jumpCoyoteTimeCounter > 0 || _doubleJumpIndex > 0))
+        if ((_jumpBufferTimeCounter > 0) && (IsGrounded() || _jumpCoyoteTimeCounter > 0 || _doubleJumpIndex > 0))
         {
             _jumpBufferTimeCounter = 0;
 
             if (_playerRigidbody.linearVelocity.y > 0)
                 force -= _playerRigidbody.linearVelocity.y;
 
-            if (!isGrounded() && _jumpCoyoteTimeCounter <= 0) 
+            if (!IsGrounded() && _jumpCoyoteTimeCounter <= 0) 
                 --_doubleJumpIndex;
 
             _playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, force);
@@ -239,7 +242,7 @@ public class PlayerController : MonoBehaviour
 
         if(!_isJumping  && _playerRigidbody.linearVelocity.y > 0) _isJumping = true;
         if(_isJumping && _playerRigidbody.linearVelocity.y < 0 && !_isAtApex) _playerRigidbody.AddForce(Vector2.up * -_jumpFallForce);
-        if(isGrounded() && _isJumping) _isJumping = false;
+        if(IsGrounded() && _isJumping) _isJumping = false;
         if(_isJumping && Mathf.Abs(_playerRigidbody.linearVelocity.y) <= _jumpApexThreshold) _isAtApex = true;
         else _isAtApex = false;
     }
@@ -257,33 +260,34 @@ public class PlayerController : MonoBehaviour
         float speedDif = _slideSpeed - _playerRigidbody.linearVelocity.y;	
 		float movement = speedDif * _slideAccel;
 		movement = Mathf.Clamp(movement, -Mathf.Abs(speedDif)  * (1 / Time.fixedDeltaTime), Mathf.Abs(speedDif) * (1 / Time.fixedDeltaTime));
+        //movement = Mathf.Min(movement, 0);
 		if (_canMove) _playerRigidbody.AddForce(movement * Vector2.up);
     }
 
-    bool isGrounded()
+    bool IsGrounded()
     {
         return Physics2D.OverlapBox((Vector2)transform.position + _groundBoxOffset, _groundBoxSize, 0, groundLayer);
     }
 
-    bool isWalled()
+    bool IsWalled()
     {
         return Physics2D.OverlapBox((Vector2)transform.position + new Vector2(_wallBoxOffset.x * transform.localScale.x, _wallBoxOffset.y), _wallBoxSize, 0, wallLayer);
     }
 
-    Collider2D getPortal()
+    Collider2D GetPortal()
     {
         return Physics2D.OverlapBox((Vector2)transform.position + _portalCheckBoxOffset, _portalCheckBoxSize, 0, groundLayer);
     }
 
-    public bool isMoving()
+    public bool IsMoving()
     {
-        if(_playerRigidbody.linearVelocity.x != 0 && isGrounded()) return true;
+        if(_playerRigidbody.linearVelocity.x != 0 && IsGrounded()) return true;
         else return false;
     }
 
-    private bool movingWithoutInput()
+    private bool MovingWithoutInput()
     {
-        if(isMoving() && Mathf.Abs(moveInput.x) == 0) return true;
+        if(IsMoving() && Mathf.Abs(moveInput.x) == 0) return true;
         else return false;
     }
 
@@ -334,7 +338,7 @@ public class PlayerController : MonoBehaviour
         SceneLoading.Instance.ReloadScene();
     }
 
-    public float getFlickerSpeedModifier()
+    public float GetFlickerSpeedModifier()
     {
         return _currentSpeed / _runSpeed;
     }

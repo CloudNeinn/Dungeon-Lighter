@@ -190,7 +190,7 @@ MonoBehaviour:
   _moveCooldownTime: 0.2
   _moveCooldownTimeCounter: 0.2
   _currentSpeed: 0
-  _speedChangeRate: 0
+  _speedChangeRate: 1.5
   _targetSpeed: 0
   _speedDiff: 0
   _jumpForce: 24
