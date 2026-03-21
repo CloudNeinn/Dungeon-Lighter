@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class PlayerLight : LightFlickering
 {
+    [SerializeField] private bool _burn;
     [SerializeField] private float _burningTime;
     [SerializeField] private float _burningTimeCounter;
 
     void Update()
     {
         Flicker();
+        if(_burn) Burn();
+    }
+
+    void Burn()
+    {
         if(_burningTimeCounter > 0 && SceneLoading.Instance.currentSceneType == SceneLoading.SceneType.Level) _burningTimeCounter -= Time.deltaTime;
         else if(SceneLoading.Instance.currentSceneType == SceneLoading.SceneType.Level && PlayerController.Instance.GetIsAlive()) 
             PlayerController.Instance.Death();

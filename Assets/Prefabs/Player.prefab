@@ -420,6 +420,7 @@ MonoBehaviour:
   _flickerSpeed: 2
   _minIntensity: 1.3
   _maxIntensity: 2
+  _burn: 1
   _burningTime: 4
   _burningTimeCounter: 4
 --- !u!1 &6879664894493196180

@@ -300,5 +300,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _light2D: {fileID: 0}
   _flickerSpeed: 0.1
-  _minIntensity: 0.5
-  _maxIntensity: 2
+  _minIntensity: 1
+  _maxIntensity: 3

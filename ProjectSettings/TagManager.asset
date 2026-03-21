@@ -52,5 +52,8 @@ TagManager:
   - name: Torch
     uniqueID: 1761893399
     locked: 0
+  - name: DivineBeing
+    uniqueID: 979262397
+    locked: 0
   m_RenderingLayers:
   - Default

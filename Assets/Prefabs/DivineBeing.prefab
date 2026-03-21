@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 918857210924514435}
   - component: {fileID: 7175350302287597514}
   - component: {fileID: 6767164377407840575}
+  - component: {fileID: 1708620083364801471}
   m_Layer: 0
   m_Name: DivineBeing
   m_TagString: Untagged
@@ -38,6 +39,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &918857210924514435
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -53,6 +55,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -74,9 +81,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 979262397
+  m_SortingLayer: 4
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -349004668, guid: ad409685b5e8a9b42bc13b20d0c8e115, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -86,11 +95,10 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &7175350302287597514
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,6 +112,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -121,15 +130,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279cfdf1bdeece145bf53d7d6b7f78df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerRadius: 12
-  playerLayer:
+  _triggerRadius: 5
+  _playerLayer:
     serializedVersion: 2
-    m_Bits: 512
-  animator: {fileID: 7175350302287597514}
-  animationStateName: Attack
-  animationTriggerName: Attack
-  audioSource: {fileID: 5712996022823046008}
-  attackSound: {fileID: 8300000, guid: 0553cc09e039d5c48a953544b49db72e, type: 3}
+    m_Bits: 0
+  _animator: {fileID: 0}
+  _animationStateName: Attack
+  _animationTriggerName: Attack
+  _audioSource: {fileID: 0}
+  _attackSound: {fileID: 0}
+--- !u!114 &1708620083364801471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2366683692176334968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3911804fbfacc4f4cab60ff188eed494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PaletteSwapper
+  threshold: 0.01
+  swaps:
+  - original: {r: 0.03529412, g: 0.015686275, b: 0.07058824, a: 1}
+    replacement: {r: 0.03529412, g: 0.015686275, b: 0.07058824, a: 1}
+    enabled: 1
+  - original: {r: 0.22352943, g: 0.019607844, b: 0.23529413, a: 1}
+    replacement: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    enabled: 1
+  - original: {r: 0.49803925, g: 0.16470589, b: 0.41176474, a: 1}
+    replacement: {r: 0.7484276, g: 0.7484276, b: 0.7484276, a: 1}
+    enabled: 1
+  - original: {r: 0.8705883, g: 0.07450981, b: 0.54901963, a: 1}
+    replacement: {r: 1, g: 1, b: 1, a: 1}
+    enabled: 1
+  - original: {r: 0.5921569, g: 0.050980397, b: 0.37254903, a: 1}
+    replacement: {r: 0.8238993, g: 0.8238993, b: 0.8238993, a: 1}
+    enabled: 1
+  - original: {r: 0, g: 0, b: 0.10196079, a: 1}
+    replacement: {r: 0, g: 0, b: 0.10196079, a: 1}
+    enabled: 1
+  - original: {r: 0, g: 0, b: 0, a: 1}
+    replacement: {r: 0, g: 0, b: 0, a: 1}
+    enabled: 1
+  - original: {r: 0.24313727, g: 0.10196079, b: 0.30980393, a: 1}
+    replacement: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+    enabled: 1
+  - original: {r: 0.058823533, g: 0.03529412, b: 0.050980397, a: 1}
+    replacement: {r: 0.058823533, g: 0.03529412, b: 0.050980397, a: 1}
+    enabled: 1
+  - original: {r: 0.13333334, g: 0.09019608, b: 0.23137257, a: 1}
+    replacement: {r: 0.32704395, g: 0.32704395, b: 0.32704395, a: 1}
+    enabled: 1
 --- !u!1 &5243601704207905658
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 5243601704207905658}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0.1, y: 0.6, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,30 +228,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
+  m_ComponentVersion: 2
   m_LightType: 1
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.609
-  m_Color: {r: 0.63522005, g: 0, b: 0.6349487, a: 1}
-  m_Intensity: 3.38
+  m_FalloffIntensity: 0.7
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
-  m_LightVolumeIntensityEnabled: 0
+  m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 0000000061fca332dfeb71be
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
+  m_LightOrder: 666
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
+  m_NormalMapQuality: 1
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowsEnabled: 1
   m_ShadowIntensity: 1
+  m_ShadowSoftness: 0
+  m_ShadowSoftnessFalloffIntensity: 0.5
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.00085020065, y: -0.001349926, z: 0}
-    m_Extent: {x: 14.209351, y: 14.209049, z: 0}
+    m_Center: {x: -0.00034999847, y: 0.00040006638, z: 0}
+    m_Extent: {x: 9.00935, y: 9.0096, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -206,7 +261,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 13.71
+  m_ShapeLightFalloffSize: 8.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: 0.5, y: 0, z: 0}
@@ -253,9 +308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c2bd453b60ef248b9e683de252ebb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _light2D: {fileID: 1039315463631481724}
   _flickerSpeed: 1.5
-  _minIntensity: 2
-  _maxIntensity: 3
+  _minIntensity: -6
+  _maxIntensity: -5
 --- !u!1 &6304933797536515923
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +354,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0553cc09e039d5c48a953544b49db72e, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 0553cc09e039d5c48a953544b49db72e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -471,7 +528,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dcdbb9f2789af334cad9e0e52cb7e728, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: dcdbb9f2789af334cad9e0e52cb7e728, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.357
   m_Pitch: 1
@@ -482,9 +540,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 42
+  MaxDistance: 200
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -577,7 +635,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.33333334
       inSlope: 0
       outSlope: 0
       tangentMode: 0

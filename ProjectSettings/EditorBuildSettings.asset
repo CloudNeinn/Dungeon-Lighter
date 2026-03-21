@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestingScene 3.unity
     guid: 90fcf3a20e4b66a4fa46b702218949de
+  - enabled: 1
+    path: Assets/Scenes/AbyssScene.unity
+    guid: bf94f37ca19ac9b43b72170547f750c6
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

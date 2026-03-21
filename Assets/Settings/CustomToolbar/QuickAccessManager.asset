@@ -13,25 +13,27 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Player
+  - displayName: Parallax
+    scenePath: 
+  - displayName: Scripts
+    scenePath: 
+  - displayName: DivineBeing
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: InputManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Player
+  - displayName: Light 2D
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bar
+  - displayName: Sounds
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Canvas
+  - displayName: AttackSound
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: BarUI
+  - displayName: OminousSounds
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Book
+  - displayName: DivineBeing
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: PagePanel 2
+  - displayName: BackgroundMidLayer
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: PagePanel 1
+  - displayName: DivineBeing (1)
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: CurrencyUI
+  - displayName: DivineBeing
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
+  - displayName: DivineBeing
     scenePath: Assets/Scenes/Hub.unity
