@@ -10,9 +10,19 @@ public class Door : MonoBehaviour
     [SerializeField] private Vector3 _interactiovityOffset;
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private int _returnCurrency;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private bool _isAbyss;
+    [SerializeField] private float _encloseCooldownTimer;
+
+    void Start()
+    {
+        if(_animator == null) _animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
+        if(_isAbyss && _encloseCooldownTimer < 0) _animator.SetTrigger("Enclose");
+        else if(_isAbyss) _encloseCooldownTimer -= Time.deltaTime;
         if(PlayerController.Instance.use1Input && InRange()) EnterDungeon();
     }
 
@@ -26,6 +36,11 @@ public class Door : MonoBehaviour
         if (SceneLoading.Instance.currentSceneType != SceneLoading.SceneType.Level) SceneLoading.Instance.SetReturnDoor(this.transform.position);
         //else ShotManager.Instance.activeShot = ShotManager.Shots.None;
         SceneLoading.Instance.LoadScene(_sceneIndex);
+    }
+
+    public void RemoveDoor()
+    {
+        gameObject.SetActive(false);
     }
 
     bool InRange()

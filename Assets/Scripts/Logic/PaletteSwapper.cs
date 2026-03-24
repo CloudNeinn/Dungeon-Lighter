@@ -88,7 +88,7 @@ public class PaletteSwapper : MonoBehaviour
         mat.SetVectorArray(OriginalColorsID, _originals);
         mat.SetVectorArray(SwappedColorsID,  _replacements);
 
-        Debug.Log($"[PaletteSwapper] Applied {count} active swap(s) to '{mat.name}'.");
+        //Debug.Log($"[PaletteSwapper] Applied {count} active swap(s) to '{mat.name}'.");
     }
 
     public void AddSwap(Color original, Color replacement)
