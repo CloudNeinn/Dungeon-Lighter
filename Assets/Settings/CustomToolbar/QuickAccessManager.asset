@@ -13,73 +13,31 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: BlueTorch
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: 'JDSherbert - Minigame Music Pack [FREE]'
+  - displayName: MenuChange
     scenePath: 
-  - displayName: Audio
+  - displayName: Torch Animated
     scenePath: 
-  - displayName: Scripts
-    scenePath: 
-  - displayName: Resources
-    scenePath: 
-  - displayName: Prefabs
-    scenePath: 
-  - displayName: OpalStudio
-    scenePath: 
-  - displayName: Material
-    scenePath: 
-  - displayName: Fonts
-    scenePath: 
-  - displayName: Hurt-Damaged
-    scenePath: 
-  - displayName: 2D-Pixel-Art-Character-Template
-    scenePath: 
-  - displayName: Torch
-    scenePath: 
-  - displayName: Door Starting
-    scenePath: 
-  - displayName: Door
-    scenePath: 
-  - displayName: DivineBeing
-    scenePath: 
-  - displayName: Bartender
-    scenePath: 
-  - displayName: DialogueBubble
-    scenePath: 
-  - displayName: DataManager
-    scenePath: 
-  - displayName: CurrencyManager
-    scenePath: 
-  - displayName: SpikedBall
-    scenePath: 
-  - displayName: SpikedBall
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Anchor
+  - displayName: GameObject
     scenePath: Assets/Scenes/Hub.unity
   - displayName: BackgroundMidLayer
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ball
+  - displayName: Bartender
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: ActivationSound
+  - displayName: Bar
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ball
+  - displayName: torch_animation
+    scenePath: 
+  - displayName: Torch (1)
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: SpikedBall
+  - displayName: torch_animation_7
+    scenePath: 
+  - displayName: GameObject
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Chains
+  - displayName: Test
+    scenePath: 
+  - displayName: BackgroundMidLayer
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ball
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: ActivationSound
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Anchor
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ball
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: ActivationSound
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ball
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: SpikedBall
-    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Sprite-0001
+    scenePath: 
+  - displayName: Sprite-0001
+    scenePath: 
