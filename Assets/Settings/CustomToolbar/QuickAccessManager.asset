@@ -13,31 +13,25 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: MenuChange
+  - displayName: CoroutineUtils
     scenePath: 
-  - displayName: Torch Animated
+  - displayName: SplineVisualizer
     scenePath: 
-  - displayName: GameObject
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bartender
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bar
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: torch_animation
+  - displayName: SplineFollower
     scenePath: 
-  - displayName: Torch (1)
+  - displayName: SplineBehaviour
+    scenePath: 
+  - displayName: Editor
+    scenePath: 
+  - displayName: SplineBehaviourEditor
+    scenePath: 
+  - displayName: Example
+    scenePath: 
+  - displayName: Player
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: torch_animation_7
-    scenePath: 
-  - displayName: GameObject
+  - displayName: Light
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Test
-    scenePath: 
-  - displayName: BackgroundMidLayer
+  - displayName: Light
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Sprite-0001
-    scenePath: 
-  - displayName: Sprite-0001
-    scenePath: 
+  - displayName: Player
+    scenePath: Assets/Scenes/Hub.unity
