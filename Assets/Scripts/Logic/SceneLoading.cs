@@ -36,11 +36,13 @@ public class SceneLoading : MonoBehaviour
             Destroy(gameObject);
         }
         SceneManager.sceneLoaded += onSceneLoad;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= onSceneLoad;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         UnityEngine.Debug.Log("destroyed");
     }
 
@@ -49,7 +51,7 @@ public class SceneLoading : MonoBehaviour
         grids = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Grid").ToList();
     }
 
-    // May be useful in the  future
+    //May be useful in the  future
     // private void OnEnable()
     // {
     //     SceneManager.sceneLoaded += OnSceneLoaded;
@@ -60,9 +62,11 @@ public class SceneLoading : MonoBehaviour
     //     SceneManager.sceneLoaded -= OnSceneLoaded;
     // }
 
-    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    // {
-    // }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PlayerController.Instance.Respawn();
+        CameraController.Instance.SetConfiner();
+    }
 
     public void StartGame()
     {

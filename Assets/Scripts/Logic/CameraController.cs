@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     public static CameraController Instance;
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
     public CinemachineFramingTransposer transposer {get; private set;}
+    [SerializeField] private CinemachineConfiner2D _confiner;
     private float _startingScreenX;
 
     void Awake()
@@ -36,5 +37,11 @@ public class CameraController : MonoBehaviour
     public void setCameraScreenX(float screenX)
     {
         transposer.m_ScreenX = screenX;
+    }
+
+    public void SetConfiner()
+    {
+        if (CameraConfiner.Instance == null) return;
+        _confiner.m_BoundingShape2D = CameraConfiner.Instance.ReturnCollider();
     }
 }

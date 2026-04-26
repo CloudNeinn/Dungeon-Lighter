@@ -426,6 +426,13 @@ public class PlayerController : MonoBehaviour
         SceneLoading.Instance.ReloadScene();
     }
 
+    public void Respawn()
+    {
+        _isAlive = true;
+        _canMove = true;
+        _playerRigidbody.bodyType = RigidbodyType2D.Dynamic;
+    }
+
     public float GetFlickerSpeedModifier()
     {
         return _currentSpeed / _runSpeed;

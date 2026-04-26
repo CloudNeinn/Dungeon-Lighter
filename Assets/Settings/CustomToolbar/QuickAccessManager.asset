@@ -13,25 +13,27 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: CoroutineUtils
-    scenePath: 
-  - displayName: SplineVisualizer
-    scenePath: 
-  - displayName: SplineFollower
-    scenePath: 
-  - displayName: SplineBehaviour
-    scenePath: 
-  - displayName: Editor
-    scenePath: 
-  - displayName: SplineBehaviourEditor
-    scenePath: 
-  - displayName: Example
-    scenePath: 
-  - displayName: Player
+  - displayName: CM vcam1
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Main Camera
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Camera confinement
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Light
+  - displayName: Camera confinement
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Light
+  - displayName: Camera confinement
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Environment
+    scenePath: 
+  - displayName: Scripts
+    scenePath: 
+  - displayName: TestingScene 1
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Scenes
+    scenePath: 
+  - displayName: Camera confinement
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Main Camera
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: CM vcam1
+    scenePath: Assets/Scenes/PersistentObjects.unity
