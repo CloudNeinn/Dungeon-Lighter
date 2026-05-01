@@ -13,27 +13,27 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: CM vcam1
+  - displayName: Embers
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Main Camera
+  - displayName: Ember 3
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Camera confinement
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Camera confinement
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Camera confinement
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: Environment
-    scenePath: 
-  - displayName: Scripts
-    scenePath: 
-  - displayName: TestingScene 1
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: Scenes
-    scenePath: 
-  - displayName: Camera confinement
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Main Camera
+  - displayName: Ember 3
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: CM vcam1
+  - displayName: Ember 2
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Ember 1
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Ember 3
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Ember 2
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Ember 1
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Ember 3
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Ember 2
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Ember 1
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Embers
     scenePath: Assets/Scenes/PersistentObjects.unity

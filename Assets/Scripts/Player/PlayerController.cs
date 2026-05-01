@@ -116,6 +116,12 @@ public class PlayerController : MonoBehaviour
         set => _runSpeed = value;
     }
 
+    public int DoubleJumpCount
+    {
+        get => _doubleJumpCount;
+        set => _doubleJumpCount = value;
+    }
+
     public int TotalDoubleJumpCount
     {
         get => _totalDoubleJumpCount;
@@ -246,8 +252,11 @@ public class PlayerController : MonoBehaviour
             if (_playerRigidbody.linearVelocity.y > 0)
                 force -= _playerRigidbody.linearVelocity.y;
 
-            if (!_isGrounded && _jumpCoyoteTimeCounter <= 0) 
+            if (!_isGrounded && _jumpCoyoteTimeCounter <= 0)
+            {
                 --_doubleJumpCount;
+                EmberOvalOrbit.Instance.ConsumeEmber();
+            }
 
             _playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, force);
             PlayerAudio.Instance.PlayJumpSound();

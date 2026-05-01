@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Trap
   - Door
+  - EmberBackTrigger
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   - Player
   - Wall
   - Background
-  - 
-  - 
+  - EmberBackTrigger
+  - Ember
   - 
   - 
   - 
