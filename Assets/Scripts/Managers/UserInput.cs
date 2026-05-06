@@ -11,9 +11,11 @@ public class UserInput : MonoBehaviour
 
     [field: SerializeField] public Vector2 moveInput { get; private set; }
     [field: SerializeField] public bool jumpInput { get; private set; }
+    [field: SerializeField] public bool jumpReleased { get; private set; }
     [field: SerializeField] public bool dashInput { get; private set; }
     [field: SerializeField] public bool runInput { get; private set; }
     [field: SerializeField] public bool use1Input { get; private set; }
+    [field: SerializeField] public bool use1Pressed { get; private set; }
     [field: SerializeField] public bool use2Input { get; private set; }
     [field: SerializeField] public bool menuToggleInput { get; private set; }
     [field: SerializeField] public bool activeItem1Input { get; private set; }
@@ -59,9 +61,11 @@ public class UserInput : MonoBehaviour
     {
         moveInput = moveAction.ReadValue<Vector2>();
         jumpInput = jumpAction.WasPressedThisFrame();
+        jumpReleased = jumpAction.WasReleasedThisFrame();
         dashInput = dashAction.WasPressedThisFrame();
         runInput = runAction.WasPressedThisFrame();
         use1Input = use1Action.WasPressedThisFrame();
+        use1Pressed = use1Action.IsPressed();
         use2Input = use2Action.WasPressedThisFrame();
         menuToggleInput = menuToggleAction.WasPressedThisFrame();
         activeItem1Input = activeItem1Action.WasPressedThisFrame();

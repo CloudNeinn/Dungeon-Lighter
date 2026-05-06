@@ -23,7 +23,7 @@ public class Door : MonoBehaviour
     {
         if(_isAbyss && _encloseCooldownTimer < 0) _animator.SetTrigger("Enclose");
         else if(_isAbyss) _encloseCooldownTimer -= Time.deltaTime;
-        if(PlayerController.Instance.use1Input && InRange()) EnterDungeon();
+        if(UserInput.Instance.use1Input && InRange()) EnterDungeon();
     }
 
     public void EnterDungeon()

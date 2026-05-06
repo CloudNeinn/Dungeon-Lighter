@@ -54,24 +54,24 @@ public class checkpoint : MonoBehaviour
         && PlayerController.Instance.transform.position.y <= transform.position.y + 4 
         && PlayerController.Instance.transform.position.y >= transform.position.y - 4)
         {
-            if(PlayerController.Instance.use2Input && !menuOpen 
+            if(UserInput.Instance.use2Input && !menuOpen 
             /*&& isActivated*/ && Time.timeScale != 0) // Input.GetKeyDown(KeyCode.F)
             {        
                 menuOpen = true;
                 checkpMenu.SetActive(menuOpen);
             }
-            else if(PlayerController.Instance.use2Input && menuOpen) // Input.GetKeyDown(KeyCode.F)
+            else if(UserInput.Instance.use2Input && menuOpen) // Input.GetKeyDown(KeyCode.F)
             {
                 menuOpen = false;
                 checkpMenu.SetActive(menuOpen);
             }
             //show e popup icon
-            if(checkpointIsSaved && PlayerController.Instance.use1Input && !isHealed) // Input.GetKeyDown(KeyCode.E)
+            if(checkpointIsSaved && UserInput.Instance.use1Input && !isHealed) // Input.GetKeyDown(KeyCode.E)
             {
                 gameUI.Respawn();
                 isHealed = true;
             }
-            else if(PlayerController.Instance.use1Input && !checkpointIsSaved) // Input.GetKeyDown(KeyCode.E)
+            else if(UserInput.Instance.use1Input && !checkpointIsSaved) // Input.GetKeyDown(KeyCode.E)
             {
                 //save checkpoint
                 CheckpointManager.Instance.updateCheckpoint();

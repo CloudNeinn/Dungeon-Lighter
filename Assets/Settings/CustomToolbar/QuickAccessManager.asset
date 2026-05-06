@@ -13,27 +13,27 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Embers
+  - displayName: Torch (6)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BackgroundMidLayer
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Player
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 3
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 3
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 2
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 1
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 3
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 2
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 1
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 3
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 2
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Ember 1
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Embers
-    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Torch (6)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Torch (1)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Flare
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Light 2D
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: OrbitObject
+    scenePath: Assets/Prefabs/Environment/Torch.prefab
+  - displayName: Torch
+    scenePath: Assets/Prefabs/Environment/Torch.prefab
+  - displayName: Torch (2)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Player
+    scenePath: DontDestroyOnLoad
+  - displayName: OrbitObject
+    scenePath: Assets/Scenes/Hub.unity

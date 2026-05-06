@@ -22,7 +22,7 @@ public class InteractiveUIController : MonoBehaviour
     void Update()
     {
         _UI.SetActive(_UIActive);
-        if (PlayerController.Instance.use1Input && InRange())
+        if (UserInput.Instance.use1Input && InRange())
         {
             _UIActive = !_UIActive;
             CurrencyManager.Instance.SetCurrencyUI();

@@ -73,7 +73,7 @@ public class DialogueBubble : MonoBehaviour
         {
             if (inInteractivityRadius() && isLookingForward())
             {
-                if (PlayerController.Instance.use2Input && !_talking)
+                if (UserInput.Instance.use2Input && !_talking)
                 {
                     InteractionIndicator(false);
                     if(_currentDialoguePart >= _dialogueLength) 
@@ -85,7 +85,7 @@ public class DialogueBubble : MonoBehaviour
                     }
                     else _typingCoroutine = StartCoroutine(TypeText(_currentDialogue.dialogue[_currentDialoguePart++].dialogueText));
                 }
-                else if(PlayerController.Instance.use2Input)
+                else if(UserInput.Instance.use2Input)
                 {
                     if (_typingCoroutine != null)
                     {

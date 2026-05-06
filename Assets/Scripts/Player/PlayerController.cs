@@ -1,4 +1,3 @@
-//using System.Numerics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -95,19 +94,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask wallLayer;
     #endregion
 
-    #region User Inputs
-    [field: Header ("Inputs")]    
-    [field: SerializeField] public Vector2 moveInput {get; private set;}
-    public bool jumpInput {get; private set;}
-    public bool dashInput {get; private set;}
-    public bool runInput {get; private set;}
-    public bool use1Input {get; private set;}
-    public bool use2Input {get; private set;}
-    public bool menuToggleInput {get; private set;}
-    public bool activeItem1Input {get; private set;}
-    public bool mapInput {get; private set;}
-    #endregion
-
     #region GET/SET
     
     public float RunSpeed
@@ -156,26 +142,24 @@ public class PlayerController : MonoBehaviour
 
 
     void Update()
-    {
-        GetInput();
-        
+    {        
         if(_isAlive) Rotate();
 
         _isGrounded = IsGrounded();
         _isWalled = IsWalled();
         _isMoving = IsMoving();
 
-        if (_isWalled && Mathf.Abs(moveInput.x) > 0 && _canMove)
+        if (_isWalled && Mathf.Abs(UserInput.Instance.moveInput.x) > 0 && _canMove)
         {
             _isWallSliding = true;
             _playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
         }
         else _isWallSliding = false;
 
-        if (UserInput.Instance.jumpAction.WasPressedThisFrame())
+        if (UserInput.Instance.jumpInput)
             _jumpPressed = true;
         
-        if (UserInput.Instance.jumpAction.WasReleasedThisFrame())
+        if (UserInput.Instance.jumpReleased)
             _jumpReleased = true;
     }
 
@@ -200,7 +184,7 @@ public class PlayerController : MonoBehaviour
         if(_isWallSliding) WallSlide();
 
         if(_canMove && !_isWallSliding) 
-            _playerRigidbody.linearVelocity = new Vector2(moveInput.x * _currentSpeed, _playerRigidbody.linearVelocity.y);
+            _playerRigidbody.linearVelocity = new Vector2(UserInput.Instance.moveInput.x * _currentSpeed, _playerRigidbody.linearVelocity.y);
 
         _jumpPressed = false;
         _jumpReleased = false;
@@ -344,8 +328,8 @@ public class PlayerController : MonoBehaviour
     {
         _movementVector = new Vector2(_playerRigidbody.linearVelocity.x, _playerRigidbody.linearVelocity.y);
         if(!_canMove && Mathf.Abs(_playerRigidbody.linearVelocity.x) >= 0.1f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(_playerRigidbody.linearVelocity.x), transform.localScale.y);
-        else if(moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
-        else if(moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        else if(UserInput.Instance.moveInput.x < 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
+        else if(UserInput.Instance.moveInput.x > 0) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
     }
 
     public void WallSlide()
@@ -375,7 +359,7 @@ public class PlayerController : MonoBehaviour
 
     private bool MovingWithoutInput()
     {
-        if(IsMoving() && IsGrounded() && Mathf.Abs(moveInput.x) == 0) return true;
+        if(IsMoving() && IsGrounded() && Mathf.Abs(UserInput.Instance.moveInput.x) == 0) return true;
         else return false;
     }
 
@@ -395,19 +379,6 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.color = Color.purple;
         Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(_ledgeDetectionBoxOffset.x * transform.localScale.x, _ledgeDetectionBoxOffset.y), _ledgeDetectionBoxSize);
-    }
-
-    void GetInput()
-    {
-        moveInput = UserInput.Instance.moveInput;
-        jumpInput = UserInput.Instance.jumpInput;
-        dashInput = UserInput.Instance.dashInput;
-        runInput = UserInput.Instance.runInput;
-        use1Input = UserInput.Instance.use1Input;
-        use2Input = UserInput.Instance.use2Input;
-        menuToggleInput = UserInput.Instance.menuToggleInput; 
-        activeItem1Input = UserInput.Instance.activeItem1Input;
-        mapInput = UserInput.Instance.mapInput;
     }
     
     public bool GetIsAlive()
@@ -445,5 +416,11 @@ public class PlayerController : MonoBehaviour
     public float GetFlickerSpeedModifier()
     {
         return _currentSpeed / _runSpeed;
+    }
+    
+    public void SetMoveCooldown(float time)
+    {
+        _canMove = false;
+        _moveCooldownTimeCounter = time;
     }
 }
