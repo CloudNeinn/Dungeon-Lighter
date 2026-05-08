@@ -62,6 +62,7 @@ MonoBehaviour:
   _orbitRotationSpeed: 4
   _faceMovement: 0
   _emberGap: 0
+  <emberResetTime>k__BackingField: 0
   _drawGizmos: 1
   _gizmoSegments: 32
   _gizmoColor: {r: 1, g: 0.5, b: 0.1, a: 0.9}
@@ -379,7 +380,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b669886be618f0d4388b0a31c73039ba, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -456,7 +457,10 @@ MonoBehaviour:
   _isFalling: 0
   _isAtApex: 0
   _isAlive: 0
+  isFlare: 0
   _movementVector: {x: 0, y: 0}
+  _horizontalAcceleration: 500
+  _horizontalDeceleration: 60
   _walkSpeed: 12
   _runSpeed: 18
   _airSpeed: 16
@@ -468,16 +472,16 @@ MonoBehaviour:
   _targetSpeed: 0
   _speedDiff: 0
   _edgeMoveAmount: 10
-  _ledgeMoveAmount: 0
-  _jumpForce: 19
+  _ledgeMoveAmount: 10
+  _jumpForce: 100
   _jumpCoyoteTime: 0.2
   _jumpCoyoteTimeCounter: 0.2
   _jumpBufferTime: 0.2
   _jumpBufferTimeCounter: 0
   _doubleJumpCount: 1
   _totalDoubleJumpCount: 1
-  _wallJumpStrengthX: -10
-  _wallJumpStrengthY: 18
+  _wallJumpStrengthX: 40
+  _wallJumpStrengthY: 120
   _jumpFallForce: 12
   _jumpApexThreshold: 0.2
   _apexSpeedMultiplier: 1.2
@@ -496,14 +500,13 @@ MonoBehaviour:
   _leftEdgeDetectionBoxOffset: {x: -0.5, y: 2}
   _rightEdgeDetectionBoxOffset: {x: 0.35, y: 2}
   _ledgeDetectionBoxSize: {x: 0.2, y: 0.5}
-  _ledgeDetectionBoxOffset: {x: 0.7, y: -1.8}
+  _ledgeDetectionBoxOffset: {x: 0.7, y: -1.7}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   wallLayer:
     serializedVersion: 2
     m_Bits: 1032
-  <moveInput>k__BackingField: {x: 0, y: 0}
 --- !u!114 &2989726128419885480
 MonoBehaviour:
   m_ObjectHideFlags: 0

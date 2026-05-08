@@ -411,8 +411,7 @@ MonoBehaviour:
   _duration: 0.4
   _delay: 0.1
   _currentDialogue: {fileID: 0}
-  _dialogueLength: 0
-  _currentDialoguePart: 0
+  _npcName: 0
 --- !u!1 &4934862705621897340
 GameObject:
   m_ObjectHideFlags: 0

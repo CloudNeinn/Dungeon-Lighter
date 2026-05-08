@@ -11,6 +11,7 @@ public class Torch : MonoBehaviour
     [SerializeField] private float _torchLightRadius;
     [SerializeField] private bool _isLit;
     [SerializeField] private bool _isFlare;
+    [SerializeField] private bool _canFlare;
     [SerializeField] private float _timeToFlare;
     [SerializeField] private float _timeToFlareCounter;
     [SerializeField] private float _flareFlightRadius;
@@ -18,8 +19,10 @@ public class Torch : MonoBehaviour
     [SerializeField] private GameObject _flare;
     [SerializeField] private float _flareOutForce;
     [SerializeField] private float _flareCooldownTime;
+    [SerializeField] private float _flareCooldownTimeCounter;
     [SerializeField] private float _flareDrag;
-    [SerializeField] private float _flareDragDuration;
+    [SerializeField] private float _flareDuration;
+    [SerializeField] private float _gravityWhileFlare;
 
 
     void Start()
@@ -36,17 +39,20 @@ public class Torch : MonoBehaviour
         {
             LightUpTorch();
         }
+
         if(playerInRange() && UserInput.Instance.use1Pressed && !_isFlare)
         {
             _timeToFlareCounter -= Time.deltaTime;
         }
         else ResetTime();
 
-        if(_timeToFlareCounter <= 0)
+        if((_timeToFlareCounter <= 0 || UserInput.Instance.use2Input && playerInRange()) && _flareCooldownTimeCounter <= 0)
         {
             _isFlare = true;
             ResetTime();
         }
+        else if(_flareCooldownTimeCounter > 0) _flareCooldownTimeCounter -= Time.deltaTime;
+
         
         if(_isFlare && (UserInput.Instance.use1Input || UserInput.Instance.jumpInput)) 
         {
@@ -65,6 +71,8 @@ public class Torch : MonoBehaviour
 
     void FlareIn()
     {
+        CameraController.Instance.ChangeFollowObject(this.gameObject);
+        PlayerController.Instance.Velocity = Vector2.zero;
         PlayerController.Instance.gameObject.SetActive(false);
         _flare.SetActive(true);
         _flare.transform.RotateAround(transform.position, Vector3.forward, _rotationSpeed * Time.deltaTime);
@@ -72,12 +80,15 @@ public class Torch : MonoBehaviour
 
     void FlareOut()
     {
+        CameraController.Instance.ChangeFollowObject(PlayerController.Instance.gameObject);
+        _flareCooldownTimeCounter = _flareCooldownTime;
         PlayerController.Instance.transform.position = _flare.transform.position;
         _flare.SetActive(false);
         PlayerController.Instance.gameObject.SetActive(true);
         PlayerController.Instance.PlayerRigidbody.AddForce(GetFlareDirection() * _flareOutForce, ForceMode2D.Impulse);
-        PlayerController.Instance.SetMoveCooldown(_flareCooldownTime);
-        StartCoroutine(FlareDrag());
+        //PlayerController.Instance.SetMoveCooldown(_flareCooldownTime);
+        
+        StartCoroutine(FlareDuration());
     }
 
     Vector2 GetFlareDirection()
@@ -97,12 +108,17 @@ public class Torch : MonoBehaviour
         return Physics2D.OverlapCircle((Vector2)transform.position, _torchLightRadius, _playerLayer);
     }
 
-    IEnumerator FlareDrag()
+    IEnumerator FlareDuration()
     {
+        PlayerController.Instance.isFlare = true;
+        float originalGravity = PlayerController.Instance.GravityScale;
+        PlayerController.Instance.GravityScale = _gravityWhileFlare;
         float originalDrag = PlayerController.Instance.PlayerRigidbody.linearDamping;
         PlayerController.Instance.PlayerRigidbody.linearDamping = _flareDrag; // e.g. 5f
-        yield return new WaitForSeconds(_flareDragDuration); // e.g. 0.2f
+        yield return new WaitForSeconds(_flareDuration); // e.g. 0.2f
         PlayerController.Instance.PlayerRigidbody.linearDamping = originalDrag;
+        PlayerController.Instance.GravityScale = originalGravity;
+        PlayerController.Instance.isFlare = false;
     }
 
     void OnDrawGizmos()
@@ -112,5 +128,8 @@ public class Torch : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere((Vector2)transform.position, _flareFlightRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, GetFlareDirection() * _flareFlightRadius);
     }
 }

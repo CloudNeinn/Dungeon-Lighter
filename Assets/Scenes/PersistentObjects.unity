@@ -1064,20 +1064,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1462144532024263905, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
-      propertyPath: _ledgeMoveAmount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1462144532024263905, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
       propertyPath: _apexGravityScale
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1462144532024263905, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
       propertyPath: _afterApexGravityModifier
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1462144532024263905, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
-      propertyPath: _ledgeDetectionBoxOffset.y
-      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 1462144532024263905, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
       propertyPath: _backEdgeDetectionBoxOffset.y
@@ -1090,6 +1082,18 @@ PrefabInstance:
     - target: {fileID: 1706112120261634656, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243905475163264413, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243905475163264413, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243905475163264413, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2243905475163264413, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1129,6 +1133,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2243905475163264413, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243905475163264413, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3511174890935854299, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}

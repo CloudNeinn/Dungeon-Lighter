@@ -176,12 +176,18 @@ MonoBehaviour:
   _torchLightRadius: 4
   _isLit: 0
   _isFlare: 0
+  _canFlare: 0
   _timeToFlare: 0.2
   _timeToFlareCounter: 0
   _flareFlightRadius: 2
-  _rotationSpeed: 150
+  _rotationSpeed: 200
   _flare: {fileID: 7268044329596429525}
-  _flareOutForce: 200
+  _flareOutForce: 300
+  _flareCooldownTime: 2
+  _flareCooldownTimeCounter: 0
+  _flareDrag: 4
+  _flareDuration: 0.3
+  _gravityWhileFlare: 0.1
 --- !u!1 &7268044329596429525
 GameObject:
   m_ObjectHideFlags: 0

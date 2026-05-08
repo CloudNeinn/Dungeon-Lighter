@@ -23,11 +23,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _isFalling;
     [SerializeField] private bool _isAtApex;
     [SerializeField] private bool _isAlive;
+    [SerializeField] public bool isFlare;
     #endregion
 
     #region Movement
     [Header("Movement Parameters")]
     [SerializeField] private Vector2 _movementVector;
+    [SerializeField] private float _horizontalAcceleration;
+    [SerializeField] private float _horizontalDeceleration;
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _airSpeed;
@@ -101,6 +104,11 @@ public class PlayerController : MonoBehaviour
         get => _runSpeed;
         set => _runSpeed = value;
     }
+    public Vector2 Velocity
+    {
+        get => _playerRigidbody.linearVelocity;
+        set => _playerRigidbody.linearVelocity = value;
+    }
 
     public int DoubleJumpCount
     {
@@ -142,17 +150,17 @@ public class PlayerController : MonoBehaviour
 
 
     void Update()
-    {        
+    {
         if(_isAlive) Rotate();
 
         _isGrounded = IsGrounded();
         _isWalled = IsWalled();
         _isMoving = IsMoving();
 
-        if (_isWalled && Mathf.Abs(UserInput.Instance.moveInput.x) > 0 && _canMove)
+        if (_isWalled && !_isGrounded && Mathf.Abs(UserInput.Instance.moveInput.x) > 0 && _canMove)
         {
             _isWallSliding = true;
-            _playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
+            //_playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
         }
         else _isWallSliding = false;
 
@@ -175,7 +183,7 @@ public class PlayerController : MonoBehaviour
         if(_canMove)
         {
             Movement();
-            Jump();
+            if(!isFlare) Jump();
         }
 
         if(!_isWallSliding) ClampFallSpeed();
@@ -183,8 +191,26 @@ public class PlayerController : MonoBehaviour
 
         if(_isWallSliding) WallSlide();
 
-        if(_canMove && !_isWallSliding) 
-            _playerRigidbody.linearVelocity = new Vector2(UserInput.Instance.moveInput.x * _currentSpeed, _playerRigidbody.linearVelocity.y);
+        if (_canMove && !_isWallSliding)
+        {
+            if (Mathf.Abs(_playerRigidbody.linearVelocity.x) > _targetSpeed && _isGrounded)
+            {
+                _playerRigidbody.AddForce(Vector2.right * 
+                    -(_playerRigidbody.linearVelocity.x - Mathf.Sign(_playerRigidbody.linearVelocity.x) 
+                    * _targetSpeed) * _horizontalDeceleration, ForceMode2D.Force);
+            }
+            else if (Mathf.Abs(_playerRigidbody.linearVelocity.x) < _targetSpeed)
+            {
+                _playerRigidbody.AddForce(Vector2.right * UserInput.Instance.moveInput.x * _horizontalAcceleration, ForceMode2D.Force);
+            }
+        }
+
+        if (Mathf.Sign(UserInput.Instance.moveInput.x) != Mathf.Sign(_playerRigidbody.linearVelocity.x) 
+            && _targetSpeed != 0 && !_isWalled && _canMove && !isFlare)
+        {
+            _playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
+        }
+            
 
         _jumpPressed = false;
         _jumpReleased = false;
@@ -194,12 +220,13 @@ public class PlayerController : MonoBehaviour
     {
         if(_isGrounded)
         {
-            if(UserInput.Instance.runAction.IsPressed()) _targetSpeed = _runSpeed;
-            else if(!UserInput.Instance.runAction.IsPressed()) _targetSpeed = _walkSpeed;
+            if(UserInput.Instance.moveInput.x == 0) _targetSpeed = 0;
+            else if(UserInput.Instance.runAction.IsPressed()) _targetSpeed = _runSpeed;
+            else _targetSpeed = _walkSpeed;
         }
         else if(!_isGrounded && !_isWalled)
         {
-            if(_isAtApex) _currentSpeed = _airSpeed * _apexSpeedMultiplier; 
+            if(_isAtApex) _targetSpeed = _airSpeed * _apexSpeedMultiplier; 
             else _targetSpeed = _airSpeed; 
         }
         else if(_isWalled)
@@ -233,16 +260,19 @@ public class PlayerController : MonoBehaviour
         {
             _jumpBufferTimeCounter = 0;
 
-            if (_playerRigidbody.linearVelocity.y > 0)
-                force -= _playerRigidbody.linearVelocity.y;
-
             if (!_isGrounded && _jumpCoyoteTimeCounter <= 0)
             {
                 --_doubleJumpCount;
+                // if decide to not stack speed
+                //_playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, 0); 
+
+                // magic number which is players mass
+                force = _jumpForce - _playerRigidbody.linearVelocity.y * 5;
                 EmberOvalOrbit.Instance.ConsumeEmber();
             }
 
-            _playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, force);
+            //_playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, force); jump force = 19 
+            _playerRigidbody.AddForce(force * Vector2.up, ForceMode2D.Impulse);
             PlayerAudio.Instance.PlayJumpSound();
         }
         else if(_jumpBufferTimeCounter > 0) _jumpBufferTimeCounter -= Time.fixedDeltaTime;
@@ -252,12 +282,20 @@ public class PlayerController : MonoBehaviour
 
         if (_jumpReleased && _playerRigidbody.linearVelocity.y > 0 && _doubleJumpCount == _totalDoubleJumpCount) 
         {
-            _playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, _playerRigidbody.linearVelocity.y * 0.5f);
+            _playerRigidbody.AddForce(0.5f * force * -Vector2.up, ForceMode2D.Impulse);
+            //_playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, _playerRigidbody.linearVelocity.y * 0.5f);
         }
 
-        if(_isWallSliding && _jumpPressed)
+        if(_isWallSliding && _jumpPressed)// && !_wallJumped)
         {
-            _playerRigidbody.linearVelocity = new Vector2(Mathf.Sign(transform.localScale.x) * _wallJumpStrengthX, _wallJumpStrengthY);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            //_playerRigidbody.linearVelocity = new Vector2(Mathf.Sign(transform.localScale.x) * _wallJumpStrengthX, _wallJumpStrengthY);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            //===
+            // questionable idk if i should leave it like this
+            _playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, 0);
+            //===
+            _playerRigidbody.AddForce(
+                new Vector2(Mathf.Sign(transform.localScale.x) * -_wallJumpStrengthX, _wallJumpStrengthY), 
+                ForceMode2D.Impulse);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             _canMove = false;
             _moveCooldownTimeCounter = _moveCooldownTime;
             _isWallSliding = false;
