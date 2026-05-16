@@ -162,6 +162,7 @@ MonoBehaviour:
   _animator: {fileID: 3951912627032822257}
   _isAbyss: 0
   _encloseCooldownTimer: 0
+  _levelName: Home...
 --- !u!95 &3951912627032822257
 Animator:
   serializedVersion: 7

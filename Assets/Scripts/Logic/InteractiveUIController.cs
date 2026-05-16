@@ -28,7 +28,7 @@ public class InteractiveUIController : MonoBehaviour
             CurrencyManager.Instance.SetCurrencyUI();
             if (_noteUI != null) _noteUI.LoadNoteText();
         }
-        if (_UIActive && (!InRange() || Mathf.Abs(PlayerController.Instance.PlayerRigidbody.linearVelocity.x) > 0)) _UIActive = false;
+        if (_UIActive && (!InRange() || Mathf.Abs(PlayerController.Instance.PlayerRigidbody.linearVelocity.x) > 5f)) _UIActive = false;
         if (_UIActive && CameraController.Instance.transposer.m_ScreenX == CameraController.Instance.getCameraScreenX())
         {
             CameraController.Instance.setCameraScreenX(_screenShiftX);

@@ -13,6 +13,7 @@ public class Door : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private bool _isAbyss;
     [SerializeField] private float _encloseCooldownTimer;
+    [SerializeField] private string _levelName;
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class Door : MonoBehaviour
         if (SceneLoading.Instance.currentSceneType != SceneLoading.SceneType.Level) SceneLoading.Instance.SetReturnDoor(this.transform.position);
         //else ShotManager.Instance.activeShot = ShotManager.Shots.None;
         SceneLoading.Instance.LoadScene(_sceneIndex);
+        SceneLoading.Instance.SetLevelName(_levelName);
     }
 
     public void RemoveDoor()

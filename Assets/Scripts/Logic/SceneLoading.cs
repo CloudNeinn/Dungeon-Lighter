@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using Cinemachine;
 using System.Diagnostics;
-
+using TMPro;
 public class SceneLoading : MonoBehaviour
 {
     public enum SceneType 
@@ -24,6 +24,9 @@ public class SceneLoading : MonoBehaviour
     [SerializeField] private Vector3 _returnDoorPosition;
     [SerializeField] private Animator _loadingScreenAnimator;
     [SerializeField] private GameObject _loadingScreen;
+    [SerializeField] private TextMeshProUGUI _levelNameText;
+    [SerializeField] private RectTransform _text;
+    private Vector3 _textStartWorldPosition;
     private bool _closeAnimationFinished;
     void Awake()
     {
@@ -38,7 +41,7 @@ public class SceneLoading : MonoBehaviour
         SceneManager.sceneLoaded += onSceneLoad;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
+    
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= onSceneLoad;
@@ -48,6 +51,7 @@ public class SceneLoading : MonoBehaviour
 
     void Start()
     {
+        _textStartWorldPosition = _text.position;
         grids = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Grid").ToList();
     }
 
@@ -61,6 +65,11 @@ public class SceneLoading : MonoBehaviour
     // {
     //     SceneManager.sceneLoaded -= OnSceneLoaded;
     // }
+
+    void LateUpdate()
+    {
+        _text.position = _textStartWorldPosition;
+    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -79,6 +88,12 @@ public class SceneLoading : MonoBehaviour
         StartCoroutine(LoadSceneAsync(sceneID, isAdditive));
     }
 
+    public void SetLevelName(string name)
+    {
+        _levelNameText.text = name;
+    }
+
+
     public void ReloadScene()
     {
         LoadScene(GetCurrentSceneID());
@@ -91,6 +106,7 @@ public class SceneLoading : MonoBehaviour
 
     IEnumerator LoadSceneAsync(int sceneID, bool isAdditive)
     {
+        if(sceneID == 1) SetLevelName("Home...");
         _loadingScreen.SetActive(true);
         _closeAnimationFinished = false;
         _loadingScreenAnimator.SetTrigger("Close");

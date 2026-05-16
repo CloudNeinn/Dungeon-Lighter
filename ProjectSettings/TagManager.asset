@@ -7,6 +7,7 @@ TagManager:
   - Trap
   - Door
   - EmberBackTrigger
+  - Chains
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - Background
   - EmberBackTrigger
   - Ember
-  - 
-  - 
+  - Chains
+  - LethalTrap
   - 
   - 
   - 
@@ -55,6 +56,9 @@ TagManager:
     locked: 0
   - name: DivineBeing
     uniqueID: 979262397
+    locked: 0
+  - name: Ground
+    uniqueID: 106934449
     locked: 0
   m_RenderingLayers:
   - Default

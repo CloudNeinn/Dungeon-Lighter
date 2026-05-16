@@ -13,27 +13,49 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
+  - displayName: FrogLight
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: LookAtObject
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: LookAtObject
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: LookAtObject
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: LookAtObject
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: LookAtObject
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: LookAtObjects
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Frog
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: OneWayPlatforms
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: FireTrap (4)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: ConveyorBelt
+    scenePath: 
+  - displayName: Traps
+    scenePath: 
+  - displayName: Prefabs
+    scenePath: 
   - displayName: Player
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Bartender
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
-    scenePath: DontDestroyOnLoad
-  - displayName: BubbleBackground
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BubbleText
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Canvas
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: DialogueBubble
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bartender
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bar
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Player
+  - displayName: GameObject
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Player
-    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Wall
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Ground
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: ConveyorBelt
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BackgroundMidLayer
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: ConveyorBelt
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BackgroundMidLayer
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: GameObject (1)
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BackgroundMidLayer
+    scenePath: Assets/Scenes/Hub.unity

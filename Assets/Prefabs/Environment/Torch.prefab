@@ -176,7 +176,7 @@ MonoBehaviour:
   _torchLightRadius: 4
   _isLit: 0
   _isFlare: 0
-  _canFlare: 0
+  _flareable: 0
   _timeToFlare: 0.2
   _timeToFlareCounter: 0
   _flareFlightRadius: 2
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Intensity: 4.96
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 0000000061fca332dfeb71be
+  m_ApplyToSortingLayers: 0000000061fca332dfeb71beb1b05f06
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 185

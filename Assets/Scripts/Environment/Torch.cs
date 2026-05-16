@@ -11,7 +11,7 @@ public class Torch : MonoBehaviour
     [SerializeField] private float _torchLightRadius;
     [SerializeField] private bool _isLit;
     [SerializeField] private bool _isFlare;
-    [SerializeField] private bool _canFlare;
+    [SerializeField] private bool _flareable;
     [SerializeField] private float _timeToFlare;
     [SerializeField] private float _timeToFlareCounter;
     [SerializeField] private float _flareFlightRadius;

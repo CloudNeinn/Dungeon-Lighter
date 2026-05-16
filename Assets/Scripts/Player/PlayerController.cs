@@ -169,6 +169,9 @@ public class PlayerController : MonoBehaviour
         
         if (UserInput.Instance.jumpReleased)
             _jumpReleased = true;
+            
+        if (Mathf.Abs(_playerRigidbody.linearVelocity.x) < 0.08f && UserInput.Instance.moveInput.x == 0)
+            _playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
     }
 
     void FixedUpdate()
@@ -426,7 +429,7 @@ public class PlayerController : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Trap")
+        if (collision.gameObject.tag == "LethalTrap")
         {
             Debug.Log("Player has collided with an enemy.");
             Death();
