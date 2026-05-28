@@ -7,9 +7,10 @@ public class ConveyorBelt : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        Rigidbody2D rb = collision.rigidbody;
+        if (rb != null)
         {
-            PlayerController.Instance.PlayerRigidbody.AddForce(_moveForce * _direction * Vector2.right, ForceMode2D.Force);
+            rb.AddForce(_moveForce * _direction * Vector2.right, ForceMode2D.Force);
         }
     }
 }

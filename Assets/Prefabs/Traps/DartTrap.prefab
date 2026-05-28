@@ -107,8 +107,7 @@ MonoBehaviour:
   _projectile: {fileID: 1041722792045646195, guid: f245d9ba577001f44a40635de32b1004, type: 3}
   _trigger: {fileID: 0}
   _projectileSpeed: 40
-  _onTimer: 1
-  _timer: 0
+  _shootDelayTimer: 1
   _Vertical: 0
   _shootDirection: {x: 0, y: 0}
   _playerLayer:

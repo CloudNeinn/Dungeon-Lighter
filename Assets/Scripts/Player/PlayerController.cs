@@ -429,9 +429,18 @@ public class PlayerController : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "LethalTrap")
+        if (collision.gameObject.CompareTag("LethalTrap"))
         {
-            Debug.Log("Player has collided with an enemy.");
+            Debug.Log("Player has collided with a lethal trap.");
+            Death();
+        }
+    }
+    
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("LethalTrap"))
+        {
+            Debug.Log("Player has triggered with a lethal trap.");
             Death();
         }
     }
