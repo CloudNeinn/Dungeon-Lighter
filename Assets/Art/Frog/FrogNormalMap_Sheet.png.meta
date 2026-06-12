@@ -1,0 +1,1261 @@
+fileFormatVersion: 2
+guid: 1e28b77a298fb3f4c8f424a3588340ef
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6365840706676139584
+    second: FrogNormalMap_Sheet_0
+  - first:
+      213: -1850312929862257032
+    second: FrogNormalMap_Sheet_1
+  - first:
+      213: 8818085106602548637
+    second: FrogNormalMap_Sheet_2
+  - first:
+      213: 8823223656864787092
+    second: FrogNormalMap_Sheet_3
+  - first:
+      213: -8291048417557371809
+    second: FrogNormalMap_Sheet_4
+  - first:
+      213: -5127121368295998959
+    second: FrogNormalMap_Sheet_5
+  - first:
+      213: -6889431519127889059
+    second: FrogNormalMap_Sheet_6
+  - first:
+      213: 4118279258536287158
+    second: FrogNormalMap_Sheet_7
+  - first:
+      213: 5825361796758007659
+    second: FrogNormalMap_Sheet_8
+  - first:
+      213: 732211894309390755
+    second: FrogNormalMap_Sheet_9
+  - first:
+      213: -8462144291882310642
+    second: FrogNormalMap_Sheet_10
+  - first:
+      213: -1465103811614613815
+    second: FrogNormalMap_Sheet_11
+  - first:
+      213: -8886177839519672265
+    second: FrogNormalMap_Sheet_12
+  - first:
+      213: 1560354111043530801
+    second: FrogNormalMap_Sheet_13
+  - first:
+      213: -4121316036808267027
+    second: FrogNormalMap_Sheet_14
+  - first:
+      213: 2977173187440396074
+    second: FrogNormalMap_Sheet_15
+  - first:
+      213: 4260012458170222679
+    second: FrogNormalMap_Sheet_16
+  - first:
+      213: -5815790914167296876
+    second: FrogNormalMap_Sheet_17
+  - first:
+      213: -7962051398403084532
+    second: FrogNormalMap_Sheet_18
+  - first:
+      213: 8200970047200419805
+    second: FrogNormalMap_Sheet_19
+  - first:
+      213: -2393184351397826662
+    second: FrogNormalMap_Sheet_20
+  - first:
+      213: -8973529895923413359
+    second: FrogNormalMap_Sheet_21
+  - first:
+      213: -503035798949446839
+    second: FrogNormalMap_Sheet_22
+  - first:
+      213: -844524953143288037
+    second: FrogNormalMap_Sheet_23
+  - first:
+      213: 4683043183172096990
+    second: FrogNormalMap_Sheet_24
+  - first:
+      213: 8234858379419134785
+    second: FrogNormalMap_Sheet_25
+  - first:
+      213: -5102860459041850215
+    second: FrogNormalMap_Sheet_26
+  - first:
+      213: -3555739208254723738
+    second: FrogNormalMap_Sheet_27
+  - first:
+      213: 8997645396410398861
+    second: FrogNormalMap_Sheet_28
+  - first:
+      213: 948068418283858226
+    second: FrogNormalMap_Sheet_29
+  - first:
+      213: -6025223733894068538
+    second: FrogNormalMap_Sheet_30
+  - first:
+      213: -5258298853864490581
+    second: FrogNormalMap_Sheet_31
+  - first:
+      213: 7488703750726171668
+    second: FrogNormalMap_Sheet_32
+  - first:
+      213: 8197876904700362677
+    second: FrogNormalMap_Sheet_33
+  - first:
+      213: 1501034327796448323
+    second: FrogNormalMap_Sheet_34
+  - first:
+      213: 7649989945365295182
+    second: FrogNormalMap_Sheet_35
+  - first:
+      213: 8248416584802614876
+    second: FrogNormalMap_Sheet_36
+  - first:
+      213: 8252786473294285536
+    second: FrogNormalMap_Sheet_37
+  - first:
+      213: -780744575094515453
+    second: FrogNormalMap_Sheet_38
+  - first:
+      213: -7844445895393995349
+    second: FrogNormalMap_Sheet_39
+  - first:
+      213: -6628347501644637029
+    second: FrogNormalMap_Sheet_40
+  - first:
+      213: 5306916817637954610
+    second: FrogNormalMap_Sheet_41
+  - first:
+      213: 7166381537881619087
+    second: FrogNormalMap_Sheet_42
+  - first:
+      213: 3651950849333399445
+    second: FrogNormalMap_Sheet_43
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 206
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04627222562085850800000000000000
+      internalID: 6365840706676139584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 206
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8767f34913e5256e0800000000000000
+      internalID: -1850312929862257032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 206
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9d153a2fa1206a70800000000000000
+      internalID: 8818085106602548637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 206
+        width: 24
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49aaf312b23627a70800000000000000
+      internalID: 8823223656864787092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 206
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f54adef546740fc80800000000000000
+      internalID: -8291048417557371809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 206
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11af66ab74ec8d8b0800000000000000
+      internalID: -5127121368295998959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 206
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5b900ef882d360a0800000000000000
+      internalID: -6889431519127889059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 206
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bb1ae28a21172930800000000000000
+      internalID: 4118279258536287158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 158
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6f64e7a0b7d7d050800000000000000
+      internalID: 5825361796758007659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 158
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a980a4a6d6592a00800000000000000
+      internalID: 732211894309390755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 158
+        width: 24
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e046144d99c609a80800000000000000
+      internalID: -8462144291882310642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 159
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ced3a588d7eaabe0800000000000000
+      internalID: -1465103811614613815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 162
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7385b700654fda480800000000000000
+      internalID: -8886177839519672265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 160
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 130f1900ccd77a510800000000000000
+      internalID: 1560354111043530801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 158
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dea2ce276e42ec6c0800000000000000
+      internalID: -4121316036808267027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 110
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a27c3308d3b015920800000000000000
+      internalID: 2977173187440396074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 110
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75889fb92ca9e1b30800000000000000
+      internalID: 4260012458170222679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 110
+        width: 24
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49c2d191af82a4fa0800000000000000
+      internalID: -5815790914167296876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 110
+        width: 36
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0f28ca107c118190800000000000000
+      internalID: -7962051398403084532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 110
+        width: 38
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddfdffcaec2bfc170800000000000000
+      internalID: 8200970047200419805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 110
+        width: 39
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9fa8e41383b9ced0800000000000000
+      internalID: -2393184351397826662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 62
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19e032c7a1e977380800000000000000
+      internalID: -8973529895923413359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 62
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94b30562b9bd409f0800000000000000
+      internalID: -503035798949446839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 62
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1fd0f39705a744f0800000000000000
+      internalID: -844524953143288037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 62
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed399c896f28df040800000000000000
+      internalID: 4683043183172096990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 14
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14b2de0e018184270800000000000000
+      internalID: 8234858379419134785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 14
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99c7c68d27ffe29b0800000000000000
+      internalID: -5102860459041850215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 14
+        width: 26
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6696c0a770a77aec0800000000000000
+      internalID: -3555739208254723738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 15
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8878f301de0edc70800000000000000
+      internalID: 8997645396410398861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 28
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 239639e0437382d00800000000000000
+      internalID: 948068418283858226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 24
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c6cdf0efea126ca0800000000000000
+      internalID: -6025223733894068538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 16
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba930945d05c607b0800000000000000
+      internalID: -5258298853864490581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 16
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41c3b2a62683de760800000000000000
+      internalID: 7488703750726171668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 17
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bf3b015c95b4c170800000000000000
+      internalID: 8197876904700362677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 26
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34c79ffa4ceb4d410800000000000000
+      internalID: 1501034327796448323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 21
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e40fecce2593a2a60800000000000000
+      internalID: 7649989945365295182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 26
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5eb9909e23487270800000000000000
+      internalID: 8248416584802614876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 17
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eacad38299c78270800000000000000
+      internalID: 8252786473294285536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 24
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3099d2d02fc3a25f0800000000000000
+      internalID: -780744575094515453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 18
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba51541150ee22390800000000000000
+      internalID: -7844445895393995349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 19
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9c9f94d0116304a0800000000000000
+      internalID: -6628347501644637029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 19
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2345bd77ab4f5a940800000000000000
+      internalID: 5306916817637954610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 19
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8af9522a0a147360800000000000000
+      internalID: 7166381537881619087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogNormalMap_Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 22
+        width: 51
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f04b7d2f55ea230800000000000000
+      internalID: 3651950849333399445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FrogNormalMap_Sheet_0: 6365840706676139584
+      FrogNormalMap_Sheet_1: -1850312929862257032
+      FrogNormalMap_Sheet_10: -8462144291882310642
+      FrogNormalMap_Sheet_11: -1465103811614613815
+      FrogNormalMap_Sheet_12: -8886177839519672265
+      FrogNormalMap_Sheet_13: 1560354111043530801
+      FrogNormalMap_Sheet_14: -4121316036808267027
+      FrogNormalMap_Sheet_15: 2977173187440396074
+      FrogNormalMap_Sheet_16: 4260012458170222679
+      FrogNormalMap_Sheet_17: -5815790914167296876
+      FrogNormalMap_Sheet_18: -7962051398403084532
+      FrogNormalMap_Sheet_19: 8200970047200419805
+      FrogNormalMap_Sheet_2: 8818085106602548637
+      FrogNormalMap_Sheet_20: -2393184351397826662
+      FrogNormalMap_Sheet_21: -8973529895923413359
+      FrogNormalMap_Sheet_22: -503035798949446839
+      FrogNormalMap_Sheet_23: -844524953143288037
+      FrogNormalMap_Sheet_24: 4683043183172096990
+      FrogNormalMap_Sheet_25: 8234858379419134785
+      FrogNormalMap_Sheet_26: -5102860459041850215
+      FrogNormalMap_Sheet_27: -3555739208254723738
+      FrogNormalMap_Sheet_28: 8997645396410398861
+      FrogNormalMap_Sheet_29: 948068418283858226
+      FrogNormalMap_Sheet_3: 8823223656864787092
+      FrogNormalMap_Sheet_30: -6025223733894068538
+      FrogNormalMap_Sheet_31: -5258298853864490581
+      FrogNormalMap_Sheet_32: 7488703750726171668
+      FrogNormalMap_Sheet_33: 8197876904700362677
+      FrogNormalMap_Sheet_34: 1501034327796448323
+      FrogNormalMap_Sheet_35: 7649989945365295182
+      FrogNormalMap_Sheet_36: 8248416584802614876
+      FrogNormalMap_Sheet_37: 8252786473294285536
+      FrogNormalMap_Sheet_38: -780744575094515453
+      FrogNormalMap_Sheet_39: -7844445895393995349
+      FrogNormalMap_Sheet_4: -8291048417557371809
+      FrogNormalMap_Sheet_40: -6628347501644637029
+      FrogNormalMap_Sheet_41: 5306916817637954610
+      FrogNormalMap_Sheet_42: 7166381537881619087
+      FrogNormalMap_Sheet_43: 3651950849333399445
+      FrogNormalMap_Sheet_5: -5127121368295998959
+      FrogNormalMap_Sheet_6: -6889431519127889059
+      FrogNormalMap_Sheet_7: 4118279258536287158
+      FrogNormalMap_Sheet_8: 5825361796758007659
+      FrogNormalMap_Sheet_9: 732211894309390755
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

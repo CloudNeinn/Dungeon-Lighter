@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AbyssScene.unity
     guid: bf94f37ca19ac9b43b72170547f750c6
+  - enabled: 1
+    path: Assets/Scenes/FrogTestScene1.unity
+    guid: 79d6a59fd23bda4478b3ecf6929d45c3
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

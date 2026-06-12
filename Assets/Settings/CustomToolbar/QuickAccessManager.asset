@@ -13,49 +13,35 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: FrogLight
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: LookAtObject
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: LookAtObject
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: LookAtObject
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: LookAtObject
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: LookAtObject
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: LookAtObjects
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Frog
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: OneWayPlatforms
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: FireTrap (4)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: ConveyorBelt
-    scenePath: 
-  - displayName: Traps
-    scenePath: 
-  - displayName: Prefabs
-    scenePath: 
-  - displayName: Player
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: GameObject
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Wall
+  - displayName: Boulder
     scenePath: Assets/Scenes/Hub.unity
   - displayName: Ground
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Background
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Grid
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: TestingScene 1
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Player
+    scenePath: DontDestroyOnLoad
+  - displayName: Door Starting
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Door Exit
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: TestingScene 1
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Door Starting
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: FrogTrap
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: FrogTrap
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: ConveyorBelt
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: ConveyorBelt
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: GameObject (1)
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
+  - displayName: TestingScene 1
+    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: Abyss
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: Level
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: Hub
+    scenePath: Assets/Scenes/FrogTestScene1.unity

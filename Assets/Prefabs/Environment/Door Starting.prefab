@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1650123266767337113, guid: 487cf292f98ec314c92b80bdca5d68b3, type: 3}
       propertyPath: m_Name
-      value: Door Variant
+      value: Door Starting
       objectReference: {fileID: 0}
     - target: {fileID: 1994149518696608238, guid: 487cf292f98ec314c92b80bdca5d68b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -81,3 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd34df9a1a4b4d94c92e1a91513165f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartingDoor
+  _pointOfArrivalFromHub: {fileID: 3521008191435731633}
+  _pointOfArrivalFromLevel: {fileID: 0}
+  _pointOfArrivalFromAbyssLevel: {fileID: 0}

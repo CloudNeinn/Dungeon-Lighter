@@ -8,6 +8,7 @@ TagManager:
   - Door
   - EmberBackTrigger
   - Chains
+  - LethalTrap
   layers:
   - Default
   - TransparentFX

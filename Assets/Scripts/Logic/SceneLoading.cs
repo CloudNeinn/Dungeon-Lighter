@@ -12,11 +12,13 @@ public class SceneLoading : MonoBehaviour
     public enum SceneType 
     { 
         Hub,
-        Level 
+        Level,
+        AbyssLevel
     }
 
     public static SceneLoading Instance;
     [field: SerializeField] public SceneType currentSceneType {get; private set;}
+    [field: SerializeField] public SceneType departureSceneType {get; private set;}
     public GameObject loadingScreen  {get; private set;}
     public Image loadingBar  {get; private set;}
     [field: SerializeField] public List<GameObject> grids {get; private set;}
@@ -106,6 +108,7 @@ public class SceneLoading : MonoBehaviour
 
     IEnumerator LoadSceneAsync(int sceneID, bool isAdditive)
     {
+        departureSceneType = currentSceneType;
         if(sceneID == 1) SetLevelName("Home...");
         _loadingScreen.SetActive(true);
         _closeAnimationFinished = false;
