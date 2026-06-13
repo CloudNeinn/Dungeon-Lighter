@@ -13,35 +13,43 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Boulder
+  - displayName: Frog
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Ground
-    scenePath: Assets/Scenes/TestingScene 1.unity
+  - displayName: FrogTrap
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: SpikedBall
+    scenePath: Assets/Scenes/Hub.unity
   - displayName: Background
-    scenePath: Assets/Scenes/TestingScene 1.unity
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: Ground
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: Spikes
+    scenePath: Assets/Scenes/FrogTestScene1.unity
   - displayName: Grid
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: TestingScene 1
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: Player
-    scenePath: DontDestroyOnLoad
-  - displayName: Door Starting
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: Door Exit
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: TestingScene 1
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: Door Starting
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: FrogTrap
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: FrogTrap
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: FrogTestScene1
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: Scenes
+    scenePath: 
+  - displayName: Background
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: Background
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: Background
+    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: BackgroundMidLayer
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: TestingScene 1
-    scenePath: Assets/Scenes/TestingScene 1.unity
-  - displayName: Abyss
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: Level
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: Hub
+  - displayName: Shaders
+    scenePath: 
+  - displayName: Scripts
+    scenePath: 
+  - displayName: BackgroundTopLayer
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Grid
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: BlackSquare
+    scenePath: 
+  - displayName: WhiteSquare
+    scenePath: 
+  - displayName: Ground
     scenePath: Assets/Scenes/FrogTestScene1.unity

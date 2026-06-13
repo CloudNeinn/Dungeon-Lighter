@@ -99,8 +99,8 @@ public class Frog : MonoBehaviour
 
     void ChangeVisionSpread()
     {
-        _light.pointLightInnerAngle = Mathf.Clamp(_originalSpread * (_visionTimeCounter/_visionTime), _originalSpread * 0.1f, _originalSpread);
-        _light.pointLightOuterAngle = Mathf.Clamp(_originalSpread * (_visionTimeCounter/_visionTime), _originalSpread * 0.1f, _originalSpread);
+        _light.pointLightInnerAngle = Mathf.Clamp(_originalSpread * (_visionTimeCounter/_visionTime), 1f, _originalSpread);
+        _light.pointLightOuterAngle = Mathf.Clamp(_originalSpread * (_visionTimeCounter/_visionTime), 1f, _originalSpread);
     }
 
     void ApplyEffect()

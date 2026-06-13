@@ -49,8 +49,11 @@ TagManager:
   - name: Not iliuminated
     uniqueID: 849607777
     locked: 0
-  - name: Player
-    uniqueID: 3195136991
+  - name: Ground
+    uniqueID: 106934449
+    locked: 0
+  - name: Abyss
+    uniqueID: 2203650265
     locked: 0
   - name: Torch
     uniqueID: 1761893399
@@ -58,8 +61,8 @@ TagManager:
   - name: DivineBeing
     uniqueID: 979262397
     locked: 0
-  - name: Ground
-    uniqueID: 106934449
+  - name: Player
+    uniqueID: 3195136991
     locked: 0
   m_RenderingLayers:
   - Default
