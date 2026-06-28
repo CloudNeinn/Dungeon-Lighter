@@ -215,7 +215,7 @@ public class DialogueBubble : MonoBehaviour
             return;
         }
 
-        StringBoolDictionary levelList = GameManager.Instance.gameState.GetListOfLevel();
+        StringBoolDictionary levelList = GameManager.Instance.gameData.GetListOfLevel();
         
         foreach (DialogueScriptableObject dialogueOption in availableDialogues)
         {

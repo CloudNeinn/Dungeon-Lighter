@@ -13,43 +13,33 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Frog
+  - displayName: DataManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: SceneManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: InputManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: DialogueManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: ObjectPoolManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: ComfyChair
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: FrogTrap
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: SpikedBall
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Background
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: Ground
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: Spikes
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: Grid
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: FrogTestScene1
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: Scenes
+  - displayName: UserInput
     scenePath: 
-  - displayName: Background
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: Background
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: Background
-    scenePath: Assets/Scenes/FrogTestScene1.unity
-  - displayName: BackgroundMidLayer
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Shaders
+  - displayName: UIManager
     scenePath: 
-  - displayName: Scripts
+  - displayName: ShotManager
     scenePath: 
-  - displayName: BackgroundTopLayer
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Grid
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: BlackSquare
+  - displayName: SceneLoader
     scenePath: 
-  - displayName: WhiteSquare
+  - displayName: ObjectPoolManager
     scenePath: 
-  - displayName: Ground
-    scenePath: Assets/Scenes/FrogTestScene1.unity
+  - displayName: NoteManager
+    scenePath: 
+  - displayName: LogicManager
+    scenePath: 
+  - displayName: GameManager
+    scenePath: 
+  - displayName: FPSManager
+    scenePath: 

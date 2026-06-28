@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Eflatun.SceneReference;
 
 public class SerializableDictionary<TKey, Tvalue> : Dictionary<TKey, Tvalue>, ISerializationCallbackReceiver
 {
@@ -44,3 +45,6 @@ public class SerializableDictionary<TKey, Tvalue> : Dictionary<TKey, Tvalue>, IS
 
 [System.Serializable]
 public class StringBoolDictionary : SerializableDictionary<string, bool> {}
+
+[System.Serializable]
+public class SceneBoolDictionary : SerializableDictionary<SceneReference, bool> {}

@@ -1,14 +1,11 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistance
 {
     public static GameManager Instance;
-    [field: SerializeField] public int toleranceLevel { get; private set; }
-    [field: SerializeField] public int completedLevels { get; private set; }
-    [SerializeField] private int _toleranceIncreaseThreshold;
     [SerializeField] private int _consecutiveShotsDrinken;
     [SerializeField] private int _needToDrinkConsecutiveShots;
-    [field: SerializeField] public GameState gameState {get; private set;}
+    [field: SerializeField] public GameData gameData {get; private set;}
 
     void Awake()
     {
@@ -22,14 +19,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void checkIfToleranceIncreases()
+    public void CheckIfToleranceIncreases()
     {
-        if (toleranceLevel * _toleranceIncreaseThreshold <= completedLevels) toleranceLevel++;
+        if (gameData.toleranceThresholds[gameData.toleranceLevel + 1] <= gameData.shotsConsumed) gameData.toleranceLevel++;
     }
 
-    public void increaseCompletedLevels()
+    public void SetLevelComplete(string levelName)
     {
-        completedLevels++;
-        checkIfToleranceIncreases();
+        if (gameData.listOfLevels.ContainsKey(levelName))
+        {
+            gameData.listOfLevels[levelName] = true;
+        }
+        else Debug.LogWarning($"[GameManager] Level '{levelName}' not found in level list dictionary.");
+    }
+
+    public void LoadData(GameData data)
+    {
+        gameData.toleranceLevel = data.toleranceLevel;
+        gameData.listOfLevels = data.listOfLevels;
+        gameData.listOfNotes = data.listOfNotes;
+        gameData.shotsConsumed = data.shotsConsumed;
+        gameData.toleranceThresholds = data.toleranceThresholds;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.toleranceLevel = gameData.toleranceLevel;
+        data.listOfLevels = gameData.listOfLevels;
+        data.listOfNotes = gameData.listOfNotes;
+        data.shotsConsumed = gameData.shotsConsumed;
+        data.toleranceThresholds = gameData.toleranceThresholds;
     }
 }

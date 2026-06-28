@@ -110,11 +110,11 @@ public class SceneLoading : MonoBehaviour
     {
         departureSceneType = currentSceneType;
         if(sceneID == 1) SetLevelName("Home...");
-        _loadingScreen.SetActive(true);
-        _closeAnimationFinished = false;
-        _loadingScreenAnimator.SetTrigger("Close");
+        //_loadingScreen.SetActive(true);
+        //_closeAnimationFinished = false;
+        //_loadingScreenAnimator.SetTrigger("Close");
     
-        yield return new WaitUntil(() => _closeAnimationFinished);
+        //yield return new WaitUntil(() => _closeAnimationFinished);
 
         AsyncOperation operation;
         if (isAdditive) operation = SceneManager.LoadSceneAsync(sceneID, LoadSceneMode.Additive);
@@ -125,7 +125,7 @@ public class SceneLoading : MonoBehaviour
             yield return null;
         }
         
-        _loadingScreenAnimator.SetTrigger("Open");
+       // _loadingScreenAnimator.SetTrigger("Open");
     }
 
     public int GetCurrentSceneID()

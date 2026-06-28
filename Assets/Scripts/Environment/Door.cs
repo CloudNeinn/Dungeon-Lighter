@@ -32,7 +32,7 @@ public class Door : MonoBehaviour
         if (_returnCurrency > 0)
         {
             CurrencyManager.Instance.addCurrency(_returnCurrency);
-            GameManager.Instance.increaseCompletedLevels();
+            GameManager.Instance.SetLevelComplete(this.gameObject.scene.name);
         }
         if (SceneLoading.Instance.currentSceneType != SceneLoading.SceneType.Level) SceneLoading.Instance.SetReturnDoor(this.transform.position);
         //else ShotManager.Instance.activeShot = ShotManager.Shots.None;

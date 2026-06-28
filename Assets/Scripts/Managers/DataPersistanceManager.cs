@@ -8,12 +8,12 @@ public class DataPersistanceManager : MonoBehaviour
     [Header("File Storage Config")]
     [SerializeField] private string _saveFileName = "savegame.json";
     [SerializeField] private string _settingsFileName = "settings.json";
-    [SerializeField] private string _notesFileName = "NoteData.json";
+    [SerializeField] private string _notesFileName = "notes.json";
 
     private GameData _gameData;
     private NoteData _noteData;
 
-    private List<IDataPersistance> _dataPersistenceObjects;
+    [SerializeField] private List<IDataPersistance> _dataPersistenceObjects;
 
     private FileDataHandler<GameData> _gameDataHandler;
     private FileDataHandler<NoteData> _notesHandler;
@@ -34,8 +34,9 @@ public class DataPersistanceManager : MonoBehaviour
 
     private void Start()
     { 
+        _dataPersistenceObjects = FindAllDataPersistenceObjects();
         InitializeHandlers();
-        //LoadGame();
+        LoadGame();
         LoadNotes();
     }
 

@@ -48,7 +48,7 @@ public class ShotManager : MonoBehaviour
     {
         if (!activeShots.Contains(shot))
         {
-            if (activeShots.Count == GameManager.Instance.toleranceLevel) activeShots.Dequeue();
+            if (activeShots.Count == GameManager.Instance.gameData.toleranceLevel) activeShots.Dequeue();
             activeShots.Enqueue(shot);
         }
         // DEBUG PURPOSES
