@@ -11,6 +11,7 @@ public class GameData
     public int toleranceLevel;
     public int shotsConsumed;
     public int[] toleranceThresholds;
+    public int saveSceneID;
 
     public StringBoolDictionary GetListOfLevel()
     {

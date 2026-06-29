@@ -2,24 +2,31 @@ using UnityEngine;
 
 public class ComfyChair : MonoBehaviour
 {
+    public static ComfyChair Instance;
     [SerializeField] private float _radius;
     [SerializeField] private Vector2 _offset;
     [SerializeField] private LayerMask _playerLayer;
-    
-    void Start()
-    {
-        
-    }
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     void Update()
     {
-        if(UserInput.Instance.use1Pressed && InRange()) Sit();
+        if(UserInput.Instance.use1Input && InRange()) Sit();
     }
 
     void Sit()
     {
         DataPersistanceManager.Instance.SaveGame();
-        Debug.Log("hello");
     }
 
     bool InRange()

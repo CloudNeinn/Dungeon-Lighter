@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour, IDataPersistance
         gameData.listOfNotes = data.listOfNotes;
         gameData.shotsConsumed = data.shotsConsumed;
         gameData.toleranceThresholds = data.toleranceThresholds;
+        SceneLoading.Instance.LoadScene(data.saveSceneID);
     }
 
     public void SaveData(ref GameData data)
@@ -49,5 +50,6 @@ public class GameManager : MonoBehaviour, IDataPersistance
         data.listOfNotes = gameData.listOfNotes;
         data.shotsConsumed = gameData.shotsConsumed;
         data.toleranceThresholds = gameData.toleranceThresholds;
+        data.saveSceneID = SceneLoading.Instance.GetCurrentSceneID();
     }
 }

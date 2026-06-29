@@ -13,33 +13,25 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
+  - displayName: ComfyChair
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: ComfyChair
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: untitled_0
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Bar
+    scenePath: 
+  - displayName: Environment
+    scenePath: 
+  - displayName: Prefabs
+    scenePath: 
+  - displayName: Bar
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Light
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: GameManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
   - displayName: DataManager
     scenePath: Assets/Scenes/PersistentObjects.unity
   - displayName: SceneManager
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: InputManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: DialogueManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: ObjectPoolManager
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: ComfyChair
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: UserInput
-    scenePath: 
-  - displayName: UIManager
-    scenePath: 
-  - displayName: ShotManager
-    scenePath: 
-  - displayName: SceneLoader
-    scenePath: 
-  - displayName: ObjectPoolManager
-    scenePath: 
-  - displayName: NoteManager
-    scenePath: 
-  - displayName: LogicManager
-    scenePath: 
-  - displayName: GameManager
-    scenePath: 
-  - displayName: FPSManager
-    scenePath: 
