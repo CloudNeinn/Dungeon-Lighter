@@ -3,72 +3,100 @@
     "b3c9ccbe-4af9-4dd3-96c8-162850b0fdfd": {
       "title": "New Note 2",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": true,
+      "shot": -1
     },
     "dd68e7a6-bff5-4067-a068-e5b9c41ca333": {
       "title": "New Note 3",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": true,
+      "shot": -1
     },
     "91cb540e-8a21-49d1-84d6-edf2428fc611": {
       "title": "New Note 4",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "2c56fec3-8ada-486d-9adc-7b225d03e0c9": {
       "title": "New Note 5",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "455e43c9-10e3-4d3e-be2a-55e04f7af21a": {
       "title": "New Note 6",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "11c343f1-7237-42de-8e56-022bd01f8d0a": {
       "title": "New Note 7",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "38ae1d07-e926-4720-a276-73d30cace5f3": {
       "title": "New Note 8",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "cf2e0a55-40c7-442a-821a-4c5d31caff89": {
       "title": "New Note 9",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "9570d182-b329-42e8-a3c3-7583285c5780": {
       "title": "New Note 10",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": 1
     },
     "a92ecd92-ed1f-4d17-860d-88a13bff7bc6": {
       "title": "New Note 11",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "dd562314-2aa8-4700-b5dc-12258fcec4b2": {
       "title": "New Note 12",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "eaa36648-f659-4dc5-ab65-ea87b56a7f44": {
       "title": "New Note 13",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "fa48ab85-98fb-431e-995d-3b8c452263d0": {
       "title": "New Note 14",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     },
     "0781bb8b-7319-41d5-8121-4b3a2a29be55": {
       "title": "New Note 14",
       "content": "Enter your note content here...",
-      "isRead": false
+      "isRead": false,
+      "isReturned": false,
+      "shot": -1
     }
   }
 }

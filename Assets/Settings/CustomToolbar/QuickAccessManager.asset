@@ -13,25 +13,27 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: ComfyChair
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: ComfyChair
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: untitled_0
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Bar
-    scenePath: 
-  - displayName: Environment
-    scenePath: 
-  - displayName: Prefabs
-    scenePath: 
-  - displayName: Bar
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Light
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: GameManager
+  - displayName: Main Camera
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: DataManager
+  - displayName: CM vcam1
+    scenePath: DontDestroyOnLoad
+  - displayName: Main Camera
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: SceneManager
+  - displayName: CM vcam1
     scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Main Camera
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Main Camera
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: FrogLight
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: FrogLight
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Main Camera
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Camera confinement
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: FrogLight
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Frog
+    scenePath: Assets/Scenes/Hub.unity

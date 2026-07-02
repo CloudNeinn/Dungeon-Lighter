@@ -8,6 +8,7 @@ public class GameData
 {
     public StringBoolDictionary listOfLevels;
     public StringBoolDictionary listOfNotes;
+    public StringBoolDictionary listOfShots;
     public int toleranceLevel;
     public int shotsConsumed;
     public int[] toleranceThresholds;

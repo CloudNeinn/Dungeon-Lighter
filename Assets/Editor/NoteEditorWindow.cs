@@ -26,6 +26,8 @@ public class NoteEditorWindow : EditorWindow
     private TextField noteContentField;
     private ToolbarSearchField searchField;
     private Toggle isReadToggle;
+    private Toggle isReturnedToggle;
+    private EnumField shotDropdown;
     private Label notesCountLabel;
     private Label notesFilteredCountLabel;
     private Button addNoteButton;
@@ -87,6 +89,8 @@ public class NoteEditorWindow : EditorWindow
         noteContentField = root.Q<TextField>("noteContentField");
         searchField = root.Q<ToolbarSearchField>("searchField");
         isReadToggle = root.Q<Toggle>("isReadToggle");
+        isReturnedToggle = root.Q<Toggle>("isReturnedToggle");
+        shotDropdown = root.Q<EnumField>("noteShotDropdown");
         notesCountLabel = root.Q<Label>("notesCountLabel");
         notesFilteredCountLabel = root.Q<Label>("notesFilteredCountLabel");
         addNoteButton = root.Q<Button>("addNoteButton");
@@ -108,6 +112,11 @@ public class NoteEditorWindow : EditorWindow
 
         if (saveSelectedButton != null)
             saveSelectedButton.clicked += saveSelectedNote;
+
+        if (shotDropdown != null)
+        {
+            shotDropdown.Init(Shots.None);
+        }
 
         if (notesListView != null)
         {
@@ -221,6 +230,8 @@ public class NoteEditorWindow : EditorWindow
                         noteTitleField.value = selectedNote.title;
                         noteContentField.value = selectedNote.content;
                         isReadToggle.value = selectedNote.isRead;
+                        isReturnedToggle.value = selectedNote.isReturned;
+                        shotDropdown.SetValueWithoutNotify(selectedNote.shot);
 
                         // Store the original version only if not already stored
                         if (!originalNoteVersions.ContainsKey(selectedNoteGuid))
@@ -229,7 +240,8 @@ public class NoteEditorWindow : EditorWindow
                             {
                                 title = selectedNote.title,
                                 content = selectedNote.content,
-                                isRead = selectedNote.isRead
+                                isRead = selectedNote.isRead,
+                                shot = selectedNote.shot
                             };
                         }
                     }
@@ -257,7 +269,9 @@ public class NoteEditorWindow : EditorWindow
         {
             title = "New Note " + (notes.Count + 1),
             content = "Enter your note content here...",
-            isRead = false
+            isRead = false,
+            isReturned = false,
+            shot = Shots.None
         };
 
         string newNoteGuid = Guid.NewGuid().ToString();
@@ -376,10 +390,13 @@ public class NoteEditorWindow : EditorWindow
             selectedNote.title = original.title;
             selectedNote.content = original.content;
             selectedNote.isRead = original.isRead;
+            selectedNote.isReturned = original.isReturned;
+            selectedNote.shot = original.shot;
 
             noteTitleField.value = original.title;
             noteContentField.value = original.content;
             isReadToggle.value = original.isRead;
+            isReturnedToggle.value = original.isReturned;
 
             editedNoteGuids.Remove(selectedNoteGuid);
             originalNoteVersions.Remove(selectedNoteGuid);
@@ -458,6 +475,25 @@ public class NoteEditorWindow : EditorWindow
             }
         });
 
+        isReturnedToggle.RegisterValueChangedCallback(evt =>
+        {
+            if (selectedNote != null && selectedNote.isRead != evt.newValue)
+            {
+                selectedNote.isReturned = evt.newValue;
+                onNoteEdit();
+            }
+        });
+
+        shotDropdown.RegisterValueChangedCallback(evt =>
+        {
+            var newShot = (Shots)evt.newValue;
+            if (selectedNote != null && selectedNote.shot != newShot)
+            {
+                selectedNote.shot = newShot;
+                onNoteEdit();
+            }
+        });
+
     }
 
     void onNoteEdit()
@@ -481,7 +517,7 @@ public class NoteEditorWindow : EditorWindow
         if (needsSave)
         {
             if (EditorUtility.DisplayDialog("Unsaved Changes", 
-                "You have unsaved changes. Would you like to save them?", "Save", "Don't Save"))
+                "You have unsaved changes. Would you like to save them? THERE IS NO CANCEL BUTTON!", "Save", "Don't Save"))
             {
                 saveNotes();
             }
