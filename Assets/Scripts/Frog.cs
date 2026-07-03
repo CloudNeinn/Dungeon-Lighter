@@ -8,15 +8,14 @@ public class Frog : MonoBehaviour
     [SerializeField] private int _rotationSpeed;
     [SerializeField] private GameObject[] _lookAtObjects;
     [SerializeField] private bool _cycle;          // false = loop (default), true = ping-pong cycle
-    [SerializeField] private Light2D _light;
-    [SerializeField] private GameObject _lightObject;
+    [SerializeField] private Light2D[] _lights;
+    [SerializeField] private GameObject[] _lightObjects;
     [SerializeField] private float _lookTime;
     [SerializeField] private float _lookTimeCounter;
     [SerializeField] private float _visionTime;
     [SerializeField] private float _visionTimeCounter;
     [SerializeField] private float _visionTimeAdvancementSpeed;
     [SerializeField] private float _visionTimeRetractionSpeed;
-    [SerializeField] private GameObject _abyssSpawnPoint;
     [SerializeField] private int _sceneIndex;
     [SerializeField] private float _maxLightIntensity;
     private float _initialLightIntensity;
@@ -27,7 +26,6 @@ public class Frog : MonoBehaviour
     [SerializeField] private float _fovAngle = 45f;
     [SerializeField] private LayerMask _obstacleMask;
     [SerializeField] private LayerMask _playerMask;
-    [SerializeField] private LayerMask _torchMask;
     private float _originalSpread;
     private bool _effectApplied;
     private int _currentTargetIndex = 0;
@@ -37,11 +35,11 @@ public class Frog : MonoBehaviour
 
     void Start()
     {
-        _initialLightIntensity = _light.intensity;
-        _originalSpread = _light.pointLightInnerAngle;
+        _initialLightIntensity = _lights[0].intensity;
+        _originalSpread = _lights[0].pointLightInnerAngle;
         _effectApplied = false;
-        if (_lightObject != null)
-            _currentSightAngle = _lightObject.transform.eulerAngles.z;
+        if (_lightObjects != null)
+            _currentSightAngle = _lightObjects[0].transform.eulerAngles.z;
 
         UpdateTargetAngle();
 
@@ -74,8 +72,13 @@ public class Frog : MonoBehaviour
             }
         }
 
-        if (_lightObject != null)
-            _lightObject.transform.rotation = Quaternion.Euler(0, 0, _currentSightAngle);
+        if (_lightObjects != null)
+        {
+            foreach (var lightObject in _lightObjects)
+            {
+                lightObject.transform.rotation = Quaternion.Euler(0, 0, _currentSightAngle);
+            }
+        }
 
         if (PlayerInSight())
         {
@@ -92,20 +95,26 @@ public class Frog : MonoBehaviour
             _effectApplied = true;
             ApplyEffect();
         }
-        
-        _light.intensity = Mathf.Clamp(_initialLightIntensity * (_visionTime / (_visionTimeCounter <= 0 ? 0.01f : _visionTimeCounter)), _initialLightIntensity, _maxLightIntensity);
-    
+
+        float newIntensity = Mathf.Clamp(_initialLightIntensity * (_visionTime / (_visionTimeCounter <= 0 ? 0.01f : _visionTimeCounter)), _initialLightIntensity, _maxLightIntensity);
+        foreach (var light in _lights)
+        {
+            light.intensity = newIntensity;
+        }
     }
 
     void ChangeVisionSpread()
     {
-        _light.pointLightInnerAngle = Mathf.Clamp(_originalSpread * (_visionTimeCounter/_visionTime), 1f, _originalSpread);
-        _light.pointLightOuterAngle = Mathf.Clamp(_originalSpread * (_visionTimeCounter/_visionTime), 1f, _originalSpread);
+        float spread = Mathf.Clamp(_originalSpread * (_visionTimeCounter/_visionTime), 1f, _originalSpread);
+        foreach (var light in _lights)
+        {
+            light.pointLightInnerAngle = spread;
+            light.pointLightOuterAngle = spread;
+        }
     }
 
     void ApplyEffect()
     {
-        //PlayerController.Instance.transform.position = _abyssSpawnPoint.transform.position;
         SceneLoading.Instance.LoadScene(_sceneIndex, false, false);
     }
 
@@ -146,7 +155,7 @@ public class Frog : MonoBehaviour
 
     bool PlayerInSight()
     {
-        _fovAngle = _light.pointLightInnerAngle;
+        _fovAngle = _lights[0].pointLightInnerAngle;
         float half = _fovAngle * 0.5f;
         LayerMask combined = _obstacleMask | _playerMask;
 

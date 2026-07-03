@@ -13,25 +13,27 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Player
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: No friction
+  - displayName: Propeller
     scenePath: 
-  - displayName: StickySurface
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: StickySurface
+  - displayName: Prefabs
     scenePath: 
-  - displayName: StickySurface
+  - displayName: Bottom
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: StickySurface
-    scenePath: 
-  - displayName: StickySurface
+  - displayName: Right
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: StickySurface
-    scenePath: 
-  - displayName: StickySurface
+  - displayName: Left
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Environment
+  - displayName: Top
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: StickySurface
-    scenePath: 
+  - displayName: Top
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Propeller
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Left
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Propeller
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Propeller
+    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Propeller
+    scenePath: Assets/Scenes/Hub.unity
