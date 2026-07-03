@@ -20,13 +20,22 @@ public class StartingPoint : MonoBehaviour
 
     void Start()
     {
-        PlacePlayerInPosition();
+        PlaceInPosition();
     }
 
-    void PlacePlayerInPosition()
+    void PlaceInPosition()
     {
-        if(SceneLoading.Instance.departureSceneType == SceneLoading.SceneType.Hub) PlayerController.Instance.gameObject.transform.position = _pointOfArrivalFromHub.transform.position;
-        else if(SceneLoading.Instance.departureSceneType == SceneLoading.SceneType.Level) PlayerController.Instance.gameObject.transform.position = _pointOfArrivalFromLevel.transform.position;
-        else if(SceneLoading.Instance.departureSceneType == SceneLoading.SceneType.AbyssLevel) PlayerController.Instance.gameObject.transform.position = _pointOfArrivalFromAbyssLevel.transform.position;
+        if(SceneLoading.Instance.departureSceneType == SceneLoading.SceneType.Hub) Place(_pointOfArrivalFromHub.transform.position);
+        else if(SceneLoading.Instance.departureSceneType == SceneLoading.SceneType.Level) Place(_pointOfArrivalFromLevel.transform.position);
+        else if(SceneLoading.Instance.departureSceneType == SceneLoading.SceneType.AbyssLevel) Place(_pointOfArrivalFromAbyssLevel.transform.position);
+    }
+
+    void Place(Vector2 position)
+    {
+        Vector3 oldPlayerPos = PlayerController.Instance.transform.position;
+        Vector3 delta = (Vector3)position - oldPlayerPos;
+
+        PlayerController.Instance.gameObject.transform.position = position;
+        CameraController.Instance.WarpCamera(position, delta);
     }
 }

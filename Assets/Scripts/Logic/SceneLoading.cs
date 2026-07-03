@@ -81,13 +81,13 @@ public class SceneLoading : MonoBehaviour
 
     public void StartGame()
     {
-        LoadScene(1);
-        LoadScene(2, true);
+        LoadScene(1, false, false);
+        LoadScene(2, true, false);
     }
 
-    public void LoadScene(int sceneID, bool isAdditive = false)
+    public void LoadScene(int sceneID, bool isAdditive = false, bool withLoadingScreen = true)
     {
-        StartCoroutine(LoadSceneAsync(sceneID, isAdditive));
+        StartCoroutine(LoadSceneAsync(sceneID, isAdditive,withLoadingScreen));
     }
 
     public void SetLevelName(string name)
@@ -106,15 +106,17 @@ public class SceneLoading : MonoBehaviour
         _closeAnimationFinished = true;
     }
 
-    IEnumerator LoadSceneAsync(int sceneID, bool isAdditive)
+    IEnumerator LoadSceneAsync(int sceneID, bool isAdditive, bool withLoadingScreen)
     {
         departureSceneType = currentSceneType;
         if(sceneID == 1) SetLevelName("Home...");
-        //_loadingScreen.SetActive(true);
-        //_closeAnimationFinished = false;
-        //_loadingScreenAnimator.SetTrigger("Close");
-    
-        //yield return new WaitUntil(() => _closeAnimationFinished);
+        if(withLoadingScreen)
+        {
+            _loadingScreen.SetActive(true);
+            _closeAnimationFinished = false;
+            _loadingScreenAnimator.SetTrigger("Close");
+            yield return new WaitUntil(() => _closeAnimationFinished);
+        }
 
         AsyncOperation operation;
         if (isAdditive) operation = SceneManager.LoadSceneAsync(sceneID, LoadSceneMode.Additive);
@@ -125,7 +127,7 @@ public class SceneLoading : MonoBehaviour
             yield return null;
         }
         
-       // _loadingScreenAnimator.SetTrigger("Open");
+       if(withLoadingScreen) _loadingScreenAnimator.SetTrigger("Open");
     }
 
     public int GetCurrentSceneID()

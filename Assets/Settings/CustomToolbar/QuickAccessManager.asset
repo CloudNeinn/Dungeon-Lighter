@@ -13,27 +13,25 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Main Camera
+  - displayName: Player
     scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: CM vcam1
-    scenePath: DontDestroyOnLoad
-  - displayName: Main Camera
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: CM vcam1
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Main Camera
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Main Camera
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: FrogLight
+  - displayName: No friction
+    scenePath: 
+  - displayName: StickySurface
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: FrogLight
+  - displayName: StickySurface
+    scenePath: 
+  - displayName: StickySurface
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Main Camera
-    scenePath: Assets/Scenes/PersistentObjects.unity
-  - displayName: Camera confinement
+  - displayName: StickySurface
+    scenePath: 
+  - displayName: StickySurface
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: FrogLight
+  - displayName: StickySurface
+    scenePath: 
+  - displayName: StickySurface
     scenePath: Assets/Scenes/Hub.unity
-  - displayName: Frog
+  - displayName: Environment
     scenePath: Assets/Scenes/Hub.unity
+  - displayName: StickySurface
+    scenePath: 

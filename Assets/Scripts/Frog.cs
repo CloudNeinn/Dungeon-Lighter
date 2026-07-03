@@ -106,7 +106,7 @@ public class Frog : MonoBehaviour
     void ApplyEffect()
     {
         //PlayerController.Instance.transform.position = _abyssSpawnPoint.transform.position;
-        SceneLoading.Instance.LoadScene(_sceneIndex);
+        SceneLoading.Instance.LoadScene(_sceneIndex, false, false);
     }
 
     void UpdateTargetAngle()

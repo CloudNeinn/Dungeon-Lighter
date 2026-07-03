@@ -49,4 +49,9 @@ public class CameraController : MonoBehaviour
     {
         _virtualCamera.m_Follow = ObjectToChange.transform;
     }
+
+    public void WarpCamera(Vector3 newPosition, Vector3 delta)
+    {
+        _virtualCamera.OnTargetObjectWarped(_virtualCamera.Follow, delta);
+    }
 }
