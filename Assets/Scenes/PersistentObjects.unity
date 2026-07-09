@@ -1023,6 +1023,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1462144532024263905, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
+      propertyPath: maxSlopeAngle
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1462144532024263905, guid: 1c5022259170ce4468bd6be711d6be1c, type: 3}
       propertyPath: _apexGravityScale
       value: 1.5
       objectReference: {fileID: 0}

@@ -628,8 +628,11 @@ MonoBehaviour:
   _originalGravity: 4
   _maxFallSpeed: -50
   _maxWallSlideSpeed: -6
-  _slideSpeed: 13
-  _slideAccel: 10
+  _wallSlideSpeed: 0
+  _wallSlideAccel: 0
+  _slideForceMultiplier: 1.8
+  _slopeTangent: {x: 0, y: 0}
+  _finalSlideForce: 0
   _groundBoxSize: {x: 1, y: 0.3}
   _groundBoxOffset: {x: -0.1, y: -2.1}
   _wallBoxSize: {x: 0.4, y: 2.5}
@@ -639,6 +642,8 @@ MonoBehaviour:
   _rightEdgeDetectionBoxOffset: {x: 0.35, y: 2}
   _ledgeDetectionBoxSize: {x: 0.2, y: 0.5}
   _ledgeDetectionBoxOffset: {x: 0.7, y: -1.7}
+  _maxSlopeAngle: 50
+  _slopeRayLength: 3
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

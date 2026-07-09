@@ -74,8 +74,8 @@ public class PlayerController : MonoBehaviour
 
     #region Slide
     [Header("Slide Parameters")]
-    [SerializeField] private float _slideSpeed;
-    [SerializeField] private float _slideAccel;
+    [SerializeField] private float _wallSlideSpeed;
+    [SerializeField] private float _wallSlideAccel;
     #endregion
 
     #region Hitboxes
@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour
         if(!_isJumping  && _playerRigidbody.linearVelocity.y > 0) _isJumping = true;
         else if(_playerRigidbody.linearVelocity.y <= 0) _isJumping = false;
         
-        if (_playerRigidbody.linearVelocity.y < 0) _isFalling = true;
+        if (_playerRigidbody.linearVelocity.y < 0 && !_isGrounded) _isFalling = true;
         else _isFalling = false;
     }
 
@@ -375,8 +375,8 @@ public class PlayerController : MonoBehaviour
 
     public void WallSlide()
     {
-        float speedDif = _slideSpeed - _playerRigidbody.linearVelocity.y;	
-		float movement = speedDif * _slideAccel;
+        float speedDif = _wallSlideSpeed - _playerRigidbody.linearVelocity.y;	
+		float movement = speedDif * _wallSlideAccel;
 		movement = Mathf.Clamp(movement, -Mathf.Abs(speedDif)  * (1 / Time.fixedDeltaTime), Mathf.Abs(speedDif) * (1 / Time.fixedDeltaTime));
         //movement = Mathf.Min(movement, 0);
 		if (_canMove) _playerRigidbody.AddForce(movement * Vector2.up);
@@ -426,7 +426,7 @@ public class PlayerController : MonoBehaviour
     {
         return _isAlive;
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("LethalTrap"))
