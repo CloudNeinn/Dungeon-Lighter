@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _isGrounded;
     [SerializeField] private bool _isMoving;
     [SerializeField] private bool _isWalled;
-    [SerializeField] private bool _isSliding;
+    [SerializeField] public bool isSliding;
     [SerializeField] private bool _isWallSliding;
     [SerializeField] private bool _isJumping;
     [SerializeField] private bool _isFalling;
@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
     [Header("Layer Masks")]
     public LayerMask groundLayer;
     public LayerMask wallLayer;
+    public LayerMask slopeLayer;
     #endregion
 
     #region GET/SET
@@ -103,6 +104,21 @@ public class PlayerController : MonoBehaviour
     {
         get => _runSpeed;
         set => _runSpeed = value;
+    }
+    public float MoveCooldownTimeCounter
+    {
+        get => _moveCooldownTimeCounter;
+        set => _moveCooldownTimeCounter = value;
+    }
+    public float MoveCooldownTime
+    {
+        get => _moveCooldownTime;
+        set => _moveCooldownTime = value;
+    }
+    public bool CanMove
+    {
+        get => _canMove;
+        set => _canMove = value;
     }
     public Vector2 Velocity
     {
@@ -177,11 +193,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if(_isJumping) EdgeSupport();
-
+        
         if(_isJumping && _isMoving && !_isWalled && IsTouchingLedge()) PushUpLedge();
         
         if(_moveCooldownTimeCounter > 0) _moveCooldownTimeCounter -= Time.fixedDeltaTime;
-        else if(_isAlive) _canMove = true;
+        else if(_isAlive && !isSliding) _canMove = true;
         
         if(_canMove)
         {
@@ -189,12 +205,12 @@ public class PlayerController : MonoBehaviour
             if(!isFlare) Jump();
         }
 
-        if(!_isWallSliding) ClampFallSpeed();
-        else ClampWallSlideSpeed();
+        if(!_isWallSliding && !isSliding) ClampFallSpeed();
+        else if(_isWallSliding) ClampWallSlideSpeed();
 
         if(_isWallSliding) WallSlide();
 
-        if (_canMove && !_isWallSliding)
+        if (_canMove && !_isWallSliding)// && !isSliding)
         {
             if (Mathf.Abs(_playerRigidbody.linearVelocity.x) > _targetSpeed && _isGrounded)
             {
@@ -208,12 +224,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Mathf.Sign(UserInput.Instance.moveInput.x) != Mathf.Sign(_playerRigidbody.linearVelocity.x) 
-            && _targetSpeed != 0 && !_isWalled && _canMove && !isFlare)
+        if (UserInput.Instance.moveInput.x != Mathf.Sign(_playerRigidbody.linearVelocity.x) 
+            && _targetSpeed != 0 && !_isWalled && _canMove && !isFlare)// && !isSliding)
         {
             _playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
         }
-            
+        // if (_isGrounded && !isSliding)
+        //     _playerRigidbody.linearVelocity = Vector2.zero;
+        // else
+        //     _playerRigidbody.linearVelocity = new Vector2(0, _playerRigidbody.linearVelocity.y);
 
         _jumpPressed = false;
         _jumpReleased = false;
@@ -364,6 +383,10 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapBox((Vector2)transform.position + new Vector2(_ledgeDetectionBoxOffset.x * transform.localScale.x, _ledgeDetectionBoxOffset.y), _ledgeDetectionBoxSize, 0, groundLayer);
     }
 
+    public bool IsTouchingSlope()
+    {
+        return Physics2D.OverlapBox((Vector2)transform.position + new Vector2(_ledgeDetectionBoxOffset.x * transform.localScale.x, _ledgeDetectionBoxOffset.y), _ledgeDetectionBoxSize, 0, slopeLayer);
+    }
 
     void Rotate()
     {
@@ -382,7 +405,7 @@ public class PlayerController : MonoBehaviour
 		if (_canMove) _playerRigidbody.AddForce(movement * Vector2.up);
     }
 
-    bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapBox((Vector2)transform.position + new Vector2(_groundBoxOffset.x * transform.localScale.x, _groundBoxOffset.y), _groundBoxSize, 0, groundLayer);
     }
