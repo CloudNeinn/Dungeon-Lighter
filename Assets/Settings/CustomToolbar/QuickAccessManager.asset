@@ -13,27 +13,53 @@ MonoBehaviour:
   m_Name: QuickAccessManager
   m_EditorClassIdentifier: CustomToolbar::OpalStudio.CustomToolbar.Editor.ToolbarElements.QuickAccess.Data.QuickAccessManager
   items:
-  - displayName: Propeller
+  - displayName: SteamManager
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: Settings
     scenePath: 
-  - displayName: Prefabs
+  - displayName: EditorSteamworksNETSettings
     scenePath: 
-  - displayName: Bottom
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Right
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Left
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Top
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Top
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Propeller
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Left
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Propeller
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Propeller
-    scenePath: Assets/Scenes/Hub.unity
-  - displayName: Propeller
-    scenePath: Assets/Scenes/Hub.unity
+  - displayName: Editor
+    scenePath: 
+  - displayName: com.rlabrecque.steamworks.net
+    scenePath: 
+  - displayName: Scripts
+    scenePath: 
+  - displayName: Assets
+    scenePath: 
+  - displayName: ===Managers===
+    scenePath: Assets/Scenes/PersistentObjects.unity
+  - displayName: EditorSteamworksNETSettingsStyleSheet
+    scenePath: 
+  - displayName: EditorSteamworksNETSettingsProvider
+    scenePath: 
+  - displayName: EditorSteamworksNETSettingsElement
+    scenePath: 
+  - displayName: autogen
+    scenePath: 
+  - displayName: types
+    scenePath: 
+  - displayName: Runtime
+    scenePath: 
+  - displayName: README
+    scenePath: 
+  - displayName: Steamworks.NET
+    scenePath: 
+  - displayName: SteamManager
+    scenePath: 
+  - displayName: Steamworks.NET
+    scenePath: 
+  - displayName: Scripts
+    scenePath: 
+  - displayName: Settings
+    scenePath: 
+  - displayName: Editor
+    scenePath: 
+  - displayName: Runtime
+    scenePath: 
+  - displayName: Plugins
+    scenePath: 
+  - displayName: com.rlabrecque.steamworks.net
+    scenePath: 
+  - displayName: com.rlabrecque.steamworks.net
+    scenePath: 

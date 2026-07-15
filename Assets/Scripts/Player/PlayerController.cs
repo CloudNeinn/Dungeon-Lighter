@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
                 // magic number which is players mass
                 force = _jumpForce - _playerRigidbody.linearVelocity.y * 5;
-                EmberOvalOrbit.Instance.ConsumeEmber();
+                EmberController.Instance.ConsumeEmber();
             }
 
             //_playerRigidbody.linearVelocity = new Vector2(_playerRigidbody.linearVelocity.x, force); jump force = 19 
