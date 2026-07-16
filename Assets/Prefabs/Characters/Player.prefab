@@ -132,10 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EmberOvalOrbit
   _target: {fileID: 2243905475163264413}
-  _embers:
-  - {fileID: 5792837856606406352}
-  - {fileID: 4376432557190557278}
-  - {fileID: 5952800136417179293}
   _availableEmberCount: 3
   activeEmberCount: 0
   _centerOffset: {x: 0, y: 0, z: 0}
@@ -146,7 +142,6 @@ MonoBehaviour:
   _orbitRotationSpeed: 4
   _faceMovement: 0
   _emberGap: 0
-  <emberResetTime>k__BackingField: 0
   _drawGizmos: 1
   _gizmoSegments: 32
   _gizmoColor: {r: 1, g: 0.5, b: 0.1, a: 0.9}
@@ -422,6 +417,7 @@ GameObject:
   - component: {fileID: 1462144532024263905}
   - component: {fileID: 2989726128419885480}
   - component: {fileID: 4596609224149716966}
+  - component: {fileID: 2947107650225880461}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -683,6 +679,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2947107650225880461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3539011809018768977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0a2a52043c72c4dab10bf73f6ce7aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EmberController
+  embers:
+  - {fileID: 5952800136417179293}
+  - {fileID: 4376432557190557278}
+  - {fileID: 5792837856606406352}
+  allowEmberReset: 0
+  _emberResetTime: 1
+  _availableEmberCount: 3
+  activeEmberCount: 0
+  emberResetTime: 3
+  emberResetTimeCooldown: 3
 --- !u!1 &3796731351743235743
 GameObject:
   m_ObjectHideFlags: 0

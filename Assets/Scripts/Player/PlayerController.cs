@@ -278,7 +278,7 @@ public class PlayerController : MonoBehaviour
         if (_jumpPressed && !_isWallSliding) 
             _jumpBufferTimeCounter = _jumpBufferTime;
 
-        if ((_jumpBufferTimeCounter > 0) && (_isGrounded || _jumpCoyoteTimeCounter > 0 || _doubleJumpCount > 0))
+        if (_jumpBufferTimeCounter > 0 && EmberController.Instance.HasEmber() && (_isGrounded || _jumpCoyoteTimeCounter > 0 || _doubleJumpCount > 0))
         {
             _jumpBufferTimeCounter = 0;
 

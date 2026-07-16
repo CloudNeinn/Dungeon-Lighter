@@ -46,7 +46,7 @@ public class Torch : MonoBehaviour
         }
         else ResetTime();
 
-        if((_timeToFlareCounter <= 0 || UserInput.Instance.use2Input && playerInRange()) && _flareCooldownTimeCounter <= 0)
+        if((_timeToFlareCounter <= 0 || UserInput.Instance.use2Input && playerInRange()) && _flareCooldownTimeCounter <= 0 && EmberController.Instance.HasEmber())
         {
             _isFlare = true;
             ResetTime();

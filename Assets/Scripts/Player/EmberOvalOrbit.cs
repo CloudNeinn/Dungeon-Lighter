@@ -6,9 +6,6 @@ public class EmberOvalOrbit : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform _target;
-    [SerializeField] private Ember[] _embers;
-    [SerializeField] private int _availableEmberCount;
-    [field: SerializeField] public int activeEmberCount;
 
     [Header("Orbit")]
     [SerializeField] private Vector3 _centerOffset = new Vector3(0f, 1.2f, 0f);
@@ -21,7 +18,6 @@ public class EmberOvalOrbit : MonoBehaviour
     [Header("Options")]
     [SerializeField] private bool _faceMovement = false;
     [SerializeField] private float _emberGap = 0.4f;
-    [field: SerializeField] public float emberResetTime {get; private set;}
 
     [Header("Gizmos")]
     [SerializeField] private bool _drawGizmos = true;
@@ -47,24 +43,13 @@ public class EmberOvalOrbit : MonoBehaviour
 
     void Start()
     {
-        if (_embers != null)
-        {
-            _lastPositions = new Vector3[_embers.Length];
-
-            for (int i = 0; i < _availableEmberCount; i++)
-            {
-                if (_embers[i] != null)
-                {
-                    _embers[i].gameObject.SetActive(true);
-                    _lastPositions[i] = _embers[i].transform.position;
-                }
-            }
-        }
+        if (EmberController.Instance.embers != null)
+            _lastPositions = new Vector3[EmberController.Instance.embers.Length];
     }
 
     void Update()
     {
-        if (_target == null || _embers == null || _embers.Length == 0)
+        if (_target == null || EmberController.Instance.embers == null || EmberController.Instance.embers.Length == 0)
             return;
 
         _timePeriod += Time.deltaTime * _emberSpeed;
@@ -73,15 +58,15 @@ public class EmberOvalOrbit : MonoBehaviour
         _orbitCenter = _target.position + _centerOffset;
         _orbitRotation = Quaternion.Euler(_orbitRotationEuler);
 
-        if (_lastPositions == null || _lastPositions.Length != _embers.Length)
-            _lastPositions = new Vector3[_embers.Length];
+        if (_lastPositions == null || _lastPositions.Length != EmberController.Instance.embers.Length)
+            _lastPositions = new Vector3[EmberController.Instance.embers.Length];
 
-        for (int i = 0; i < _embers.Length; i++)
+        for (int i = 0; i < EmberController.Instance.embers.Length; i++)
         {
-            if (_embers[i] == null)
+            if (EmberController.Instance.embers[i] == null)
                 continue;
 
-            float emberTime = _timePeriod - (i * _emberGap);
+            float emberTime = _timePeriod + (i * _emberGap);
 
             Vector3 localOffset = new Vector3(
                 Mathf.Cos(emberTime) * _horizontalRadius,
@@ -91,7 +76,7 @@ public class EmberOvalOrbit : MonoBehaviour
 
             Vector3 worldPosition = _orbitCenter + _orbitRotation * localOffset;
 
-            Transform emberTransform = _embers[i].transform;
+            Transform emberTransform = EmberController.Instance.embers[i].transform;
             Vector3 delta = worldPosition - emberTransform.position;
 
             emberTransform.position = worldPosition;
@@ -101,11 +86,6 @@ public class EmberOvalOrbit : MonoBehaviour
 
             _lastPositions[i] = emberTransform.position;
         }
-    }
-
-    public void ConsumeEmber()
-    {
-        _embers[activeEmberCount - 1].DeactivateEmber();
     }
 
     void OnDrawGizmos()
@@ -137,9 +117,9 @@ public class EmberOvalOrbit : MonoBehaviour
 
         Gizmos.DrawSphere(orbitCenter, 0.03f);
 
-        if (_embers != null)
+        if (EmberController.Instance != null && EmberController.Instance.embers != null)
         {
-            for (int i = 0; i < _embers.Length; i++)
+            for (int i = 0; i < EmberController.Instance.embers.Length; i++)
             {
                 float emberTime = _timePeriod - (i * _emberGap);
 
